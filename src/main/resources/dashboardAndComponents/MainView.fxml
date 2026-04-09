@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dashboardAndComponents.DashboardController">
+    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <children>
+            <TextField maxHeight="27.0" maxWidth="544.0" prefHeight="27.0" prefWidth="544.0" promptText="Search for equipment" style="-fx-padding: 0005;">
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+            </TextField>
+
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="314.0" maxWidth="539.0" prefHeight="314.0" prefWidth="539.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="AS_NEEDED">
+                <GridPane maxWidth="539.0" minHeight="30.0" minWidth="30.0" prefHeight="409.0" prefWidth="525.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <Button fx:id="buttonEquipment1" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Button fx:id="buttonEquipment2" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Button fx:id="buttonEquipment3" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 3" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                    <Button fx:id="buttonEquipment4" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 4" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                    <Button fx:id="buttonEquipment5" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 5" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                    <Button fx:id="buttonEquipment6" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 6" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Button fx:id="buttonEquipment7" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 7" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Button fx:id="buttonEquipment8" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 8" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                    <Button fx:id="buttonEquipment9" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 9" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <Button fx:id="buttonEquipment10" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 10" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                    <Button fx:id="buttonEquipment11" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 11" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Button fx:id="buttonEquipment12" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 12" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button fx:id="buttonEquipment13" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 13" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                    <Button fx:id="buttonEquipment14" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 14" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                    <Button fx:id="buttonEquipment15" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 15" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                    <Button fx:id="buttonEquipment16" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 16" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Button fx:id="buttonEquipment17" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 17" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Button fx:id="buttonEquipment18" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 18" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                    <Button fx:id="buttonEquipment19" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 19" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                    <Button fx:id="buttonEquipment20" maxHeight="96.0" maxWidth="99.0" mnemonicParsing="false" onMouseClicked="#onActionEquipmentButton" prefHeight="96.0" prefWidth="99.0" text="Eqpmnt Img 20" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                </GridPane>
+            </ScrollPane>
+
+        </children>
+    </VBox>
+    <Pane fx:id="paneOverlayShadow" opacity="0.3" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" visible="false" StackPane.alignment="CENTER" />
+    <Pane fx:id="paneMainContainer" maxHeight="300.0" maxWidth="442.0" prefHeight="300.0" prefWidth="442.0" style="-fx-background-color: white;" visible="false">
+        <VBox alignment="CENTER" maxHeight="300.0" maxWidth="442.0" prefHeight="300.0" prefWidth="442.0">
+         <Button fx:id="buttonExitOverlay" mnemonicParsing="false" onMouseClicked="#onMouseClickExitOverlay" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #E67070;" text="X" textFill="WHITE">
+            <VBox.margin>
+               <Insets bottom="5.0" left="400.0" />
+            </VBox.margin>
+            <font>
+               <Font name="Arial Black" size="12.0" />
+            </font>
+         </Button>
+            <Label fx:id="labelEquipmentDetails" alignment="TOP_LEFT" maxHeight="260.0" maxWidth="430.0" prefHeight="260.0" prefWidth="430.0" text="Testing">
+                <font>
+                    <Font name="Arial Black" size="12.0" />
+                </font>
+            </Label>
+        </VBox>
+    </Pane>
+</StackPane>

@@ -1,9 +1,9 @@
-package com.example.stackoaverflowproject;
+package dashboardAndComponents;
 
 import javafx.application.Application;
 
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(HelloApplication.class, args);
+        Application.launch(DashboardApplication.class, args);
     }
 }

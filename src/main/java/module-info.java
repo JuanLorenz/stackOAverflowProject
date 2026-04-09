@@ -6,6 +6,6 @@ module com.example.stackoaverflowproject {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.example.stackoaverflowproject to javafx.fxml;
-    exports com.example.stackoaverflowproject;
+    opens dashboardAndComponents to javafx.fxml;
+    exports dashboardAndComponents;
 }
