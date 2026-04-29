@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<Pane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="auth.Login.LoginController">
+   <children>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+          <children>
+              <VBox alignment="CENTER" prefHeight="400.0" prefWidth="256.0">
+                  <children>
+                  <Label text="Login">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                      <Label text="Email" />
+                      <TextField fx:id="tfEmail" />
+                      <Label text="Password" />
+                      <PasswordField fx:id="tfPassword">
+                          <VBox.margin>
+                              <Insets bottom="5.0" />
+                          </VBox.margin>
+                  </PasswordField>
+                  <HBox alignment="CENTER" prefHeight="11.0" prefWidth="256.0">
+                     <children>
+                        <Label fx:id="lStatus1" text="Dont have an account? " />
+                        <Hyperlink onAction="#onClickToRegister" text="Register Here" />
+                     </children>
+                  </HBox>
+                      <Label fx:id="lStatus" text=" ">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                      <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#login" text="Login">
+                          <VBox.margin>
+                              <Insets bottom="10.0" />
+                          </VBox.margin>
+                  </Button>
+                  </children>
+              </VBox>
+          </children>
+      </HBox>
+   </children>
+</Pane>

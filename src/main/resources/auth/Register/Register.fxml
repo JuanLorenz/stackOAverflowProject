@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="auth.Register.RegisterController">
+   <children>
+      <Button layoutX="39.0" layoutY="20.0" mnemonicParsing="false" onAction="#onClickBackToLogin" prefHeight="25.0" prefWidth="60.0" text="Back" />
+
+      <HBox alignment="CENTER" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="658.0">
+      
+      
+          <children>
+              <VBox alignment="CENTER" prefHeight="400.0" prefWidth="267.0">
+                  <children>
+                  <Label text="Register">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                      <Label text="Name" />
+                      <TextField fx:id="tfName" />
+                      <Label text="Email" />
+                      <TextField fx:id="tfEmail" />
+                      <Label text="Password" />
+                      <PasswordField fx:id="tfPassword">
+                          <VBox.margin>
+                              <Insets bottom="20.0" />
+                          </VBox.margin>
+                      </PasswordField>
+                      <Label fx:id="lStatus" text=" " />
+                      <Button fx:id="buttonRegister" mnemonicParsing="false" onAction="#onClickRegister" text="Reigster">
+                          <VBox.margin>
+                              <Insets bottom="15.0" />
+                          </VBox.margin>
+                      </Button>
+                  </children>
+              </VBox>
+      
+      
+      
+          </children>
+      </HBox>
+   </children>
+</Pane>
