@@ -7,17 +7,21 @@ module com.example.stackoaverflowproject {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires jbcrypt;
-    requires java.sql; // hashing algorithm
+    requires java.sql;
 
     // OPEN your UI folders so JavaFX can read your @FXML tags
-    opens auth.Login to javafx.fxml;
-    opens auth.Register to javafx.fxml;
-    opens dashboardAndComponents to javafx.fxml;
+    opens screens.login to javafx.fxml;
+    opens screens.register to javafx.fxml;
+    opens screens.dashboard to javafx.fxml;
+    opens screens.profile to javafx.fxml;
 
     //EXPORT your folders so the application can run and the classes can talk to each other
-    exports auth.Login;
-    exports auth.Register;
-    exports dashboardAndComponents;
-    exports shared;
+    exports screens.login;
+    exports screens.register;
+    exports screens.dashboard;
     exports app;
+    exports utilities.sqlRelated;
+    exports utilities.serializationRelated;
+    exports data;
+    exports utilities.javafxRelated;
 }

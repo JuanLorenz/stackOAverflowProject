@@ -1,4 +1,4 @@
-package dashboardAndComponents;
+package screens.dashboard;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

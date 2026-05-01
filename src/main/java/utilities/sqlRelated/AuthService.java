@@ -1,9 +1,9 @@
-package auth.Login;
+package utilities.sqlRelated;
 
 
 
 import org.mindrot.jbcrypt.BCrypt;
-import shared.MySqlConnection;
+import data.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package auth.Login;
+package data;
 
 import java.io.Serializable;
 

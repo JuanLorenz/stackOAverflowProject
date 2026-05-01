@@ -1,4 +1,4 @@
-package auth.Register;
+package screens.register;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,9 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import shared.NavigationUtils;
+import utilities.sqlRelated.RegisterService;
+import utilities.javafxRelated.NavigationUtils;
 
 public class RegisterController {
 
@@ -50,7 +50,7 @@ public class RegisterController {
             lStatus.setText("Registration successful!");
 
             // Switch back to the login screen so the user can log in
-            NavigationUtils.switchScene(event, "/auth/login/login.fxml");
+            NavigationUtils.switchScene(event, "/screens/login/Login.fxml");
 
         } else if (result == 0) {
             lStatus.setTextFill(Color.RED);
@@ -62,6 +62,6 @@ public class RegisterController {
     }
 
     public void onClickBackToLogin(ActionEvent event) {
-        NavigationUtils.switchScene(event,"/auth/login/login.fxml" );
+        NavigationUtils.switchScene(event,"/screens/login/Login.fxml" );
     }
 }

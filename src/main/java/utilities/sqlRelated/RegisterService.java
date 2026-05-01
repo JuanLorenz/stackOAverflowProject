@@ -1,8 +1,6 @@
-package auth.Register;
+package utilities.sqlRelated;
 
 
-
-import shared.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package dashboardAndComponents;
+package screens.dashboard;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

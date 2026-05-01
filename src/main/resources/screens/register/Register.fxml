@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="auth.Register.RegisterController">
+<Pane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.register.RegisterController">
    <children>
       <Button layoutX="39.0" layoutY="20.0" mnemonicParsing="false" onAction="#onClickBackToLogin" prefHeight="25.0" prefWidth="60.0" text="Back" />
 

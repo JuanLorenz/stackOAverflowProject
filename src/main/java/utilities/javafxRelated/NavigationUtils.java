@@ -1,4 +1,4 @@
-package shared;
+package utilities.javafxRelated;
 
 
 import javafx.event.ActionEvent;
@@ -15,7 +15,7 @@ public class NavigationUtils {
     public static void switchScene(ActionEvent event, String fxmlPath) {
         try {
             // We removed the hardcoded "/MVC Components/".
-            // Now, you pass the exact path based on the feature (e.g., "/auth/login/login.fxml")
+            // Now, you pass the exact path based on the feature (e.g., "/screens.auth/login/login.fxml")
             Parent root = FXMLLoader.load(NavigationUtils.class.getResource(fxmlPath));
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
