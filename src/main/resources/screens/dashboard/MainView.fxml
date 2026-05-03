@@ -5,23 +5,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardController">
+<StackPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardController">
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
         <children>
-            <TextField fx:id="tfSearchEquipment" maxHeight="27.0" maxWidth="544.0" prefHeight="27.0" prefWidth="544.0" promptText="Search for equipment" style="-fx-padding: 0005;">
-                <opaqueInsets>
-                    <Insets />
-                </opaqueInsets>
-                <VBox.margin>
-                    <Insets bottom="10.0" />
-                </VBox.margin>
-            </TextField>
+         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+            <children>
+                  <TextField fx:id="tfSearchField" maxHeight="27.0" maxWidth="544.0" prefHeight="27.0" prefWidth="544.0" promptText="Search for equipment" style="-fx-padding: 0005; -fx-prompt-text-fill: gray;">
+                      <opaqueInsets>
+                          <Insets />
+                      </opaqueInsets>
+                  </TextField>
+            </children>
+            <VBox.margin>
+               <Insets left="40.0" right="40.0" />
+            </VBox.margin>
+         </HBox>
          <ScrollPane fitToWidth="true" prefHeight="270.0" prefWidth="200.0">
             <content>
                <TilePane fx:id="equipmentContainer" alignment="CENTER_LEFT" hgap="5.0" prefColumns="4" prefHeight="270.0" prefRows="4" prefWidth="200.0" vgap="5.0">

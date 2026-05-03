@@ -1,15 +1,20 @@
 package screens.dashboard;
 
 import data.Equipment;
+import javafx.animation.PauseTransition;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import utilities.sqlRelated.EquipmentService;
 
 import java.util.ArrayList;
@@ -23,20 +28,37 @@ public class DashboardController {
     public Label labelEquipmentDetails;
     public Button buttonExitOverlay;
     public TilePane equipmentContainer;
+    public TextField tfSearchField;
+
     private List<Equipment> items = new ArrayList<>();
+    private final PauseTransition searchDelay = new PauseTransition((Duration.millis(300)));
 
     public void initialize(){
-        //make sure to always refresh by clearing the UI
-        equipmentContainer.getChildren().clear();
         items = EquipmentService.getAllEquipment();
+        //make sure to always refresh by clearing the UI
+        refreshList(items);
 
-        for(Equipment item : items) {
+        //set up timer
+        //when timer finishes, it runs the filter logic automatically
+        searchDelay.setOnFinished(event -> handleSearch());
+
+        //add listener to the search field
+        tfSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            //everytime user types a letter, restart the timer
+            searchDelay.playFromStart();
+        });
+    }
+
+    private void refreshList(List<Equipment> equipments) {
+        equipmentContainer.getChildren().clear();
+
+        for(Equipment item : equipments) {
             //create buttons from equipment and add it to the TilePane
             Button btn = new Button();
             btn.setPrefSize(120,150);
 
             //create the image container (make it low-res first)
-            Image lowres = new Image(Objects.requireNonNull(getClass().getResourceAsStream(item.getImagePath())), 100, 100, true, true);
+            Image lowres = new Image(Objects.requireNonNull(getClass().getResource(item.getImagePath())).toExternalForm(), 100, 100, true, true, true);
             ImageView image = new ImageView(lowres);
             image.setFitWidth(80);
             image.setPreserveRatio(true);
@@ -74,9 +96,27 @@ public class DashboardController {
         );
 
         //no logic for showing image yet
-
         paneOverlayShadow.setVisible(true);
         paneMainContainer.setVisible(true);
+    }
+
+    private void handleSearch() {
+        String searched = tfSearchField.getText().toLowerCase().trim();
+        if(searched.isBlank()) {
+            refreshList(items);
+            return;
+        }
+
+        List<Equipment> results = items.stream()
+                .filter(item -> item.getEquipmentName().toLowerCase().contains(searched))
+                .toList();
+
+        refreshList(results);
+    }
+
+    public void onMouseClickExitOverlay(MouseEvent event) {
+        paneOverlayShadow.setVisible(false);
+        paneMainContainer.setVisible(false);
     }
 
     //DON'T DELETE THESE YET
@@ -99,9 +139,4 @@ public class DashboardController {
 //
 //       return sb;
 //    }
-
-    public void onMouseClickExitOverlay(MouseEvent mouseEvent) {
-        paneOverlayShadow.setVisible(false);
-        paneMainContainer.setVisible(false);
-    }
 }
