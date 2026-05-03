@@ -26,4 +26,15 @@ public class EquipmentService {
 
         return list;
     }
+
+//    public static List<Equipment> getEquipmentByName(String name) {
+//        List<Equipment> masterlist = getAllEquipment();
+//        List<Equipment> list = new ArrayList<>();
+//
+//        for(Equipment e : masterlist) {
+//            if(e.getEquipmentName().toLowerCase().contains(name.toLowerCase())) list.add(e);
+//        }
+//
+//        return list;
+//    }
 }
