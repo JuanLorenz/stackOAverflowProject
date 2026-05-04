@@ -16,32 +16,30 @@
             </Label>
             <VBox alignment="CENTER" maxHeight="500.0" maxWidth="300.0" prefHeight="218.0" prefWidth="434.0">
                <children>
-                  <TextField promptText="Equipment Name">
+                  <TextField fx:id= "equipmentName" promptText="Equipment Name">
                      <VBox.margin>
                         <Insets bottom="20.0" left="15.0" right="15.0" />
                      </VBox.margin></TextField>
-                  <TextField promptText="Research Title, Project Code, Event, etc.">
+                  <TextField fx:id="purpose" promptText="Research Title, Project Code, Event, etc.">
                      <VBox.margin>
                         <Insets bottom="20.0" left="15.0" right="15.0" />
                      </VBox.margin></TextField>
-                  <TextField promptText="Affiliations, Univeristy, etc.">
+                  <TextField fx:id="affiliation" promptText="Affiliations, Univeristy, etc.">
                      <VBox.margin>
                         <Insets bottom="20.0" left="15.0" right="15.0" />
                      </VBox.margin>
-                     <font>
-                        <Font name="System Italic" size="12.0" />
-                     </font></TextField>
-                  <TextField promptText="Supervisor">
+                  </TextField>
+                  <TextField fx:id="supervisor" promptText="Supervisor">
                      <VBox.margin>
                         <Insets bottom="20.0" left="15.0" right="15.0" />
                      </VBox.margin></TextField>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="79.0" text="Back">
+                        <Button fx:id="back" onAction="#onBackButtonClicked" mnemonicParsing="false" prefWidth="79.0" text="Back">
                            <HBox.margin>
                               <Insets right="100.0" />
                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="77.0" text="Reserve" />
+                        <Button fx:id="reserve" onAction="#onReserveButtonClicked" mnemonicParsing="false" prefHeight="26.0" prefWidth="77.0" text="Reserve" />
                      </children>
                      <VBox.margin>
                         <Insets top="30.0" />
