@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.reserve.ReserveController">
+   <children>
+      <VBox alignment="CENTER" layoutY="-4.0" prefHeight="408.0" prefWidth="600.0">
+         <children>
+            <Label prefHeight="47.0" prefWidth="228.0" text="Reserve Equipment">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" maxHeight="500.0" maxWidth="300.0" prefHeight="218.0" prefWidth="434.0">
+               <children>
+                  <TextField promptText="Equipment Name">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="15.0" right="15.0" />
+                     </VBox.margin></TextField>
+                  <TextField promptText="Research Title, Project Code, Event, etc.">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="15.0" right="15.0" />
+                     </VBox.margin></TextField>
+                  <TextField promptText="Affiliations, Univeristy, etc.">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="15.0" right="15.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font></TextField>
+                  <TextField promptText="Supervisor">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="15.0" right="15.0" />
+                     </VBox.margin></TextField>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefWidth="79.0" text="Back">
+                           <HBox.margin>
+                              <Insets right="100.0" />
+                           </HBox.margin></Button>
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="77.0" text="Reserve" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin></VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</Pane>
