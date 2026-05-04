@@ -19,38 +19,31 @@ public class LoginController {
     // email : admin@cit.edu
     // pass : 123
 
-    @FXML
-    private TextField tfEmail;
+    @FXML private TextField tfEmail;
+    @FXML private PasswordField tfPassword;
+    @FXML private Label lStatus;
+    @FXML private Button buttonLogin;
 
-    @FXML
-    private PasswordField tfPassword;
+    private final AuthService authService = new AuthService();
 
-    @FXML
-    private Label lStatus;
-
-    @FXML
-    private Button buttonLogin;
-
-    @FXML
-    void login(ActionEvent event) {
+    // "view" when login is clicked
+    public void onLoginClicked(ActionEvent event) {
         String email = tfEmail.getText();
         String password = tfPassword.getText();
 
         if (email.isBlank() || password.isBlank()) {
-            lStatus.setTextFill(Color.RED);
-            lStatus.setText("Please enter both email and password.");
+            showStatus(Color.RED, "Please enter both email and password.");
             return;
         }
 
         // 2. Delegate the database check to your AuthService
-        User authenticatedUser = AuthService.authenticate(email, password);
+        User authenticatedUser = authService.login(email, password);
 
         if (authenticatedUser != null) {
             // 3. Success! Save the session using your SerializeManager
             SerializeManager.SerializeUser(authenticatedUser);
 
-            lStatus.setTextFill(Color.GREEN);
-            lStatus.setText("Login successful!");
+            showStatus(Color.GREEN, "Login successful!");
 
             // 4. Switch to the dashboard
             // Note: Make sure you actually have a dashboard.fxml created in your resources folder!
@@ -59,12 +52,18 @@ public class LoginController {
         } else {
             // Fail: Clear password field and show error
             tfPassword.clear();
-            lStatus.setTextFill(Color.RED);
-            lStatus.setText("Invalid username or password.");
+            showStatus(Color.RED, "Invalid email or password.");
         }
     }
 
     public void onClickToRegister(ActionEvent event) {
         NavigationUtils.switchScene(event,"/screens/register/Register.fxml" );
+    }
+
+    // helper; sets status label configurations depending on the login result
+    // reduces duplication of multiple items
+    private void showStatus(Color color, String message) {
+        lStatus.setTextFill(color);
+        lStatus.setText(message);
     }
 }
