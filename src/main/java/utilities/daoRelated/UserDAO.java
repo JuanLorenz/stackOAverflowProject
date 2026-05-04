@@ -13,8 +13,13 @@ public class UserDAO {
     // tried my best to adhere to single responsibility principle
     private final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
     private final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
+    private final String INSERT_USER   = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
-    // finds user from database that matches the provided id
+    /**
+     * Finds the user in the database given an ID.
+     * @return User - if user exists <br>
+     * null - if user does not exist
+     */
     public User findUser(int id) {
         try (Connection c = MySqlConnection.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_ID)) {
@@ -31,7 +36,11 @@ public class UserDAO {
         return null;
     }
 
-    // finds user from database that matches the provided email
+    /**
+     * Finds the user in the database given an email.
+     * @return User - if user exists <br>
+     * null - if user does not exist
+     */
     public User findUser(String email) {
         try (Connection c = MySqlConnection.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_EMAIL)) {
@@ -48,7 +57,30 @@ public class UserDAO {
         return null;
     }
 
-    // helper; makes the user class derived from the database
+    /**
+     * Saves the new user in the database. Used when adding a new user via register.
+     */
+    public boolean addUser(String name, String email, String password) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(INSERT_USER)) {
+
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setString(3, password); // already hashed
+
+            return statement.executeUpdate() > 0; // true if row was inserted
+
+        } catch (SQLException e) {
+            System.err.println("Failed to save user: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * UserDAO helper.
+     * Maps the ResultSet retrieved from the database into a User class.
+     * @return User
+     */
     private User mapUser(ResultSet rs) throws SQLException {
         return new User(
                 rs.getInt("id"),
