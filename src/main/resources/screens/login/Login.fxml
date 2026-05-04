@@ -39,7 +39,7 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
-                      <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#login" text="Login">
+                      <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#onLoginClicked" text="Login">
                           <VBox.margin>
                               <Insets bottom="10.0" />
                           </VBox.margin>
