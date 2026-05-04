@@ -41,7 +41,7 @@ public class LoginController {
 
         if (authenticatedUser != null) {
             // 3. Success! Save the session using your SerializeManager
-            SerializeManager.SerializeUser(authenticatedUser);
+            SerializeManager.serializeUser(authenticatedUser);
 
             showStatus(Color.GREEN, "Login successful!");
 
@@ -60,8 +60,10 @@ public class LoginController {
         NavigationUtils.switchScene(event,"/screens/register/Register.fxml" );
     }
 
-    // helper; sets status label configurations depending on the login result
-    // reduces duplication of multiple items
+    /**
+     * UI helper. <br>
+     * Sets status label display depending on the result of action invoked.
+     */
     private void showStatus(Color color, String message) {
         lStatus.setTextFill(color);
         lStatus.setText(message);

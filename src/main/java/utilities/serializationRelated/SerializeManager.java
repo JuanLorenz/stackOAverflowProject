@@ -9,7 +9,7 @@ import java.io.*;
 public class SerializeManager {
     public static final String SESSION_PATH = "src/main/java/data/currentUser.ser";
 
-    public static void SerializeUser(User user) {
+    public static void serializeUser(User user) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SESSION_PATH))) {
             oos.writeObject(user);
             System.out.println("Session saved locally.");

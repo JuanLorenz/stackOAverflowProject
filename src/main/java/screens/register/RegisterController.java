@@ -33,7 +33,7 @@ public class RegisterController {
         }
 
         // 2. Pass data to the Service layer
-        int result = registerService.registerUser(name, email, password);
+        int result = registerService.register(name, email, password);
         System.out.println("Test");
         // 3. Handle the result
         if (result == 1) {
@@ -54,9 +54,9 @@ public class RegisterController {
     }
 
     /**
-     UI helper.
-     ets status label display depending on the result of action invoked.
-    */
+     * UI helper.
+     * Sets status label display depending on the result of action invoked.
+     */
     private void showStatus(Color color, String message) {
         lStatus.setTextFill(color);
         lStatus.setText(message);
