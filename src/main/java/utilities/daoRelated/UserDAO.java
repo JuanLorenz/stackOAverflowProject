@@ -112,7 +112,8 @@ public class UserDAO implements GeneralDAO<User> {
                 rs.getInt("id"),
                 rs.getString("name"),
                 rs.getString("email"),
-                rs.getString("password")
+                rs.getString("password"),
+                rs.getString("userType")
         );
     }
 }

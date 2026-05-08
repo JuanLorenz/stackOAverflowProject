@@ -12,7 +12,8 @@ public class RegisterService {
             return 0;
         }
 
-        if (userDAO.save(new User(0, name, email, BCrypt.hashpw(password, BCrypt.gensalt())))) {
+        // set to "user" ang userType sa mga mu register kay walay maka register nga admin dapat ofc
+        if (userDAO.save(new User(0, name, email, BCrypt.hashpw(password, BCrypt.gensalt()),"user"))) {
             return 1;
         }
         return -1;
