@@ -5,48 +5,107 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<HBox prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.login.LoginController">
+    <children>
 
-<Pane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.login.LoginController">
-   <children>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
-          <children>
-              <VBox alignment="CENTER" prefHeight="400.0" prefWidth="256.0">
-                  <children>
-                  <Label text="Login">
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                     <VBox.margin>
+        <VBox alignment="CENTER_LEFT" prefWidth="450.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="40.0" left="80.0" right="80.0" top="40.0" />
+            </padding>
+            <children>
+
+                <Label style="-fx-text-fill: #51dca5; -fx-font-weight: bold; -fx-font-size: 32px;" text="🔗">
+                    <VBox.margin>
                         <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </Label>
-                      <Label text="Email" />
-                      <TextField fx:id="tfEmail" />
-                      <Label text="Password" />
-                      <PasswordField fx:id="tfPassword">
-                          <VBox.margin>
-                              <Insets bottom="5.0" />
-                          </VBox.margin>
-                  </PasswordField>
-                  <HBox alignment="CENTER" prefHeight="11.0" prefWidth="256.0">
-                     <children>
-                        <Label fx:id="lStatus1" text="Dont have an account? " />
-                        <Hyperlink onAction="#onClickToRegister" text="Register Here" />
-                     </children>
-                  </HBox>
-                      <Label fx:id="lStatus" text=" ">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                      <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#onLoginClicked" text="Login">
-                          <VBox.margin>
-                              <Insets bottom="10.0" />
-                          </VBox.margin>
-                  </Button>
-                  </children>
-              </VBox>
-          </children>
-      </HBox>
-   </children>
-</Pane>
+                    </VBox.margin>
+                </Label>
+
+                <Label text="Welcome Back!" textFill="#222222">
+                    <font>
+                        <Font name="System Bold" size="32.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="40.0" />
+                    </VBox.margin>
+                </Label>
+
+                <VBox spacing="8.0">
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                    <children>
+                        <Label text="Email" textFill="#222222">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tfEmail" promptText="Enter your email account" styleClass="custom-input" />
+                    </children>
+                </VBox>
+
+                <VBox spacing="8.0">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <Label text="Password" textFill="#222222">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                        <PasswordField fx:id="tfPassword" promptText="Enter your password" styleClass="custom-input" />
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER">
+                    <children>
+                        <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#onLoginClicked" prefHeight="45.0" prefWidth="200.0" styleClass="btn-login" text="Login" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+               <opaqueInsets>
+                  <Insets top="20.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+                </HBox>
+
+                <HBox alignment="CENTER">
+                    <children>
+                        <Label fx:id="lStatus" text=" ">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER" prefHeight="20.0">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                    <children>
+                        <Label fx:id="lStatus1" text="Dont have an account? " textFill="#666666" />
+                        <Hyperlink onAction="#onClickToRegister" style="-fx-text-fill: #51dca5; -fx-font-weight: bold;" text="Register Here" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+
+        <StackPane prefWidth="450.0" HBox.hgrow="ALWAYS">
+            <children>
+                <Pane styleClass="right-image-pane" />
+
+                <Pane styleClass="gradient-overlay">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Pane>
+            </children>
+        </StackPane>
+
+    </children>
+</HBox>

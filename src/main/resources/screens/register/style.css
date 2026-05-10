@@ -1,0 +1,51 @@
+/* --- Input styling with the Blue border --- */
+.custom-input {
+    -fx-background-color: white;
+    -fx-border-color: #4d69da; /* Blue border from image */
+    -fx-border-width: 2px;
+    -fx-border-radius: 25px;
+    -fx-background-radius: 25px;
+    -fx-padding: 10px 15px;
+    -fx-text-fill: #333333;
+}
+
+.custom-input:focused {
+    -fx-border-color: #2b44b1; /* Darker blue when typing */
+}
+
+/* Label styling */
+.input-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: #222222;
+    -fx-padding: 0 0 5 5;
+}
+
+/* --- The Sky Blue Register Button --- */
+.btn-register {
+    -fx-background-color: #40bfff; /* Bright sky blue from image */
+    -fx-background-radius: 25px;
+    -fx-cursor: hand;
+}
+
+.btn-register:hover {
+    -fx-background-color: #35a8e0;
+}
+
+/* --- Left Image Area --- */
+.left-image-pane {
+    -fx-background-image: url('YOUR_SURVEY_IMAGE.jpg'); /* Use your surveying image here */
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.gradient-overlay {
+    -fx-background-color: linear-gradient(to bottom right, rgba(30, 100, 180, 0.5), rgba(66, 230, 164, 0.5));
+}
+
+.btn-back {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4d69da;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
