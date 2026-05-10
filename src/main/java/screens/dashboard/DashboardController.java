@@ -2,6 +2,10 @@ package screens.dashboard;
 
 import data.Equipment;
 import javafx.animation.PauseTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,23 +32,33 @@ public class DashboardController {
     public TilePane equipmentContainer;
     public TextField tfSearchField;
 
-    private List<Equipment> items = new ArrayList<>();
+    private ObservableList<Equipment> items = FXCollections.observableArrayList();
+    private FilteredList<Equipment> filteredList;
+
     private final PauseTransition searchDelay = new PauseTransition((Duration.millis(300)));
+    private final EquipmentService equipmentService = new EquipmentService();
 
     public void initialize(){
-        items = EquipmentService.getAllEquipment();
-        //make sure to always refresh by clearing the UI
-        refreshList(items);
+        items.addAll(equipmentService.getAllEquipment());
+        filteredList = new FilteredList<>(items, p -> true);
 
-        //set up timer
-        //when timer finishes, it runs the filter logic automatically
+        //set up timer, when it finishes, it runs the filter logic automatically
         searchDelay.setOnFinished(event -> handleSearch());
 
         //add listener to the search field
         tfSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
             //everytime user types a letter, restart the timer
-            searchDelay.playFromStart();
+            filteredList.setPredicate(item -> {
+                if (newValue == null || newValue.isBlank()) return true;
+
+                String lowerCaseFilter = newValue.toLowerCase();
+                return item.getEquipmentName().toLowerCase().contains(lowerCaseFilter) ||
+                        item.getModelNo().toLowerCase().contains(lowerCaseFilter);
+            });
         });
+        filteredList.addListener((ListChangeListener<Equipment>) c -> refreshList(filteredList));
+
+        refreshList(items);
     }
 
     private void refreshList(List<Equipment> equipments) {
@@ -56,10 +70,16 @@ public class DashboardController {
             btn.setPrefSize(120,150);
 
             //create the image container (make it low-res first)
-            Image lowres = new Image(Objects.requireNonNull(getClass().getResource(item.getImagePath())).toExternalForm(), 100, 100, true, true, true);
+            Image lowres;
+            try {
+                String path = item.getImagePath();
+                lowres = new Image(getClass().getResource(path).toExternalForm(), 100, 100, true, true, true);
+            } catch (Exception e) {
+                // Fallback if the path in DB is wrong
+                lowres = new Image(getClass().getResource("/images/placeholder.png").toExternalForm(), 100, 100, true, true, true);
+            }
+
             ImageView image = new ImageView(lowres);
-            image.setFitWidth(80);
-            image.setPreserveRatio(true);
 
             //create the label (using a bit of CSS)
             Label name = new Label(item.getEquipmentName());
