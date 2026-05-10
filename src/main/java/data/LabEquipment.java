@@ -1,7 +1,5 @@
 package data;
 
-import java.util.Date;
-
 public class LabEquipment extends Equipment {
     private String hazardLevel;
 
