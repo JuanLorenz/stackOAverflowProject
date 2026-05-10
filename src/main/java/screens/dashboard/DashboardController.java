@@ -2,7 +2,6 @@ package screens.dashboard;
 
 import data.Equipment;
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -118,25 +116,4 @@ public class DashboardController {
         paneOverlayShadow.setVisible(false);
         paneMainContainer.setVisible(false);
     }
-
-    //DON'T DELETE THESE YET
-//    public void onActionEquipmentButton(MouseEvent mouseEvent) {
-//        Button src = (Button) mouseEvent.getSource();
-//        labelEquipmentDetails.setText(Objects.requireNonNull(createDetails(src)).toString());
-//        paneOverlayShadow.setVisible(true);
-//        paneMainContainer.setVisible(true);
-//    }
-
-//    private StringBuilder createDetails(Button src){
-//       StringBuilder sb = new StringBuilder();
-//
-//       sb.append("Equipment Name : ");
-//       sb.append(eqpmtButtons.get(eqpmtButtons.indexOf(src)).getText());
-//       sb.append("\n\n");
-//       sb.append("Availability: [would depend on a static boolean map \n from the view that handles equipment borrowing]\n\n");
-//       sb.append("Borrow Fee: [would depend on a static double map \n from the view that handles equipment borrowing]\n\n");
-//       sb.append("Further details to be added");
-//
-//       return sb;
-//    }
 }
