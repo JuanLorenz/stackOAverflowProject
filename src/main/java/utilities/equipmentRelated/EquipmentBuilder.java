@@ -16,21 +16,20 @@ public class EquipmentBuilder {
     private String name, model, serial, condition, imagePath;
     private int totalQty, availableQty;
 
-    private String hazard;
-    private String sport, size;
-    private String discipline, safetyStd;
-    private String specs, warranty;
-
     public static EquipmentBuilder start(String type) {
         EquipmentBuilder builder = new EquipmentBuilder();
         builder.type = type.toUpperCase();
         return builder;
     }
 
-    public EquipmentBuilder setInfo(int id, String name, String model, String serial, String condition, String imagePath) {
+    public EquipmentBuilder setInfo(int id, String name, String model) {
         this.id = id;
         this.name = name;
         this.model = model;
+        return this;
+    }
+
+    public EquipmentBuilder setDetails(String serial, String condition, String imagePath) {
         this.serial = serial;
         this.condition = condition;
         this.imagePath = imagePath;
@@ -43,41 +42,26 @@ public class EquipmentBuilder {
         return this;
     }
 
-    public EquipmentBuilder labDetails(String hazard) {
-        this.hazard = hazard;
-        return this;
-    }
-
-    public EquipmentBuilder sportDetails(String sport, String size) {
-        this.sport = sport;
-        this.size = size;
-        return this;
-    }
-
-    public EquipmentBuilder engineerDetails(String discipline, String safetyStd) {
-        this.discipline = discipline;
-        this.safetyStd = safetyStd;
-        return this;
-    }
-
-    public EquipmentBuilder techDetails(String specs, String warranty) {
-        this.specs = specs;
-        this.warranty = warranty;
-        return this;
-    }
-
     public Equipment build() {
         switch (this.type) {
-            case "LAB":
-                return new LabEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath, hazard);
-            case "SPORT":
-                return new SportEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath, sport, size);
             case "ENGINEER":
-                return new EngineerEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath, discipline, safetyStd);
-            case "TECH":
-                return new TechEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath, specs, LocalDate.parse(warranty, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                return new EngineerEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
+            case "CHEMISTRY":
+                return new ChemistryEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
+            case "PE":
+                return new PEEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
+            case "MULTIMEDIA":
+                return new MultimediaEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
+            case "MEDICAL SCIENCE":
+                return new MedSciEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
+            case "IT":
+                return new ITEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
+            case "ARCHITECTURE":
+                return new ArchiEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
+            case "AGRICULTURE":
+                return new AgriEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
             default:
-                throw new IllegalArgumentException("Unknown equipment type: " + type);
+                throw new IllegalArgumentException("Invalid equipment type.");
         }
     }
 }
