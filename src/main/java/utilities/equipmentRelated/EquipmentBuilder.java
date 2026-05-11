@@ -54,7 +54,7 @@ public class EquipmentBuilder {
                 return new MultimediaEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
             case "MEDICAL SCIENCES":
                 return new MedSciEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
-            case "INFORMATION TECHNOLOGIES":
+            case "INFORMATION TECHNOLOGY":
                 return new ITEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
             case "ARCHITECTURE":
                 return new ArchiEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);

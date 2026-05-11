@@ -8,6 +8,7 @@ module com.example.stackoaverflowproject {
     requires org.kordamp.bootstrapfx.core;
     requires jbcrypt;
     requires java.sql;
+    requires com.example.stackoaverflowproject;
 
     // OPEN your UI folders so JavaFX can read your @FXML tags
     opens screens.login to javafx.fxml;
