@@ -48,13 +48,13 @@ public class EquipmentBuilder {
                 return new EngineerEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
             case "CHEMISTRY":
                 return new ChemistryEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
-            case "PE":
+            case "PHYSICAL EDUCATION":
                 return new PEEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
-            case "MULTIMEDIA":
+            case "MULTI MEDIA":
                 return new MultimediaEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
-            case "MEDICAL SCIENCE":
+            case "MEDICAL SCIENCES":
                 return new MedSciEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
-            case "IT":
+            case "INFORMATION TECHNOLOGIES":
                 return new ITEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
             case "ARCHITECTURE":
                 return new ArchiEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);

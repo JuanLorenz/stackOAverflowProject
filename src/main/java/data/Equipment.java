@@ -22,6 +22,8 @@ public abstract class Equipment {
         this.imagePath = imagePath;
     }
 
+    public abstract String getCategory();
+
     public int getEquipmentID() {
         return equipmentID;
     }

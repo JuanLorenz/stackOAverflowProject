@@ -2,6 +2,7 @@ package utilities.daoRelated;
 
 import data.Equipment;
 import data.*;
+import utilities.equipmentRelated.EquipmentBuilder;
 import utilities.sqlRelated.MySqlConnection;
 
 import java.sql.Connection;
@@ -14,10 +15,29 @@ import java.util.List;
 public class EquipmentDAO implements GeneralDAO<Equipment> {
 
     private final String FIND_ALL = "SELECT * FROM equipment";
+    private final String FIND_BY_ID = "SELECT * FROM equipment WHERE equipmentID = ?";
+    private final String INSERT_EQUIPMENT = "INSERT INTO equipment (equipmentName, category, modelNo, serialNo, condition, totalQty, availableQty, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     @Override
-    public boolean save(Equipment entity) {
-        return false;
+    public boolean save(Equipment equipment) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(INSERT_EQUIPMENT)) {
+
+            statement.setString(1, equipment.getEquipmentName());
+            statement.setString(2, equipment.getCategory());
+            statement.setString(3, equipment.getModelNo());
+            statement.setString(4, equipment.getSerialNo());
+            statement.setString(5, equipment.getCondition());
+            statement.setInt(6, equipment.getTotalQty());
+            statement.setInt(7, equipment.getAvailableQty());
+            statement.setString(8, equipment.getImagePath());
+
+            return statement.executeUpdate() > 0; // true if row was inserted
+
+        } catch (SQLException e) {
+            System.err.println("Failed to save user: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
@@ -27,6 +47,18 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
 
     @Override
     public Equipment findByID(int id) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(FIND_BY_ID)) {
+
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return mapEquipment(rs);
+            }
+        } catch (SQLException e) {
+            System.err.println("Database connection or query failed: " + e.getMessage());
+        }
         return null;
     }
 
@@ -49,21 +81,16 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
         return equipments;
     }
 
-    //Bruh, what do I do with the concrete classes
     private Equipment mapEquipment(ResultSet rs) throws SQLException {
-        Equipment e;
-
-        String category = rs.getString("category");
-        int id = rs.getInt("equipmentID");
-        String eq = rs.getString("equipmentName");
-        String md = rs.getString("modelNo");
-        String sr = rs.getString("serialNo");
-        String cd = rs.getString("condition");
-        int tl = rs.getInt("totalQty");
-        int av = rs.getInt("availableQty");
-        String pt = "/images/placeholder-img.png"; //STILL PLACEHOLDER
-
-
-        return new GenEquipment(id, eq, md, sr, cd, tl, av, pt);
+        return EquipmentBuilder.start(rs.getString("category"))
+                .setInfo(rs.getInt("equipmentID"),
+                        rs.getString("equipmentName"),
+                        rs.getString("modelNo"))
+                .setDetails(rs.getString("serialNo"),
+                        rs.getString("condition"),
+                        rs.getString("imagePath"))
+                .setInventory(rs.getInt("totalQty"),
+                        rs.getInt("availableQty"))
+                .build();
     }
 }
