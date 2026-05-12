@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="rootPane" maxHeight="900.0" maxWidth="1600.0" minHeight="225.0" minWidth="400.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@usershell.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.userShell.UserShellController">
+    <left>
+        <!-- SIDEBAR -->
+<!--        <VBox fx:id="sidebar" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #eee; -fx-border-width: 0 1 0 0;" spacing="10">-->
+<!--            <children>-->
+<!--                <Label text="EquipLink" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2dd4bf;">-->
+<!--                    <VBox.margin><Insets bottom="40.0" left="20.0" top="20.0" /></VBox.margin>-->
+<!--                </Label>-->
+<!--                <Button onAction="#showHome" styleClass="menu-button" text="Home" maxWidth="Infinity" />-->
+<!--                <Button onAction="#showDashboard" styleClass="menu-button" text="Dashboard" maxWidth="Infinity" />-->
+<!--                <Button onAction="#showSettings" styleClass="menu-button" text="Settings" maxWidth="Infinity" />-->
+<!--                <Spacer VBox.vgrow="ALWAYS" />-->
+<!--                <Button text="Logout" style="-fx-background-color: #38BDF8; -fx-text-fill: white;" />-->
+<!--            </children>-->
+<!--        </VBox>-->
+
+        <VBox fx:id="sidebar" prefWidth="200.0" spacing="10" styleClass="sidebar">
+            <children>
+                <Label text="EquipLink" textFill="#2dd4bf">
+                    <font><Font name="System Bold" size="24.0" /></font>
+                    <VBox.margin><Insets bottom="40.0" left="20.0" top="20.0" /></VBox.margin>
+                </Label>
+                <Button maxWidth="Infinity" onAction="#showHome" styleClass="menu-button" text="Home" />
+                <Button maxWidth="Infinity" onAction="#showDashboard" styleClass="menu-button, menu-button-active" text="Dashboard" />
+                <Button maxWidth="Infinity" onAction="#showSettings" styleClass="menu-button" text="Settings" />
+                <Button maxWidth="Infinity" onAction="#showHistory" styleClass="menu-button" text="History" />
+                <Button maxWidth="150" style="-fx-background-color: #38BDF8; -fx-text-fill: white; -fx-background-radius: 20;" text="Logout">
+                    <VBox.margin><Insets bottom="20.0" left="20.0" /></VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox>
+            <children>
+                <!-- TOP BAR (Hamburger) -->
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0" style="-fx-background-color: white;">
+                    <children>
+                        <Button fx:id="btnHamburger" onAction="#toggleSidebar" style="-fx-background-color: transparent; -fx-font-size: 20;" text="☰" />
+                    </children>
+                    <padding><Insets left="15.0" /></padding>
+                </HBox>
+
+                <!-- DYNAMIC CONTENT AREA -->
+                <StackPane fx:id="contentArea" VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
