@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.settings.SettingsController">
    <padding>
       <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
    </padding>
@@ -15,7 +15,7 @@
       <!-- Title -->
       <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #222222;" text="Account Settings">
          <VBox.margin>
-            <Insets bottom="10.0" />
+            <Insets bottom="10.0" top="10.0" />
          </VBox.margin>
       </Label>
 
@@ -37,7 +37,7 @@
                         <Insets bottom="4.0" left="4.0" top="4.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField prefHeight="38.0" prefWidth="280.0" promptText="Enter your name" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-text-fill: #aaaaaa; -fx-prompt-text-fill: #aaaaaa;">
+                  <TextField fx:id="txtfldName" prefHeight="38.0" prefWidth="280.0" promptText="Enter your name" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-text-fill: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-border-width: 2;">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -48,33 +48,52 @@
                         <Insets bottom="4.0" left="4.0" top="4.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField prefHeight="38.0" prefWidth="280.0" promptText="Enter your email account" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-text-fill: #aaaaaa; -fx-prompt-text-fill: #aaaaaa;">
+                  <TextField fx:id="txtfldEmail" prefHeight="38.0" prefWidth="280.0" promptText="Enter your email account" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-text-fill: #aaaaaa; -fx-prompt-text-fill: #aaaaaa; -fx-border-width: 2;">
                   </TextField>
                </children>
             </VBox>
 
             <!-- Right: Avatar -->
-            <VBox alignment="TOP_CENTER" spacing="10.0">
+            <VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="223.0" spacing="10.0">
                <VBox.margin>
                   <Insets top="40.0" />
                </VBox.margin>
                <children>
                   <!-- Avatar circle (placeholder) -->
-                  <StackPane prefHeight="120.0" prefWidth="120.0">
+                  <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="134.0">
                      <children>
-                        <Circle fill="#c0c0c0" radius="58.0" />
-                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_RIGHT" />
+                        <ImageView fx:id="imgProfile" fitHeight="116.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="false">
+
+                           <image>
+                              <Image url="@../../images/placeholder-profile.png" />
+                           </image>
+
+                           <clip>
+                              <Circle centerX="58.0" centerY="58.0" radius="58.0" />
+                           </clip>
+                        </ImageView>
+                        <ImageView fitHeight="46.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_RIGHT">
+                           <image>
+                              <Image url="@../../images/camera-logo.png" />
+                           </image>
+                           <StackPane.margin>
+                              <Insets right="40.0" />
+                           </StackPane.margin>
+                        </ImageView>
                      </children>
                   </StackPane>
 
                   <!-- Upload / Delete buttons -->
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Button prefHeight="34.0" prefWidth="105.0" style="-fx-background-color: #3ecfb2; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;" text="Upload New" />
-                        <Button prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #aaaaaa; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;" text="Delete Avatar" />
+                        <Button onAction="#onClickUploadNewProfile" prefHeight="34.0" prefWidth="105.0" style="-fx-background-color: #3ecfb2; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;" text="Upload New" />
+                        <Button onAction="#onClickDeleteProfile" prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #aaaaaa; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;" text="Delete Avatar" />
                      </children>
                   </HBox>
                </children>
+               <HBox.margin>
+                  <Insets left="80.0" />
+               </HBox.margin>
             </VBox>
 
          </children>
@@ -102,7 +121,7 @@
                               <Insets left="4.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField prefHeight="38.0" prefWidth="280.0" promptText="Enter New Password" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-prompt-text-fill: #aaaaaa;" />
+                        <PasswordField fx:id="txtfldNewPassword" prefHeight="38.0" prefWidth="280.0" promptText="Enter New Password" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-prompt-text-fill: #aaaaaa; -fx-border-width: 2;" />
                      </children>
                   </VBox>
 
@@ -114,7 +133,7 @@
                               <Insets left="4.0" />
                            </VBox.margin>
                         </Label>
-                        <PasswordField prefHeight="38.0" prefWidth="280.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-prompt-text-fill: #aaaaaa;" />
+                        <PasswordField fx:id="txtfldConfirmPassword" prefHeight="38.0" prefWidth="280.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 6 14 6 14; -fx-font-size: 13px; -fx-prompt-text-fill: #aaaaaa; -fx-border-width: 2;" />
                      </children>
                   </VBox>
                </children>
@@ -128,7 +147,16 @@
             <Insets top="24.0" />
          </VBox.margin>
          <children>
-            <Button prefHeight="38.0" prefWidth="140.0" style="-fx-background-color: #42b8e8; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;" text="Save Changes" />
+            <VBox alignment="TOP_CENTER" prefHeight="101.0" prefWidth="187.0">
+               <children>
+                  <Button fx:id="btnSaveChanges" onAction="#onClickSaveChanges" prefHeight="38.0" prefWidth="140.0" style="-fx-background-color: #42b8e8; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 20; -fx-cursor: hand;" text="Save Changes" />
+                  <Label fx:id="lblError" style="-fx-font-size: 12px; -fx-font-weight: bold;" textFill="RED">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </HBox>
 
