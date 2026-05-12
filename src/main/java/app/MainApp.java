@@ -1,18 +1,31 @@
 package app;
 
+import data.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.serializationRelated.SerializeManager;
+
 import java.io.IOException;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        User currentUser = SerializeManager.deserializeUser();
+
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/login/Login.fxml"));
+            FXMLLoader loader;
+
+            if(currentUser == null)
+                 loader = new FXMLLoader(getClass().getResource("/screens/login/Login.fxml"));
+            else if(currentUser.getUserType().equals("admin"))
+                loader = new FXMLLoader(getClass().getResource("/screens/dashboard/dashboardAdmin.fxml"));
+            else
+                loader = new FXMLLoader(getClass().getResource("/screens/home/Home.fxml"));
+
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
