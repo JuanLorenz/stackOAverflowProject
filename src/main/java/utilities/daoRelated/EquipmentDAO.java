@@ -92,7 +92,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
 
     public Equipment findByName(String name) {
         try (Connection c = MySqlConnection.getConnection();
-             PreparedStatement statement = c.prepareStatement(FIND_BY_ID)) {
+             PreparedStatement statement = c.prepareStatement(FIND_BY_NAME)) {
 
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();

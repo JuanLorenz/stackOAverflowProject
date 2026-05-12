@@ -1,22 +1,21 @@
 package data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Transaction {
     private int transactionID;
     private User user;
     private Equipment equipment;
-    private Date dateBorrowed;
-    private Date dateDue;
-    private Date dateReturned;
+    private LocalDate dateBorrowed;
+    private LocalDate dateReturned;
 
-    public Transaction(int transactionID, User user, Equipment equipment, Date dateBorrowed, Date dateDue) {
+    public Transaction(int transactionID, User user, Equipment equipment, LocalDate dateBorrowed, LocalDate dateReturned) {
         this.transactionID = transactionID;
         this.user = user;
         this.equipment = equipment;
         this.dateBorrowed = dateBorrowed;
-        this.dateDue = dateDue;
-        dateReturned = null;
+        this.dateReturned = dateReturned;
     }
 
     public int getTransactionID() {
@@ -43,27 +42,19 @@ public class Transaction {
         this.equipment = equipment;
     }
 
-    public Date getDateBorrowed() {
+    public LocalDate getDateBorrowed() {
         return dateBorrowed;
     }
 
-    public void setDateBorrowed(Date dateBorrowed) {
+    public void setDateBorrowed(LocalDate dateBorrowed) {
         this.dateBorrowed = dateBorrowed;
     }
 
-    public Date getDateDue() {
-        return dateDue;
-    }
-
-    public void setDateDue(Date dateDue) {
-        this.dateDue = dateDue;
-    }
-
-    public Date getDateReturned() {
+    public LocalDate getDateReturned() {
         return dateReturned;
     }
 
-    public void setDateReturned(Date dateReturned) {
+    public void setDateReturned(LocalDate dateReturned) {
         this.dateReturned = dateReturned;
     }
 }
