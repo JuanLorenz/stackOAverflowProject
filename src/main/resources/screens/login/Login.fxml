@@ -2,23 +2,29 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.login.LoginController">
+<!-- Added imports for Images -->
+
+<HBox prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.login.LoginController">
     <children>
 
+        <!-- Left Side: Login Form -->
         <VBox alignment="CENTER_LEFT" prefWidth="450.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
             <padding>
                 <Insets bottom="40.0" left="80.0" right="80.0" top="40.0" />
             </padding>
             <children>
-
-                <Label style="-fx-text-fill: #51dca5; -fx-font-weight: bold; -fx-font-size: 32px;" text="🔗">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Label>
+      
+                <!-- NEW: Replaced Label with ImageView -->
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <!-- The ../../ tells it to go up two folders from the screens/login folder -->
+                        <Image url="@../../images/logo-no-text.png" />
+                    </image>
+                </ImageView>
 
                 <Label text="Welcome Back!" textFill="#222222">
                     <font>
@@ -65,12 +71,12 @@
                             </font>
                         </Button>
                     </children>
-               <opaqueInsets>
-                  <Insets top="20.0" />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
+                    <opaqueInsets>
+                        <Insets top="20.0" />
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
                 </HBox>
 
                 <HBox alignment="CENTER">
@@ -96,14 +102,15 @@
             </children>
         </VBox>
 
+        <!-- Right Side: Image with Gradient -->
         <StackPane prefWidth="450.0" HBox.hgrow="ALWAYS">
             <children>
                 <Pane styleClass="right-image-pane" />
 
                 <Pane styleClass="gradient-overlay">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets></Pane>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Pane>
             </children>
         </StackPane>
 

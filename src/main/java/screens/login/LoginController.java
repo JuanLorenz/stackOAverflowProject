@@ -47,7 +47,7 @@ public class LoginController {
 
             // 4. Switch to the dashboard
             // Note: Make sure you actually have a dashboard.fxml created in your resources folder!
-            NavigationUtils.switchScene(event, "/screens/dashboard/MainView.fxml");
+            NavigationUtils.switchScene(event, "/screens/home/Home.fxml");
 
         } else {
             // Fail: Clear password field and show error
