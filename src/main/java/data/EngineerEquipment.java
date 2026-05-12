@@ -7,6 +7,6 @@ public class EngineerEquipment extends Equipment {
 
     @Override
     public String getCategory() {
-        return "Engineer";
+        return "Engineering";
     }
 }

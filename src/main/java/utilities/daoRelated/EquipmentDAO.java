@@ -16,7 +16,9 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
 
     private final String FIND_ALL = "SELECT * FROM equipment";
     private final String FIND_BY_ID = "SELECT * FROM equipment WHERE equipmentID = ?";
+    private final String FIND_BY_NAME = "SELECT * FROM equipment WHERE equipmentName = ?";
     private final String INSERT_EQUIPMENT = "INSERT INTO equipment (equipmentName, category, modelNo, serialNo, condition, totalQty, availableQty, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String UPDATE_CONDITION = "UPDATE equipment SET condition = ? WHERE id = ?";
 
     @Override
     public boolean save(Equipment equipment) {
@@ -79,6 +81,37 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
         }
 
         return equipments;
+    }
+
+    public Equipment findByName(String name) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(FIND_BY_ID)) {
+
+            statement.setString(1, name);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return mapEquipment(rs);
+            }
+        } catch (SQLException e) {
+            System.err.println("Database connection or query failed: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean updateCondition(int id, String condition) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(UPDATE_CONDITION)) {
+
+            statement.setString(1, condition);
+            statement.setInt(2, id);
+
+            return statement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Failed to save user: " + e.getMessage());
+            return false;
+        }
     }
 
     private Equipment mapEquipment(ResultSet rs) throws SQLException {

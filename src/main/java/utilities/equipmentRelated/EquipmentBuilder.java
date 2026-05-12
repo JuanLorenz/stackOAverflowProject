@@ -44,7 +44,7 @@ public class EquipmentBuilder {
 
     public Equipment build() {
         switch (this.type) {
-            case "ENGINEER":
+            case "ENGINEERING":
                 return new EngineerEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
             case "CHEMISTRY":
                 return new ChemistryEquipment(id, name, model, serial, condition, totalQty, availableQty, imagePath);
