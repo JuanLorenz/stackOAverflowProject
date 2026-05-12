@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import utilities.sqlRelated.RegisterService;
 import utilities.javafxRelated.NavigationUtils;
@@ -17,8 +19,17 @@ public class RegisterController {
     @FXML private PasswordField tfPassword;
     @FXML private Label lStatus;
     @FXML private Button buttonRegister;
+    @FXML private ImageView leftSideImage;
+    @FXML private StackPane imageContainer;
 
     private final RegisterService registerService = new RegisterService();
+
+    @FXML
+    public void initialize() {
+        // Forces the image to always be the exact size of the container
+        leftSideImage.fitWidthProperty().bind(imageContainer.widthProperty());
+        leftSideImage.fitHeightProperty().bind(imageContainer.heightProperty());
+    }
 
     @FXML
     void onClickRegister(ActionEvent event) {
@@ -26,37 +37,28 @@ public class RegisterController {
         String email = tfEmail.getText().trim();
         String password = tfPassword.getText();
 
-        // 1. Basic Validation
         if (name.isBlank() || email.isBlank() || password.isBlank()) {
             showStatus(Color.RED, "All fields are required.");
             return;
         }
 
-        // 2. Pass data to the Service layer
-        int result = registerService.register(name, email, password);
-        System.out.println("Test");
-        // 3. Handle the result
+        int result = registerService.register(name, email, password, "user");
+
         if (result == 1) {
             showStatus(Color.GREEN, "Registration successful!");
-
-            // Switch back to the login screen so the user can log in
             NavigationUtils.switchScene(event, "/screens/login/Login.fxml");
-
         } else if (result == 0) {
-            showStatus(Color.RED, "Username is already taken.");
+            showStatus(Color.RED, "Email is already taken.");
         } else {
             showStatus(Color.RED, "A database error occurred.");
         }
     }
 
+    @FXML
     public void onClickBackToLogin(ActionEvent event) {
-        NavigationUtils.switchScene(event,"/screens/login/Login.fxml" );
+        NavigationUtils.switchScene(event, "/screens/login/Login.fxml");
     }
 
-    /**
-     * UI helper.
-     * Sets status label display depending on the result of action invoked.
-     */
     private void showStatus(Color color, String message) {
         lStatus.setTextFill(color);
         lStatus.setText(message);

@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import utilities.serializationRelated.SerializeManager;
 import utilities.sqlRelated.AuthService;
@@ -22,10 +24,17 @@ public class LoginController {
     @FXML private TextField tfEmail;
     @FXML private PasswordField tfPassword;
     @FXML private Label lStatus;
-    @FXML private Button buttonLogin;
+    @FXML private ImageView rightSideImage;
+    @FXML private StackPane imageContainer;
 
     private final AuthService authService = new AuthService();
 
+    @FXML
+    public void initialize() {
+        // Keeps image fitted to the pane without breaking layout
+        rightSideImage.fitWidthProperty().bind(imageContainer.widthProperty());
+        rightSideImage.fitHeightProperty().bind(imageContainer.heightProperty());
+    }
     // "view" when login is clicked
     public void onLoginClicked(ActionEvent event) {
         String email = tfEmail.getText();

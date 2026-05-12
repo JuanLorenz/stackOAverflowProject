@@ -5,26 +5,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-// import shared.DatabaseInitializer; // Uncomment if you are using the DB setup class!
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/login/Login.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
             primaryStage.setTitle("Capstone");
             primaryStage.setScene(scene);
+
+            // It's good practice to keep minimum dimensions
             primaryStage.setMinWidth(1066);
             primaryStage.setMinHeight(600);
-            primaryStage.setMaxWidth(1920);
-            primaryStage.setMaxHeight(1080);
+
+            primaryStage.setMaximized(true);
             primaryStage.show();
 
         } catch (IOException e) {
