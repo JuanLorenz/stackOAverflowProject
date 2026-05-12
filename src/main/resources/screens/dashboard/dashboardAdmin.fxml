@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox style="-fx-background-color: white;" stylesheets="@dashboardAdminStyle.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+    </padding>
+    <children>
+        <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #222222;" text="Welcome, Admin!">
+            <VBox.margin>
+                <Insets bottom="30.0" />
+            </VBox.margin>
+        </Label>
+        <HBox spacing="40.0" VBox.vgrow="ALWAYS">
+            <children>
+                <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #222222;" text="Actively Borrowed" />
+                        <VBox styleClass="gradient-container" VBox.vgrow="ALWAYS">
+                            <children>
+                                <TableView fx:id="activelyBorrowedTable" styleClass="custom-table" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn prefWidth="120.0" text="Item Name" />
+                                        <TableColumn prefWidth="120.0" text="Date" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #222222;" text="Returned" />
+                        <VBox styleClass="gradient-container" VBox.vgrow="ALWAYS">
+                            <children>
+                                <TableView fx:id="returnedTable" styleClass="custom-table" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn prefWidth="120.0" text="Item Name" />
+                                        <TableColumn prefWidth="120.0" text="Date" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</VBox>
