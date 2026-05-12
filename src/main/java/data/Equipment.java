@@ -28,6 +28,10 @@ public abstract class Equipment {
         return equipmentID;
     }
 
+    public void setEquipmentID(int id) {
+        this.equipmentID = id;
+    }
+
     public String getEquipmentName() {
         return equipmentName;
     }

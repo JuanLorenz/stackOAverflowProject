@@ -1,4 +1,4 @@
-package app;
+package screens.userShell;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,15 +7,18 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-// import shared.DatabaseInitializer; // Uncomment if you are using the DB setup class!
 
-public class MainApp extends Application {
+public class test extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/login/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/userShell/UserShell.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
@@ -31,9 +34,5 @@ public class MainApp extends Application {
             System.err.println("CRITICAL ERROR: Failed to load the starting FXML file.");
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

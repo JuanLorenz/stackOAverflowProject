@@ -1,6 +1,7 @@
 package utilities.daoRelated;
 
 import data.User;
+import org.mindrot.jbcrypt.BCrypt;
 import utilities.sqlRelated.MySqlConnection;
 
 import java.sql.Connection;
@@ -16,6 +17,7 @@ public class UserDAO implements GeneralDAO<User> {
     private final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
     private final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     private final String INSERT_USER   = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+    private final String CHANGE_USER_DETAILS = "UPDATE user SET name = ?, email = ?, password = ? WHERE email = ?";
 
     /**
      * Finds the user in the database given an ID.
@@ -100,6 +102,36 @@ public class UserDAO implements GeneralDAO<User> {
             System.err.println("Database connection or query failed: " + e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * Changes the user's field details based on the inputted new values.
+     * @return true - if query successful
+     *         false - if query failed
+     */
+    public boolean changeUserDetails(String currentEmail, String newEmail, String name, String password) {
+        try (
+                Connection c = MySqlConnection.getConnection();
+                PreparedStatement statement = c.prepareStatement(CHANGE_USER_DETAILS)
+        ) {
+
+            statement.setString(1, name);
+            statement.setString(2, newEmail);
+            statement.setString(3, BCrypt.hashpw(password, BCrypt.gensalt()));
+            statement.setString(4, currentEmail);
+
+            int rowsUpdated = statement.executeUpdate();
+
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+
+            System.err.println(
+                    "Database connection or query failed: " + e.getMessage()
+            );
+        }
+
+        return false;
     }
 
     /**
