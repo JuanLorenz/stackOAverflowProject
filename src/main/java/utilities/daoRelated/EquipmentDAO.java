@@ -42,7 +42,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
                 return true;
             }
         } catch (SQLException e) {
-            System.err.println("Failed to save user: " + e.getMessage());
+            System.err.println("Failed to save equipment: " + e.getMessage());
             return false;
         }
 
@@ -116,7 +116,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
             return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            System.err.println("Failed to save user: " + e.getMessage());
+            System.err.println("Failed to update equipment: " + e.getMessage());
             return false;
         }
     }

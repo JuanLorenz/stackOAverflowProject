@@ -5,22 +5,52 @@ import data.User;
 import utilities.equipmentRelated.EquipmentBuilder;
 import utilities.sqlRelated.MySqlConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionDAO implements GeneralDAO<Transaction> {
 
-    private final String FIND_ALL = "SELECT * FROM transaction";
-    private final String FIND_BY_ID = "SELECT t.*, u.*, e.* FROM transaction t JOIN users u ON t.userID = u.userID JOIN equipment e ON t.equipmentID = e.equipmentID WHERE transactionID = ?";
-    private final String INSERT_EQUIPMENT = "INSERT INTO transaction (equipmentID, userID, dateBorrowed, dateReturned)";
+    private final String FIND_ALL = """
+            SELECT\s
+                t.*,\s
+                u.id AS u_id, u.name AS u_name, u.email AS u_email, u.password AS u_pw, u.userType AS u_type,
+                e.equipmentID AS e_id, e.equipmentName AS e_name, e.category AS e_cat, e.modelNo AS e_model,\s
+                e.serialNo AS e_serial, e.condition AS e_cond, e.totalQty AS e_total,\s
+                e.availableQty AS e_avail, e.imagePath AS e_path
+            FROM transaction t\s
+            JOIN users u ON t.userID = u.id\s
+            JOIN equipment e ON t.equipmentID = e.equipmentID
+            """;
+    private final String FIND_BY_ID = FIND_ALL + " WHERE t.transactionID = ?";
+    private final String INSERT_TRANSACTION = "INSERT INTO transaction (equipmentID, userID, dateBorrowed, dateReturned) VALUES (?, ?, ?, ?)";
 
     @Override
     public boolean save(Transaction transaction) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(INSERT_TRANSACTION, Statement.RETURN_GENERATED_KEYS)) {
+
+            statement.setInt(1, transaction.getEquipment().getEquipmentID());
+            statement.setInt(2, transaction.getUser().getId());
+            statement.setObject(3, transaction.getDateBorrowed());
+            statement.setObject(4, null);
+
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        transaction.setTransactionID(generatedKeys.getInt(1));
+                    }
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to save transaction: " + e.getMessage());
+            return false;
+        }
+
         return false;
     }
 
@@ -48,28 +78,42 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
 
     @Override
     public List<Transaction> findAll() {
-        return List.of();
+        List<Transaction> transactions = new ArrayList<>();
+
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(FIND_ALL)) {
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                transactions.add(mapTransaction(rs));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Database connection or query failed: " + e.getMessage());
+        }
+
+        return transactions;
     }
 
     private Transaction mapTransaction(ResultSet rs) throws SQLException {
         return new Transaction(
                 rs.getInt("transactionID"),
                 new User(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("userType")
+                        rs.getInt("u_id"),
+                        rs.getString("u_name"),
+                        rs.getString("u_email"),
+                        rs.getString("u_pw"),
+                        rs.getString("u_type")
                 ),
-                EquipmentBuilder.start(rs.getString("category"))
-                        .setInfo(rs.getInt("e.equipmentID"),
-                                rs.getString("equipmentName"),
-                                rs.getString("modelNo"))
-                        .setDetails(rs.getString("serialNo"),
-                                rs.getString("condition"),
-                                rs.getString("imagePath"))
-                        .setInventory(rs.getInt("totalQty"),
-                                rs.getInt("availableQty"))
+                EquipmentBuilder.start(rs.getString("e_cat"))
+                        .setInfo(rs.getInt("e_id"),
+                                rs.getString("e_name"),
+                                rs.getString("e_model"))
+                        .setDetails(rs.getString("e_serial"),
+                                rs.getString("e_cond"),
+                                rs.getString("e_path"))
+                        .setInventory(rs.getInt("e_total"),
+                                rs.getInt("e_avail"))
                         .build(),
                 rs.getObject("dateBorrowed", LocalDate.class),
                 rs.getObject("dateReturned", LocalDate.class)
