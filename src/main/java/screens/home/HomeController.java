@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import utilities.serializationRelated.SerializeManager;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class HomeController {
@@ -113,7 +114,7 @@ public class HomeController {
         User currentUser = SerializeManager.deserializeUser();
         Equipment eq1 = new MultimediaEquipment(101, "Topcon Total Station", "TS-100", "SN1", "Good", 5, 4, "") {};
 
-        Date today = new Date();
+        LocalDate today = LocalDate.now();
         ObservableList<Transaction> borrowedList = FXCollections.observableArrayList(
                 new Transaction(1, currentUser, eq1, today, today)
 //                new Transaction(2, user, eq2, today, today),
