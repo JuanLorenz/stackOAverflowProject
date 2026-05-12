@@ -21,7 +21,7 @@ public class UserShellController {
     public void initialize() {
         //THIS IS JUST TESTING
         try {
-            Parent loginView = FXMLLoader.load(getClass().getResource("/screens/login/Login.fxml"));
+            Parent loginView = FXMLLoader.load(getClass().getResource("/screens/login/Login.fxml")); //this should be the dashboard later
             contentArea.getChildren().setAll(loginView);
 
         } catch (IOException e) {
@@ -64,8 +64,8 @@ public class UserShellController {
         }
     }
 
-    @FXML public void showHome() { loadView("/screens/home/HomeView.fxml"); }
-    @FXML public void showDashboard() { loadView("/screens/dashboard/MainView.fxml"); }
-    @FXML public void showSettings() { loadView("/screens/settings/SettingsView.fxml"); }
-    @FXML public void showHistory() { loadView("/screens/settings/SettingsView.fxml"); }
+    @FXML public void showHome() { loadView("/screens/home/Home.fxml"); }
+    @FXML public void showDashboard() { loadView("/screens/dashboard/DashboardUser.fxml"); }
+    @FXML public void showSettings() { loadView("/screens/settings/Settings.fxml"); }
+    @FXML public void showHistory() { loadView("/screens/history/History.fxml"); }
 }

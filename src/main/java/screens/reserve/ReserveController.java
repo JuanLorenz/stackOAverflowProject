@@ -3,8 +3,6 @@ package screens.reserve;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import utilities.javafxRelated.NavigationUtils;
 
@@ -18,7 +16,7 @@ public class ReserveController {
 
 
     public void onBackButtonClicked(ActionEvent actionEvent) {
-        NavigationUtils.switchScene(actionEvent,"/screens/dashboard/MainView.fxml");
+        NavigationUtils.switchScene(actionEvent, "/screens/dashboard/DashboardUser.fxml");
     }
 
     public void onReserveButtonClicked(ActionEvent actionEvent) {
