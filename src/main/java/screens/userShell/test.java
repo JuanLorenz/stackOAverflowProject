@@ -24,8 +24,8 @@ public class test extends Application {
             Scene scene = new Scene(root);
             primaryStage.setTitle("Capstone");
             primaryStage.setScene(scene);
-            primaryStage.setMinWidth(1066);
-            primaryStage.setMinHeight(600);
+            primaryStage.setMinWidth(960);
+            primaryStage.setMinHeight(640);
             primaryStage.setMaxWidth(1920);
             primaryStage.setMaxHeight(1080);
             primaryStage.show();

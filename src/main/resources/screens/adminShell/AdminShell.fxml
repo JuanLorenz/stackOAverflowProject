@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootPane" maxHeight="900.0" maxWidth="1600.0" minHeight="225.0" minWidth="400.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@usershell.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.userShell.UserShellController">
+<BorderPane fx:id="rootPane" maxHeight="900.0" maxWidth="1600.0" minHeight="225.0" minWidth="400.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@adminshell.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.userShell.UserShellController">
     <left>
         <!-- SIDEBAR -->
         <VBox fx:id="sidebar" maxWidth="200.0" prefWidth="200.0" spacing="10" styleClass="sidebar">

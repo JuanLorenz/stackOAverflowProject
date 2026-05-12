@@ -1,0 +1,65 @@
+/* Header Colors */
+.orange-header {
+    -fx-background-color: #FBB03B; /* Matches your prototype orange */
+}
+
+.dashboard-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Search Field */
+.search-field {
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-padding: 10 20;
+    -fx-border-color: #CCCCCC;
+    -fx-background-color: white;
+}
+
+/* Equipment Card (The Button) */
+.equipment-card {
+    -fx-background-color: white;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-border-color: #333333;
+    -fx-border-width: 1.5;
+    -fx-cursor: hand;
+}
+
+.equipment-card:hover {
+    -fx-background-color: #F9F9F9;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+/* ScrollPane fix */
+.content-scrollpane {
+    -fx-background-color: transparent;
+}
+.content-scrollpane .viewport {
+    -fx-background-color: white;
+}
+
+/* Popup/Overlay Styles */
+.detail-card {
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 20, 0, 0, 0);
+}
+
+.reserve-button {
+    -fx-background-color: #FF5F5F;
+    -fx-text-fill: white;
+    -fx-background-radius: 15;
+    -fx-font-weight: bold;
+    -fx-padding: 10 25;
+}
+
+.exit-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #999;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
