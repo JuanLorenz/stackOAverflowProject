@@ -10,54 +10,65 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<StackPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="414.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardController">
-    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-        <children>
-         <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0">
+<StackPane stylesheets="@dashboardUser.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardController">
+    <children>
+        <!-- Main Scrollable Content -->
+        <VBox prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;">
             <children>
-                  <TextField fx:id="tfSearchField" maxHeight="27.0" maxWidth="544.0" prefHeight="27.0" prefWidth="544.0" promptText="Search for equipment" style="-fx-padding: 0005; -fx-prompt-text-fill: gray;">
-                      <opaqueInsets>
-                          <Insets />
-                      </opaqueInsets>
-                  </TextField>
-            </children>
-            <VBox.margin>
-               <Insets left="40.0" right="40.0" />
-            </VBox.margin>
-         </HBox>
-         <ScrollPane fitToWidth="true" prefHeight="270.0" prefWidth="200.0">
-            <content>
-               <TilePane fx:id="equipmentContainer" alignment="CENTER_LEFT" hgap="5.0" prefColumns="4" prefHeight="270.0" prefRows="4" prefWidth="200.0" vgap="5.0">
-                  <padding>
-                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                  </padding>
-               </TilePane>
-            </content>
-            <VBox.margin>
-               <Insets left="40.0" right="40.0" />
-            </VBox.margin>
-         </ScrollPane>
+                <!-- ORANGE HEADER SECTION -->
+                <VBox spacing="15.0" styleClass="orange-header">
+                    <padding>
+                        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+                    </padding>
+                    <children>
+                        <Label styleClass="dashboard-title" text="Dashboard">
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin></Label>
+                        <TextField fx:id="tfSearchField" maxWidth="450.0" promptText="Search Equipment" styleClass="search-field">
+                     <padding>
+                        <Insets left="200.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin></TextField>
+                    </children>
+                </VBox>
 
-        </children>
-    </VBox>
-    <Pane fx:id="paneOverlayShadow" opacity="0.3" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" visible="false" StackPane.alignment="CENTER" />
-    <Pane fx:id="paneMainContainer" maxHeight="300.0" maxWidth="442.0" prefHeight="300.0" prefWidth="442.0" style="-fx-background-color: white;" visible="false">
-        <VBox alignment="CENTER" maxHeight="300.0" maxWidth="442.0" prefHeight="300.0" prefWidth="442.0">
-         <Button fx:id="buttonExitOverlay" mnemonicParsing="false" onMouseClicked="#onMouseClickExitOverlay" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #E67070;" text="X" textFill="WHITE">
-            <VBox.margin>
-               <Insets bottom="5.0" left="400.0" />
-            </VBox.margin>
-            <font>
-               <Font name="Arial Black" size="12.0" />
-            </font>
-         </Button>
-            <Label fx:id="labelEquipmentDetails" alignment="TOP_LEFT" maxHeight="260.0" maxWidth="430.0" prefHeight="260.0" prefWidth="430.0" text="Testing">
-                <font>
-                    <Font name="Arial Black" size="12.0" />
-                </font>
-            </Label>
+                <!-- EQUIPMENT GRID SECTION -->
+                <ScrollPane fitToWidth="true" styleClass="content-scrollpane" VBox.vgrow="ALWAYS">
+                    <content>
+                        <TilePane fx:id="equipmentContainer" hgap="25.0" vgap="25.0">
+                            <padding>
+                                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+                            </padding>
+                        </TilePane>
+                    </content>
+                </ScrollPane>
+            </children>
         </VBox>
-    </Pane>
+
+        <!-- OVERLAY SHADOW -->
+        <Pane fx:id="paneOverlayShadow" onMouseClicked="#onMouseClickExitOverlay" opacity="0.4" style="-fx-background-color: black;" visible="false" />
+
+        <!-- DETAIL POPUP CONTAINER -->
+        <VBox fx:id="paneMainContainer" alignment="CENTER" fillWidth="false" visible="false">
+            <VBox prefWidth="450.0" spacing="20" styleClass="detail-card">
+                <padding>
+                    <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+                </padding>
+                <children>
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button fx:id="buttonExitOverlay" onMouseClicked="#onMouseClickExitOverlay" styleClass="exit-button" text="X" />
+                    </HBox>
+                    <Label fx:id="labelEquipmentName" styleClass="detail-header" text="Equipment Name" />
+                    <Label fx:id="labelEquipmentDetails" styleClass="detail-body" text="Details go here..." wrapText="true" />
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button styleClass="reserve-button" text="Reserve" />
+                    </HBox>
+                </children>
+            </VBox>
+        </VBox>
+    </children>
 </StackPane>
