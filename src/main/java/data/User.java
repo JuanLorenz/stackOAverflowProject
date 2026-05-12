@@ -23,4 +23,5 @@ public class User implements Serializable {
     public String getName() { return name; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
+    public String getUserType() { return userType; }
 }
