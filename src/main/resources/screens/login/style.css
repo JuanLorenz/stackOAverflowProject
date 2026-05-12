@@ -1,69 +1,51 @@
 /* =======================================================
-   TEXT FIELD STYLING (Email & Password)
+   TEXT FIELD STYLING
 ======================================================= */
-
 .custom-input {
     -fx-background-color: white;
-    -fx-border-color: #51dca5; /* The teal border color */
+    -fx-border-color: #51dca5;
     -fx-border-width: 1.5px;
-    -fx-border-radius: 30px; /* Rounds the border */
-    -fx-background-radius: 30px; /* Rounds the white background to match */
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
     -fx-padding: 12px 20px;
     -fx-font-size: 14px;
     -fx-text-fill: #333333;
 }
 
-/* Make it highlight a slightly darker teal when the user clicks to type */
 .custom-input:focused {
     -fx-border-color: #38a579;
     -fx-border-width: 2px;
 }
 
-/* Style the placeholder text to be grey and italic */
-.custom-input:disabled, .custom-input .text {
+.custom-input .text {
     -fx-prompt-text-fill: #a0a0a0;
     -fx-font-style: italic;
 }
 
 /* =======================================================
-   LOGIN BUTTON STYLING
+   BUTTON STYLING
 ======================================================= */
-
-.btn-login {
-    -fx-background-color: #51dca5; /* Solid teal background */
-    -fx-background-radius: 30px; /* Perfectly rounded edges */
-    -fx-cursor: hand; /* Shows a pointer finger when hovering */
+.btn-login, .btn-register {
+    -fx-background-color: #51dca5;
+    -fx-background-radius: 30px;
+    -fx-cursor: hand;
 }
 
-/* Make it slightly darker when the mouse hovers over it */
-.btn-login:hover {
+.btn-login:hover, .btn-register:hover {
     -fx-background-color: #43c28f;
 }
 
-/* Make it click down smoothly */
-.btn-login:pressed {
+.btn-login:pressed, .btn-register:pressed {
     -fx-background-color: #38a579;
 }
 
-/* Remove the ugly default dotted box that appears when clicking hyperlinks */
 .hyperlink:focused {
     -fx-border-color: transparent;
 }
 
 /* =======================================================
-   RIGHT SIDE STYLING (Image & Gradient)
+   RIGHT SIDE OVERLAY
 ======================================================= */
-
-.right-image-pane {
-    /* IMPORTANT: Change this URL to point to your actual image! */
-    /* Example: if it's in a resources/images folder, use url('/images/lab.jpg') */
-    -fx-background-image: url('YOUR_IMAGE_PATH_HERE.jpg');
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-}
-
 .gradient-overlay {
-    /* Creates the transparent Blue-to-Green overlay on top of the image */
-    /* The "0.65" at the end of the rgba values is the opacity (65% solid). Change it to tweak the look! */
     -fx-background-color: linear-gradient(to bottom right, rgba(30, 100, 180, 0.65), rgba(66, 230, 164, 0.65));
 }

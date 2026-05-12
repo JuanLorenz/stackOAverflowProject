@@ -1,30 +1,30 @@
 package utilities.javafxRelated;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.util.Objects;
 
 public class NavigationUtils {
 
     public static void switchScene(ActionEvent event, String fxmlPath) {
         try {
+            // Pass the exact path based on the feature (e.g., "/screens/login/login.fxml")
+            Parent newRoot = FXMLLoader.load(Objects.requireNonNull(NavigationUtils.class.getResource(fxmlPath)));
 
-            // Now, you pass the exact path based on the feature (e.g., "/screens.auth/login/login.fxml")
-            Parent root = FXMLLoader.load(NavigationUtils.class.getResource(fxmlPath));
+            // 2. Get the current Scene from the button that was clicked
+            Scene currentScene = ((Node) event.getSource()).getScene();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            // 3. THE FIX: Just replace the content inside the current scene!
+            currentScene.setRoot(newRoot);
 
         } catch (IOException e) {
             System.err.println("CRITICAL ERROR: Failed to load the FXML file at: " + fxmlPath);
-            e.printStackTrace(); // Always print the error so you know exactly why it crashed
+            e.printStackTrace();
         }
     }
 }
