@@ -45,6 +45,8 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
             System.err.println("Failed to save user: " + e.getMessage());
             return false;
         }
+
+        return false;
     }
 
     @Override
