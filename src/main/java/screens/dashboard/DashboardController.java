@@ -27,6 +27,7 @@ public class DashboardController {
 
     public Pane paneOverlayShadow;
     public Pane paneMainContainer;
+    public Label labelEquipmentName;
     public Label labelEquipmentDetails;
     public Button buttonExitOverlay;
     public TilePane equipmentContainer;
@@ -34,16 +35,11 @@ public class DashboardController {
 
     private ObservableList<Equipment> items = FXCollections.observableArrayList();
     private FilteredList<Equipment> filteredList;
-
-    private final PauseTransition searchDelay = new PauseTransition((Duration.millis(300)));
     private final EquipmentService equipmentService = new EquipmentService();
 
     public void initialize(){
         items.addAll(equipmentService.getAllEquipment());
         filteredList = new FilteredList<>(items, p -> true);
-
-        //set up timer, when it finishes, it runs the filter logic automatically
-        searchDelay.setOnFinished(event -> handleSearch());
 
         //add listener to the search field
         tfSearchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -65,30 +61,29 @@ public class DashboardController {
         equipmentContainer.getChildren().clear();
 
         for(Equipment item : equipments) {
-            //create buttons from equipment and add it to the TilePane
             Button btn = new Button();
-            btn.setPrefSize(120,150);
+            btn.getStyleClass().add("equipment-card");
+            btn.setPrefSize(180,220);
 
-            //create the image container (make it low-res first)
             Image lowres;
             try {
                 String path = item.getImagePath();
-                lowres = new Image(getClass().getResource(path).toExternalForm(), 100, 100, true, true, true);
+                lowres = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm(), 100, 100, true, true, true);
             } catch (Exception e) {
-                // Fallback if the path in DB is wrong
-                lowres = new Image(getClass().getResource("/images/placeholder.png").toExternalForm(), 100, 100, true, true, true);
+                lowres = new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-img.png")).toExternalForm(), 100, 100, true, true, true);
             }
 
             ImageView image = new ImageView(lowres);
+            image.setFitWidth(100);
+            image.setPreserveRatio(true);
 
-            //create the label (using a bit of CSS)
             Label name = new Label(item.getEquipmentName());
-            name.setStyle("-fx-font-weight: bold; -fx-text-fill: #333;");
+            name.setStyle("-fx-font-size: 14px; -fx-font-family: 'Segoe UI Semibold';");
+            name.setWrapText(true);
+            name.setAlignment(Pos.CENTER);
 
-            //arrange image and label in a VBox
-            VBox card = new VBox(5);
+            VBox card = new VBox(15, image, name); //5
             card.setAlignment(Pos.CENTER);
-            card.getChildren().addAll(image, name);
 
             btn.setGraphic(card);
             btn.setOnAction(event -> handleButtonClick(item));

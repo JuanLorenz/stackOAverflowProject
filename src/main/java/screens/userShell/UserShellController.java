@@ -19,9 +19,8 @@ public class UserShellController {
     private boolean isSidebarVisible = true;
 
     public void initialize() {
-        //THIS IS JUST TESTING
         try {
-            Parent loginView = FXMLLoader.load(getClass().getResource("/screens/login/Login.fxml")); //this should be the dashboard later
+            Parent loginView = FXMLLoader.load(getClass().getResource("/screens/dashboard/DashboardUser.fxml")); //this should be the dashboard later
             contentArea.getChildren().setAll(loginView);
 
         } catch (IOException e) {
