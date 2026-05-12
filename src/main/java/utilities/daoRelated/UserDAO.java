@@ -106,7 +106,7 @@ public class UserDAO implements GeneralDAO<User> {
 
     /**
      * Changes the user's field details based on the inputted new values.
-     * @return true - if query successful
+     * @return true - if query successful <br>
      *         false - if query failed
      */
     public boolean changeUserDetails(String currentEmail, String newEmail, String name, String password) {
