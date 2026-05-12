@@ -17,7 +17,7 @@ public class UserDAO implements GeneralDAO<User> {
     private final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
     private final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     private final String INSERT_USER   = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-    private final String CHANGE_USER_DETAILS = "UPDATE user SET name = ?, email = ?, password = ? WHERE email = ?";
+    private final String CHANGE_USER_DETAILS = "UPDATE users SET name = ?, email = ?, password = ? WHERE email = ?";
 
     /**
      * Finds the user in the database given an ID.
@@ -130,7 +130,6 @@ public class UserDAO implements GeneralDAO<User> {
                     "Database connection or query failed: " + e.getMessage()
             );
         }
-
         return false;
     }
 

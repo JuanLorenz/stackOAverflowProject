@@ -16,6 +16,7 @@ module com.example.stackoaverflowproject {
     opens screens.settings to javafx.fxml;
     opens screens.home to javafx.fxml;
     opens screens.userShell to javafx.fxml;
+    opens screens.aaDebugger to javafx.fxml;
 
     //EXPORT your folders so the application can run and the classes can talk to each other
     exports screens.login;
@@ -24,6 +25,7 @@ module com.example.stackoaverflowproject {
     exports screens.settings;
     exports screens.home;
     exports screens.userShell;
+    exports screens.aaDebugger;
     exports app;
     exports utilities.sqlRelated;
     exports utilities.serializationRelated;
