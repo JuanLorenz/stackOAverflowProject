@@ -5,10 +5,7 @@ import data.*;
 import utilities.equipmentRelated.EquipmentBuilder;
 import utilities.sqlRelated.MySqlConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
     @Override
     public boolean save(Equipment equipment) {
         try (Connection c = MySqlConnection.getConnection();
-             PreparedStatement statement = c.prepareStatement(INSERT_EQUIPMENT)) {
+             PreparedStatement statement = c.prepareStatement(INSERT_EQUIPMENT, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, equipment.getEquipmentName());
             statement.setString(2, equipment.getCategory());
@@ -34,8 +31,16 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
             statement.setInt(7, equipment.getAvailableQty());
             statement.setString(8, equipment.getImagePath());
 
-            return statement.executeUpdate() > 0; // true if row was inserted
+            int affectedRows = statement.executeUpdate();
 
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        equipment.setEquipmentID(generatedKeys.getInt(1));
+                    }
+                }
+                return true;
+            }
         } catch (SQLException e) {
             System.err.println("Failed to save user: " + e.getMessage());
             return false;
