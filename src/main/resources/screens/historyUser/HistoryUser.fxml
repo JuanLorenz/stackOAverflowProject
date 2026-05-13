@@ -19,8 +19,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox prefWidth="150.0" promptText="Category" GridPane.columnIndex="1" />
-            <TextField promptText="Search Equipment" />
+            <ComboBox fx:id="cbCategory" prefWidth="150.0" promptText="Category" GridPane.columnIndex="1" />
+            <TextField fx:id="tfSearchEquipment" promptText="Search Equipment" />
          </children>
          <VBox.margin>
             <Insets bottom="20.0" />
@@ -28,11 +28,8 @@
       </GridPane>
        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
            <content>
-               <!-- This VBox acts as the main wrapper for the "Table" -->
                <VBox fx:id="tableWrapper">
                    <children>
-
-                       <!-- 1. THE HEADER ROW -->
                        <HBox fx:id="tableHeader" alignment="CENTER">
                            <children>
                                <Label alignment="CENTER" maxWidth="Infinity" text="Borrow Date" HBox.hgrow="ALWAYS" />
@@ -41,12 +38,8 @@
                                <Label alignment="CENTER" maxWidth="Infinity" text="Date Returned" HBox.hgrow="ALWAYS" />
                            </children>
                        </HBox>
-
-                       <!-- 2. DATA ROWS CONTAINER -->
-                       <!-- Your Controller will inject rows into this VBox -->
                        <VBox fx:id="rowsContainer">
                            <children>
-                               <!-- Leave empty for dynamic loading -->
                            </children>
                        </VBox>
 
