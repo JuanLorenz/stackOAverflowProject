@@ -26,5 +26,36 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </GridPane>
+       <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+           <content>
+               <!-- This VBox acts as the main wrapper for the "Table" -->
+               <VBox fx:id="tableWrapper">
+                   <children>
+
+                       <!-- 1. THE HEADER ROW -->
+                       <HBox fx:id="tableHeader" alignment="CENTER">
+                           <children>
+                               <Label alignment="CENTER" maxWidth="Infinity" text="Borrow Date" HBox.hgrow="ALWAYS" />
+                               <Label alignment="CENTER" maxWidth="Infinity" text="Equipment Name" HBox.hgrow="ALWAYS" />
+                               <Label alignment="CENTER" maxWidth="Infinity" text="Condition" HBox.hgrow="ALWAYS" />
+                               <Label alignment="CENTER" maxWidth="Infinity" text="Date Returned" HBox.hgrow="ALWAYS" />
+                           </children>
+                       </HBox>
+
+                       <!-- 2. DATA ROWS CONTAINER -->
+                       <!-- Your Controller will inject rows into this VBox -->
+                       <VBox fx:id="rowsContainer">
+                           <children>
+                               <!-- Leave empty for dynamic loading -->
+                           </children>
+                       </VBox>
+
+                   </children>
+               </VBox>
+           </content>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+       </ScrollPane>
    </children>
 </VBox>
