@@ -25,6 +25,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
             """;
     private final String FIND_BY_ID = FIND_ALL + " WHERE t.transactionID = ?";
     private final String INSERT_TRANSACTION = "INSERT INTO transaction (equipmentID, userID, dateBorrowed, dateReturned) VALUES (?, ?, ?, ?)";
+    private final String UPDATE_RETURN = "UPDATE transaction SET dateReturned = ? WHERE transactionID = ?";
 
     @Override
     public boolean save(Transaction transaction) {
@@ -93,6 +94,21 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
         }
 
         return transactions;
+    }
+
+    public boolean updateReturn(int id, LocalDate dateReturned) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(UPDATE_RETURN)) {
+
+            statement.setObject(1, dateReturned);
+            statement.setInt(2, id);
+
+            return statement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Failed to update equipment: " + e.getMessage());
+            return false;
+        }
     }
 
     private Transaction mapTransaction(ResultSet rs) throws SQLException {

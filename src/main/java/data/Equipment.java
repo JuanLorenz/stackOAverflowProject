@@ -32,6 +32,18 @@ public abstract class Equipment {
         this.equipmentID = id;
     }
 
+    public void setTotalQty(int totalQty) {
+        this.totalQty = totalQty;
+    }
+
+    public void setAvailableQty(int availableQty) {
+        this.availableQty = availableQty;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
     public String getEquipmentName() {
         return equipmentName;
     }
