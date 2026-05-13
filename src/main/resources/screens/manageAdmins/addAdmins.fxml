@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane prefHeight="511.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.manageAdmins.AddAdminController">
+
+    <!-- Main Card -->
+    <VBox alignment="CENTER" prefWidth="360.0" style="-fx-background-color: white;                  -fx-border-color: #e0e0e0;                  -fx-border-width: 1px;                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 24, 0, 0, 6);">
+
+        <stylesheets>
+            <URL value="@addAdmin.css" />
+        </stylesheets>
+
+        <!-- Title -->
+        <Label style="-fx-font-family: 'Arial Black';                       -fx-font-size: 20px;                       -fx-font-weight: bold;                       -fx-text-fill: #111111;                       -fx-padding: 28 0 20 0;" styleClass="dialog-title" text="Add Admin" />
+
+        <!-- Form -->
+        <VBox spacing="6.0" style="-fx-padding: 0 32 0 32;" VBox.vgrow="NEVER">
+
+            <!-- Name -->
+            <Label style="-fx-font-size: 13px;                           -fx-font-weight: bold;                           -fx-text-fill: #222222;" text="Name" />
+
+            <TextField fx:id="txtfldName" maxWidth="Infinity" promptText="Enter your name" style="-fx-background-color: white;                               -fx-border-color: #b0d8f5;                               -fx-border-radius: 50px;                               -fx-background-radius: 50px;                               -fx-border-width: 1.5px;                               -fx-padding: 10 18 10 18;                               -fx-font-size: 13px;                               -fx-prompt-text-fill: #aaaaaa;                               -fx-pref-height: 40px;" />
+
+            <!-- Email -->
+            <Label style="-fx-font-size: 13px;                           -fx-font-weight: bold;                           -fx-text-fill: #222222;                           -fx-padding: 8 0 0 0;" text="Email" />
+
+            <TextField fx:id="txtfldEmail" maxWidth="Infinity" promptText="Enter your email account" style="-fx-background-color: white;                               -fx-border-color: #b0d8f5;                               -fx-border-radius: 50px;                               -fx-background-radius: 50px;                               -fx-border-width: 1.5px;                               -fx-padding: 10 18 10 18;                               -fx-font-size: 13px;                               -fx-prompt-text-fill: #aaaaaa;                               -fx-pref-height: 40px;" />
+
+            <!-- Password -->
+            <Label style="-fx-font-size: 13px;                           -fx-font-weight: bold;                           -fx-text-fill: #222222;                           -fx-padding: 8 0 0 0;" text="Password" />
+
+            <PasswordField fx:id="txtfldPassword" maxWidth="Infinity" promptText="Enter your password" style="-fx-background-color: white;                                   -fx-border-color: #b0d8f5;                                   -fx-border-radius: 50px;                                   -fx-background-radius: 50px;                                   -fx-border-width: 1.5px;                                   -fx-padding: 10 18 10 18;                                   -fx-font-size: 13px;                                   -fx-prompt-text-fill: #aaaaaa;                                   -fx-pref-height: 40px;" />
+
+        </VBox>
+
+        <!-- Add Button -->
+        <Button fx:id="btnAdd" onAction="#handleAddAdmin" style="-fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9);                        -fx-text-fill: white;                        -fx-font-size: 14px;                        -fx-font-weight: bold;                        -fx-background-radius: 50px;                        -fx-padding: 10 40 10 40;                        -fx-cursor: hand;                        -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.35), 8, 0, 0, 3);" text="Add">
+
+            <VBox.margin>
+                <Insets top="22.0" />
+            </VBox.margin>
+
+        </Button>
+      <Label fx:id="lblError" alignment="CENTER" prefHeight="18.0" prefWidth="243.0" textFill="RED">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+
+    </VBox>
+
+    <!-- X BUTTON -->
+    <Button onAction="#handleClose" style="-fx-background-color: transparent;                    -fx-text-fill: #777777;                    -fx-font-size: 16px;                    -fx-font-weight: bold;                    -fx-cursor: hand;                    -fx-padding: 8 12 0 0;" text="✕" StackPane.alignment="TOP_RIGHT" />
+
+</StackPane>

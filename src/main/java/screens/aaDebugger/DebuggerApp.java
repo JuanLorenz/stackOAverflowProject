@@ -11,7 +11,7 @@ import java.io.IOException;
 public class DebuggerApp extends Application{
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(DebuggerApp.class.getResource("/screens/settings/settings.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(DebuggerApp.class.getResource("/screens/manageAdmins/manageAdmins.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 960, 640);
         stage.setTitle("WILDInv");
         stage.setResizable(true);

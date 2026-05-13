@@ -8,6 +8,7 @@ module com.example.stackoaverflowproject {
     requires org.kordamp.bootstrapfx.core;
     requires jbcrypt;
     requires java.sql;
+    requires java.desktop;
 
     // OPEN your UI folders so JavaFX can read your @FXML tags
     opens screens.login to javafx.fxml;
@@ -17,6 +18,8 @@ module com.example.stackoaverflowproject {
     opens screens.home to javafx.fxml;
     opens screens.userShell to javafx.fxml;
     opens screens.aaDebugger to javafx.fxml;
+    opens screens.manageAdmins to javafx.fxml;
+
 
     //EXPORT your folders so the application can run and the classes can talk to each other
     exports screens.login;
@@ -26,6 +29,7 @@ module com.example.stackoaverflowproject {
     exports screens.home;
     exports screens.userShell;
     exports screens.aaDebugger;
+    exports screens.manageAdmins;
     exports app;
     exports utilities.sqlRelated;
     exports utilities.serializationRelated;
