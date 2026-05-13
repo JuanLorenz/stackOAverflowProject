@@ -16,6 +16,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
     private final String FIND_BY_NAME = "SELECT * FROM equipment WHERE equipmentName = ?";
     private final String INSERT_EQUIPMENT = "INSERT INTO equipment (equipmentName, category, modelNo, serialNo, condition, totalQty, availableQty, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String UPDATE_CONDITION = "UPDATE equipment SET condition = ? WHERE id = ?";
+    private final String UPDATE_QUANTITY = "UPDATE equipment SET totalQty = ?, availableQty = ? WHERE id = ?";
 
     @Override
     public boolean save(Equipment equipment) {
@@ -112,6 +113,22 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
 
             statement.setString(1, condition);
             statement.setInt(2, id);
+
+            return statement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Failed to update equipment: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateQuantity(int id, int total, int available) {
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(UPDATE_QUANTITY)) {
+
+            statement.setInt(1, total);
+            statement.setInt(2, available);
+            statement.setInt(3, id);
 
             return statement.executeUpdate() > 0;
 
