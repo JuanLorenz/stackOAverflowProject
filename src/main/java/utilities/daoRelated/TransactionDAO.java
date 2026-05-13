@@ -23,7 +23,8 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
             JOIN users u ON t.userID = u.id\s
             JOIN equipment e ON t.equipmentID = e.equipmentID
             """;
-    private final String FIND_BY_ID = FIND_ALL + " WHERE t.transactionID = ?";
+    private final String FIND_BY_TRANSACTION_ID = FIND_ALL + " WHERE t.transactionID = ?";
+    private final String FIND_BY_USER_ID = FIND_ALL + " WHERE u.id = ?";
     private final String INSERT_TRANSACTION = "INSERT INTO transaction (equipmentID, userID, dateBorrowed, dateReturned) VALUES (?, ?, ?, ?)";
     private final String UPDATE_RETURN = "UPDATE transaction SET dateReturned = ? WHERE transactionID = ?";
 
@@ -63,7 +64,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
     @Override
     public Transaction findByID(int id) {
         try (Connection c = MySqlConnection.getConnection();
-             PreparedStatement statement = c.prepareStatement(FIND_BY_ID)) {
+             PreparedStatement statement = c.prepareStatement(FIND_BY_TRANSACTION_ID)) {
 
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -91,6 +92,26 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
 
         } catch (SQLException e) {
             System.err.println("Database connection or query failed: " + e.getMessage());
+        }
+
+        return transactions;
+    }
+
+    public List<Transaction> findAllByUserId(int userId) {
+        List<Transaction> transactions = new ArrayList<>();
+
+        try (Connection c = MySqlConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(FIND_BY_USER_ID)) {
+
+            statement.setInt(1, userId);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                transactions.add(mapTransaction(rs));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Failed to fetch user history: " + e.getMessage());
         }
 
         return transactions;

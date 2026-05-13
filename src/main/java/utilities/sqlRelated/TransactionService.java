@@ -7,6 +7,7 @@ import utilities.daoRelated.EquipmentDAO;
 import utilities.daoRelated.TransactionDAO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TransactionService {
     private final EquipmentDAO equipmentDAO = new EquipmentDAO();
@@ -59,5 +60,13 @@ public class TransactionService {
 
         // returns false when one of them failed to update
         return updateEquipment && updateTransaction;
+    }
+
+    public List<Transaction> getAllTransactions() {
+        return transactionDAO.findAll();
+    }
+
+    public List<Transaction> getUserHistory(int userId) {
+        return transactionDAO.findAllByUserId(userId);
     }
 }
