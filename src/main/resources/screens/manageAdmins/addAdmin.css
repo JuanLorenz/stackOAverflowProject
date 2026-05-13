@@ -1,0 +1,51 @@
+
+.dialog-title {
+    -fx-font-family: "Arial Black", "Segoe UI Black", Arial, sans-serif;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111111;
+    -fx-alignment: center;
+}
+
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+}
+
+.dialog-field {
+    -fx-background-color: white;
+    -fx-border-color: #b0d8f5;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 10 18 10 18;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-pref-height: 40px;
+}
+.dialog-field:focused {
+    -fx-border-color: #38b6ff;
+    -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.22), 6, 0, 0, 2);
+}
+
+.add-button {
+    -fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 50px;
+    -fx-padding: 10 40 10 40;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.35), 8, 0, 0, 3);
+}
+.add-button:hover {
+    -fx-background-color: linear-gradient(to right, #1aa8f5, #20c99a);
+    -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.55), 12, 0, 0, 4);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.add-button:pressed {
+    -fx-scale-x: 0.97;
+    -fx-scale-y: 0.97;
+}

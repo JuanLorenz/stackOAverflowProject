@@ -1,73 +1,172 @@
-
-/* Root VBox */
+/* ── Root ── */
 .root {
     -fx-background-color: #ffffff;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* Add Admin Button hover effect */
-#addAdminButton:hover {
+.menu-button:hover {
+    -fx-background-color: rgba(56,182,255,0.10);
+}
+.menu-button:pressed {
+    -fx-scale-x: 0.94;
+    -fx-scale-y: 0.94;
+}
+
+/* ── Welcome title ── */
+.welcome-label {
+    -fx-font-family: "Arial Black", "Segoe UI Black", Arial, sans-serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111111;
+}
+
+/* ── "Manage Admins" section title ── */
+.section-label {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222222;
+    -fx-padding: 4 0 0 0;
+}
+
+/* ── Search field ── */
+.search-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 34px;
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 50px;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 50px;
+    -fx-border-width: 1px;
+    -fx-padding: 6 16 6 16;
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+    -fx-prompt-text-fill: #aaaaaa;
+}
+.search-field:focused {
+    -fx-border-color: #38b6ff;
+    -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.25), 6, 0, 0, 2);
+}
+
+/* ── Add Admin button ── */
+.add-admin-button {
+    -fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 50px;
+    -fx-padding: 10 24 10 24;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.35), 8, 0, 0, 3);
+}
+.add-admin-button:hover {
     -fx-background-color: linear-gradient(to right, #1aa8f5, #20c99a);
     -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.55), 12, 0, 0, 4);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
-
-#addAdminButton:pressed {
+.add-admin-button:pressed {
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
 }
 
-/* ListView rows — white pill-shaped cells */
-.list-cell {
-    -fx-background-color: white;
-    -fx-background-radius: 50px;
-    -fx-padding: 12 20 12 20;
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
-    -fx-font-family: "Segoe UI", Arial, sans-serif;
+/* ── Gradient card container ── */
+.gradient-card {
+    -fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9);
+    -fx-background-radius: 20px;
+    -fx-padding: 14;
+    -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.25), 16, 0, 0, 4);
+}
+
+/* ── ListView inside card ── */
+.admins-list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
     -fx-border-color: transparent;
-}
-
-.list-cell:odd {
-    -fx-background-color: white;
-}
-
-.list-cell:selected {
-    -fx-background-color: rgba(255,255,255,0.85);
-    -fx-text-fill: #111111;
-}
-
-.list-cell:hover {
-    -fx-background-color: rgba(255,255,255,0.9);
-}
-
-/* Remove ListView focus ring and scroll bar styling */
-.list-view {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
 
-.list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:focused:selected {
-    -fx-background-color: rgba(255,255,255,0.85);
+/* ── List cells — white pill rows ── */
+.list-cell {
+    -fx-background-color: white;
+    -fx-background-radius: 50px;
+    -fx-padding: 10 16 10 16;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-border-color: transparent;
+    /* spacing between cells */
+    -fx-cell-size: 44px;
+}
+.list-cell:odd {
+    -fx-background-color: white;
+}
+.list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.list-cell:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.88);
+    -fx-text-fill: #111111;
+}
+.list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.92);
 }
 
-/* Scrollbar — make it subtle */
-.list-view .scroll-bar:vertical {
+/* Keep focus ring off the list */
+.admins-list-view:focused {
+    -fx-background-color: transparent;
+}
+.admins-list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:focused:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.88);
+}
+
+/* ── Delete Admin button (inside each cell) ── */
+.delete-admin-button {
+    -fx-background-color: #ff4d4d;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 50px;
+    -fx-padding: 6 16 6 16;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+}
+.delete-admin-button:hover {
+    -fx-background-color: #e03333;
+    -fx-effect: dropshadow(gaussian, rgba(255,77,77,0.45), 8, 0, 0, 2);
+    -fx-scale-x: 1.04;
+    -fx-scale-y: 1.04;
+}
+.delete-admin-button:pressed {
+    -fx-scale-x: 0.96;
+    -fx-scale-y: 0.96;
+}
+
+/* ── Empty state label ── */
+.empty-label {
+    -fx-font-family: "Arial Black", "Segoe UI Black", Arial, sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* ── Scrollbar — subtle ── */
+.admins-list-view .scroll-bar:vertical {
     -fx-background-color: transparent;
     -fx-pref-width: 6px;
 }
-
-.list-view .scroll-bar:vertical .thumb {
-    -fx-background-color: rgba(255,255,255,0.5);
+.admins-list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.5);
     -fx-background-radius: 3px;
 }
-
-.list-view .scroll-bar:vertical .track {
+.admins-list-view .scroll-bar:vertical .track {
     -fx-background-color: transparent;
 }
-
-.list-view .scroll-bar:vertical .increment-button,
-.list-view .scroll-bar:vertical .decrement-button {
+.admins-list-view .scroll-bar:vertical .increment-button,
+.admins-list-view .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
     -fx-pref-height: 0;
 }
