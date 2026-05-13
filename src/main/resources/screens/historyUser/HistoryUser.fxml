@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox minWidth="512.0" style="-fx-padding: 30;" styleClass="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.historyUser.HistoryUserController">
+   <children>
+      <Label style="-fx-font-weight: bold; -fx-font-size: 30;" styleClass="labelHistory" text="History">
+         <VBox.margin>
+            <Insets bottom="30.0" />
+         </VBox.margin></Label>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ComboBox prefWidth="150.0" promptText="Category" GridPane.columnIndex="1" />
+            <TextField promptText="Search Equipment" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </GridPane>
+   </children>
+</VBox>
