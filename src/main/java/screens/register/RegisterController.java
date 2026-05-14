@@ -9,8 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import utilities.sqlRelated.RegisterService;
-import utilities.javafxRelated.NavigationUtils;
+import utilities.service.RegisterService;
+import utilities.manager.SceneManager;
 
 public class RegisterController {
 
@@ -46,7 +46,7 @@ public class RegisterController {
 
         if (result == 1) {
             showStatus(Color.GREEN, "Registration successful!");
-            NavigationUtils.switchScene(event, "/screens/login/Login.fxml");
+            SceneManager.switchScene(event, "/screens/login/Login.fxml");
         } else if (result == 0) {
             showStatus(Color.RED, "Email is already taken.");
         } else {
@@ -56,7 +56,7 @@ public class RegisterController {
 
     @FXML
     public void onClickBackToLogin(ActionEvent event) {
-        NavigationUtils.switchScene(event, "/screens/login/Login.fxml");
+        SceneManager.switchScene(event, "/screens/login/Login.fxml");
     }
 
     private void showStatus(Color color, String message) {

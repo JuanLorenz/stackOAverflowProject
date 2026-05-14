@@ -1,7 +1,8 @@
 package data;
 
+import data.equipment.Equipment;
+
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Transaction {
     private int transactionID;

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox prefHeight="600.0" prefWidth="900.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.register.RegisterController">
+<HBox prefHeight="600.0" prefWidth="900.0" stylesheets="@RegisterStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.register.RegisterController">
     <children>
 
         <!-- Left Side: Image with Gradient -->
@@ -15,7 +15,7 @@
                 <!-- managed="false" prevents this large image from squishing the form -->
                 <ImageView fx:id="leftSideImage" managed="false" pickOnBounds="true" preserveRatio="false">
                     <image>
-                        <Image url="@../../images/engineers.png" />
+                        <Image url="@../../media/images/engineers.png" />
                     </image>
                 </ImageView>
                 <Pane styleClass="gradient-overlay" mouseTransparent="true" />
@@ -32,7 +32,7 @@
             <top>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
                     <image>
-                        <Image url="@../../images/logo-no-text.png" />
+                        <Image url="@../../media/icons/logo-no-text.png" />
                     </image>
                 </ImageView>
             </top>

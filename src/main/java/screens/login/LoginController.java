@@ -4,16 +4,15 @@ package screens.login;
 import data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import utilities.serializationRelated.SerializeManager;
-import utilities.sqlRelated.AuthService;
-import utilities.javafxRelated.NavigationUtils;
+import utilities.manager.SerializeManager;
+import utilities.service.AuthService;
+import utilities.manager.SceneManager;
 
 public class LoginController {
 
@@ -56,7 +55,7 @@ public class LoginController {
 
             // 4. Switch to the dashboard
             // Note: Make sure you actually have a dashboard.fxml created in your resources folder!
-            NavigationUtils.switchScene(event, "/screens/home/Home.fxml");
+            SceneManager.switchScene(event, "/screens/home/HomeUser.fxml");
 
         } else {
             // Fail: Clear password field and show error
@@ -66,7 +65,7 @@ public class LoginController {
     }
 
     public void onClickToRegister(ActionEvent event) {
-        NavigationUtils.switchScene(event,"/screens/register/Register.fxml" );
+        SceneManager.switchScene(event,"/screens/register/Register.fxml" );
     }
 
     /**
