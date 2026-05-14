@@ -31,31 +31,41 @@ public class AddEquipmentPopupController {
     @FXML private Button add;
     private final EquipmentService equipmentService = new EquipmentService();
     private String imagePath;
+    private File selectedImage;
 
     public void onUploadImgClicked(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.png", "*.jpg", "*.jpeg"));
         Stage stage = (Stage) uploadImage.getScene().getWindow();
-        File selectedImage = fileChooser.showOpenDialog(stage);
+        File tempFile = fileChooser.showOpenDialog(stage);
+
+        if (tempFile != null) {
+            selectedImage = tempFile;
+            // Show a preview immediately from the local disk
+            equipmentImage.setImage(new Image(selectedImage.toURI().toString()));
+        }
+    }
+
+    public void onAddClicked(ActionEvent actionEvent) {
 
         if(selectedImage != null){
             try{
-                File imageDestination = new File("src/main/resources/images/equipment/", selectedImage.getName());
+                File imageDestination = new File("src/main/resources/media/images/equipmentImages/", selectedImage.getName());
 
                 Files.copy(selectedImage.toPath(), imageDestination.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
                 Image image = new Image(imageDestination.toURI().toString());
                 equipmentImage.setImage(image);
 
-                imagePath = "images/equipment/" + selectedImage.getName();
+                imagePath = "media/images/equipmentImages/" + selectedImage.getName();
+                System.out.println("Successfully copies & added the image in equipmentImage folder");
             }catch(IOException e){
                 System.out.println("Failure in saving image");
             }
         }
-    }
 
-    public void onAddClicked(ActionEvent actionEvent) {
+
         Equipment addedEquipment = EquipmentBuilder.start(equipmentCategory.getText())
                 .setInfo(equipmentService.getAllEquipment().size(),
                         equipmentName.getText(),
@@ -67,10 +77,7 @@ public class AddEquipmentPopupController {
                         Integer.parseInt(equipmentTotalQty.getText()))
                 .build();
 
-        //implement adding this to the list of equipments
+        System.out.println("Successfully added a new equipment");
     }
 
-    public void onBackClicked(ActionEvent actionEvent) {
-        // maybe tangtangon ni???? mayhaps
-    }
 }

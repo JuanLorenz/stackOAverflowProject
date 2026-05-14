@@ -6,12 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="500.0" prefWidth="650.0"
-      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="screens.dashboard.AddEquipmentPopupController">
+<Pane fx:id="addEquipmentPopUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.AddEquipmentPopupController">
     <children>
-        <VBox alignment="CENTER" layoutX="25.0" layoutY="10.0" prefWidth="600.0">
+        <VBox alignment="CENTER" layoutX="25.0" layoutY="10.0" prefWidth="600.0" style="-fx-background-color: white;">
             <children>
                 <!-- HEADER -->
                 <Label text="Add Equipment">
@@ -62,14 +59,12 @@
                 </HBox>
 
                 <!-- FOOTER BUTTONS -->
-                <HBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0">
+                <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="600.0">
                     <children>
-                        <Button fx:id="back" mnemonicParsing="false" onAction="#onBackClicked" prefWidth="80.0" text="Back">
-                            <HBox.margin>
-                                <Insets right="340.0" />
-                            </HBox.margin>
-                        </Button>
-                        <Button fx:id="add" mnemonicParsing="false" onAction="#onAddClicked" prefWidth="80.0" text="Add" />
+                        <Button fx:id="add" mnemonicParsing="false" onAction="#onAddClicked" prefWidth="80.0" text="Add">
+                     <HBox.margin>
+                        <Insets right="25.0" />
+                     </HBox.margin></Button>
                     </children>
                     <VBox.margin>
                         <Insets top="10.0" />
