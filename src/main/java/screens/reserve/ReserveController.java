@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import utilities.javafxRelated.NavigationUtils;
+import utilities.manager.SceneManager;
 
 public class ReserveController {
     @FXML private TextField equipmentName;
@@ -16,7 +16,7 @@ public class ReserveController {
 
 
     public void onBackButtonClicked(ActionEvent actionEvent) {
-        NavigationUtils.switchScene(actionEvent, "/screens/dashboard/DashboardUser.fxml");
+        SceneManager.switchScene(actionEvent, "/screens/dashboard/DashboardUser.fxml");
     }
 
     public void onReserveButtonClicked(ActionEvent actionEvent) {

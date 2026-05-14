@@ -11,10 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import utilities.daoRelated.UserDAO;
-import utilities.javafxRelated.ImageService;
-import utilities.serializationRelated.SerializeManager;
-import utilities.sqlRelated.AuthService;
+import utilities.database.UserDAO;
+import utilities.service.ImageService;
+import utilities.manager.SerializeManager;
+import utilities.service.AuthService;
 
 import java.io.File;
 import java.util.Objects;

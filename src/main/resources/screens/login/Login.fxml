@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.login.LoginController">
+<HBox stylesheets="@LoginStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.login.LoginController">
     <children>
         <BorderPane prefWidth="450.0" minWidth="450.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
             <padding><Insets bottom="40.0" left="80.0" right="80.0" top="40.0" /></padding>
             <top>
                 <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_LEFT">
-                    <image><Image url="@../../images/logo-no-text.png" /></image>
+                    <image><Image url="@../../media/icons/logo-no-text.png" /></image>
                 </ImageView>
             </top>
             <center>
@@ -63,7 +63,7 @@
                            pickOnBounds="true"
                            preserveRatio="false">
                     <image>
-                        <Image url="@../../images/scientists.png" />
+                        <Image url="@../../media/images/scientists.png" />
                     </image>
                 </ImageView>
 

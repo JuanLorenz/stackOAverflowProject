@@ -1,7 +1,6 @@
 package screens.dashboard;
 
-import data.Equipment;
-import javafx.animation.PauseTransition;
+import data.equipment.Equipment;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -16,10 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
-import utilities.sqlRelated.EquipmentService;
+import utilities.service.EquipmentService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
