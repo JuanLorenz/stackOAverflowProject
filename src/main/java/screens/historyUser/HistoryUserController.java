@@ -13,8 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import utilities.serializationRelated.SerializeManager;
-import utilities.sqlRelated.TransactionService;
+import utilities.manager.SerializeManager;
+import utilities.service.TransactionService;
 
 public class HistoryUserController {
     public ComboBox<String> cbCategory;
