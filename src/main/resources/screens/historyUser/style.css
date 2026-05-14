@@ -10,11 +10,63 @@
 
 /* 2. Rounded Search and Category inputs */
 .text-field, .combo-box {
+    -fx-pref-height: 40px; /* Force identical height */
+    -fx-background-color: white;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-    -fx-border-color: #cccccc;
+    -fx-border-color: #e0e0e0;
+    -fx-padding: 0 15 0 15;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+}
+
+/* 2. Styling the ComboBox specifically */
+.combo-box .cell {
+    -fx-text-fill: #333;
+}
+
+/* Styling the arrow button area */
+.combo-box .arrow-button {
     -fx-background-color: transparent;
-    -fx-padding: 5 15 5 15;
+    -fx-padding: 0 10 0 0;
+}
+
+/* Styling the actual arrow triangle */
+.combo-box .arrow {
+    -fx-background-color: #999;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z"; /* Modern downward triangle */
+}
+
+/* 3. STYLING THE DROPDOWN LIST (The Popup) */
+
+/* The actual list container */
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #e0e0e0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+    -fx-padding: 5;
+}
+
+/* Individual items in the list */
+.combo-box-popup .list-cell {
+    -fx-padding: 10 15 10 15;
+    -fx-background-color: transparent;
+    -fx-text-fill: #555;
+    -fx-background-radius: 10; /* Rounded selection highlight */
+}
+
+/* Hover effect for dropdown items */
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #000;
+}
+
+/* Selected item in the dropdown */
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #4facfe; /* Matches your blue theme */
+    -fx-text-fill: white;
 }
 
 .text-field:focused, .combo-box:focused {
