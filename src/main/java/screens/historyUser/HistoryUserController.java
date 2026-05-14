@@ -16,8 +16,6 @@ import javafx.scene.layout.VBox;
 import utilities.serializationRelated.SerializeManager;
 import utilities.sqlRelated.TransactionService;
 
-import java.util.List;
-
 public class HistoryUserController {
     public ComboBox<String> cbCategory;
     public TextField tfSearchEquipment;
@@ -90,11 +88,13 @@ public class HistoryUserController {
         HBox row = new HBox();
         row.setAlignment(Pos.CENTER);
         row.setSpacing(10); // Matches FXML spacing if needed
+        row.getStyleClass().add("history-row");
 
         Label[] labels = getLabels(t);
         for (Label l : labels) {
             l.setMaxWidth(Double.MAX_VALUE);
             l.setAlignment(Pos.CENTER);
+            l.setStyle("-fx-text-fill: #333333; -fx-font-weight: bold;");
             HBox.setHgrow(l, Priority.ALWAYS);
             row.getChildren().add(l);
         }

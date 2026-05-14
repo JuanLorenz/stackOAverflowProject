@@ -1,0 +1,67 @@
+/* 1. General Page Styling */
+.root {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.labelHistory {
+    -fx-text-fill: #222222;
+}
+
+/* 2. Rounded Search and Category inputs */
+.text-field, .combo-box {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #cccccc;
+    -fx-background-color: transparent;
+    -fx-padding: 5 15 5 15;
+}
+
+.text-field:focused, .combo-box:focused {
+    -fx-border-color: #3498db;
+}
+
+/* 3. The Main Gradient Container (tableWrapper) */
+.table-container {
+    -fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 40%, #00f2fe 60%, #43e97b 100%);
+    -fx-background-radius: 40;
+    -fx-padding: 30;
+}
+
+/* 4. Make the ScrollPane invisible so the gradient shows through */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Styling for each individual transaction row */
+.history-row {
+    -fx-background-color: white;
+    -fx-background-radius: 15; /* Rounded corners */
+    -fx-padding: 15;            /* Internal space so text isn't cramped */
+
+    /* Optional: shadow to give it that "floating" look */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+/* Optional: Make it change color slightly when the user hovers over it */
+.history-row:hover {
+    -fx-background-color: #fcfcfc;
+}
+
+.header-box {
+    -fx-background-color: white;
+    -fx-background-radius: 15; /* Rounded corners like the rows */
+    -fx-padding: 15 10 15 10;  /* Vertical and horizontal padding */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2); /* Subtle shadow */
+}
+
+.header-label {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}

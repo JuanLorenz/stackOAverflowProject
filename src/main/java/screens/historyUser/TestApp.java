@@ -13,6 +13,7 @@ public class TestApp extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 600, 420);
         stage.setTitle("EquipLink");
         stage.setResizable(true);
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }
