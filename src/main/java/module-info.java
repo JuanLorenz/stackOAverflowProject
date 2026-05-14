@@ -16,6 +16,7 @@ module com.example.stackoaverflowproject {
     opens screens.dashboard to javafx.fxml;
     opens screens.settings to javafx.fxml;
     opens screens.home to javafx.fxml;
+    opens screens.historyUser to javafx.fxml;
     opens screens.appshell to javafx.fxml;
 
 
@@ -32,4 +33,5 @@ module com.example.stackoaverflowproject {
     exports utilities.database;
     exports utilities.manager;
     exports utilities.service;
+    exports screens.historyUser;
 }
