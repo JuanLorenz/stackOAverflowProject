@@ -67,7 +67,7 @@
 }
 
 /* --- BUTTONS --- */
-.reserve-button {
+.borrow-button {
     -fx-background-color: #FF5F5F;
     -fx-text-fill: white;
     -fx-background-radius: 15;
@@ -76,7 +76,7 @@
     -fx-cursor: hand;
 }
 /* ADDED: Feedback when hovering over Reserve */
-.reserve-button:hover {
+.borrow-button:hover {
     -fx-background-color: #E55454;
 }
 

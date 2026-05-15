@@ -81,7 +81,7 @@
                   </children>
                </HBox>
                     <HBox alignment="CENTER_RIGHT">
-                        <Button styleClass="reserve-button" text="Reserve" />
+                        <Button styleClass="borrow-button" text="Borrow" />
                     </HBox>
                 </children>
             </VBox>

@@ -17,7 +17,7 @@ public class DashboardUserController {
     @FXML public VBox paneMainContainer;
     @FXML public Label labelEquipmentName;
     @FXML public ImageView equipmentImage;
-    @FXML private Label labelEquipmentDetails;
+    @FXML public Label labelEquipmentDetails;
 
     private DashboardViewModel viewModel;
 
