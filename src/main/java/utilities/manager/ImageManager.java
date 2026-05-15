@@ -75,7 +75,7 @@ public class ImageManager {
     public static Image getSafeImage(String path, double width, double height) {
         // 1. Check if the String itself is valid
         if (path == null || path.isBlank()) {
-            return getPlaceholder(width, height);
+            return getPlaceholderEquipment(width, height);
         }
 
         // 2. Check if the file actually exists in your resources
@@ -84,7 +84,7 @@ public class ImageManager {
 
         if (resource == null) {
             System.err.println("IMAGE NOT FOUND: " + path);
-            return getPlaceholder(width, height);
+            return getPlaceholderEquipment(width, height);
         }
 
         // 3. Load the image now that we know the URL is safe
@@ -92,7 +92,7 @@ public class ImageManager {
         return new Image(resource.toExternalForm(), width, height, true, true, true);
     }
 
-    private static Image getPlaceholder(double w, double h) {
+    private static Image getPlaceholderEquipment(double w, double h) {
         var placeholder = ImageManager.class.getResource("/media/equipments/placeholder-equipment.png");
         return new Image(placeholder.toExternalForm(), w, h, true, true, true);
     }
