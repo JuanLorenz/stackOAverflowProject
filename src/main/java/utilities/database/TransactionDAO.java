@@ -151,8 +151,7 @@ public class TransactionDAO implements ContractDAO<Transaction> {
                         .setInventory(rs.getInt("e_total"),
                                 rs.getInt("e_avail"))
                         .build(),
-                rs.getObject("dateBorrowed", LocalDate.class),
-                rs.getObject("dateReturned", LocalDate.class)
+                rs.getObject("dateBorrowed", LocalDate.class)
         );
     }
 }
