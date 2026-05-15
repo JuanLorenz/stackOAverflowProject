@@ -1,6 +1,6 @@
-/* Header Colors */
+/* --- HEADER SECTION --- */
 .orange-header {
-    -fx-background-color: #FBB03B; /* Matches your prototype orange */
+    -fx-background-color: #FBB03B; /* Prototype Orange */
 }
 
 .dashboard-title {
@@ -10,7 +10,7 @@
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-/* Search Field */
+/* --- SEARCH BAR --- */
 .search-field {
     -fx-background-radius: 25;
     -fx-border-radius: 25;
@@ -19,7 +19,7 @@
     -fx-background-color: white;
 }
 
-/* Equipment Card (The Button) */
+/* --- EQUIPMENT GRID CARDS --- */
 .equipment-card {
     -fx-background-color: white;
     -fx-background-radius: 25;
@@ -31,10 +31,11 @@
 
 .equipment-card:hover {
     -fx-background-color: #F9F9F9;
+    /* Adds a subtle "lifted" shadow effect on hover */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
 }
 
-/* ScrollPane fix */
+/* --- SCROLLBAR AREA --- */
 .content-scrollpane {
     -fx-background-color: transparent;
 }
@@ -42,19 +43,41 @@
     -fx-background-color: white;
 }
 
-/* Popup/Overlay Styles */
+/* --- POPUP / DETAIL MODAL --- */
 .detail-card {
     -fx-background-color: white;
     -fx-background-radius: 30;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 20, 0, 0, 0);
 }
 
+/* NEW: Style for the Equipment Name inside the popup */
+.detail-header {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Segoe UI Semibold", sans-serif;
+}
+
+/* NEW: Style for the technical details/specs text */
+.detail-body {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-line-spacing: 5px; /* Adds space between lines of specs */
+}
+
+/* --- BUTTONS --- */
 .reserve-button {
     -fx-background-color: #FF5F5F;
     -fx-text-fill: white;
     -fx-background-radius: 15;
     -fx-font-weight: bold;
     -fx-padding: 10 25;
+    -fx-cursor: hand;
+}
+/* ADDED: Feedback when hovering over Reserve */
+.reserve-button:hover {
+    -fx-background-color: #E55454;
 }
 
 .exit-button {
@@ -62,4 +85,9 @@
     -fx-text-fill: #999;
     -fx-font-size: 18;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+/* ADDED: Make the X turn red when hovering */
+.exit-button:hover {
+    -fx-text-fill: #FF5F5F;
 }

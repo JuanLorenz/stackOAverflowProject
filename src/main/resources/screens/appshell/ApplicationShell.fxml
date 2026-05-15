@@ -60,12 +60,12 @@
                <graphic>
                   <VBox prefHeight="50.0" prefWidth="50.0">
                      <children>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../media/icons/icon-burger.png" />
+                              <Image url="@../../media/icons/icon-burger-green.png" />
                            </image>
                            <VBox.margin>
-                              <Insets top="5.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </ImageView>
                      </children>
