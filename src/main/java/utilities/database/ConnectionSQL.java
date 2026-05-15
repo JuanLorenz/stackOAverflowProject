@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySqlConnection {
+public class ConnectionSQL {
 
     // Make sure your XAMPP/MySQL server has this exact database created: 'oop2-capstone'
     public static final String URL = "jdbc:mysql://localhost:3306/oop2-capstone";

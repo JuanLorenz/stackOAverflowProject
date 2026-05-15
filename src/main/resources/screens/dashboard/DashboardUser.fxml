@@ -5,13 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane stylesheets="@dashboardUser.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardController">
+<StackPane stylesheets="@DashboardUserStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardUserController">
     <children>
         <!-- Main Scrollable Content -->
         <VBox prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;">
@@ -54,7 +55,7 @@
 
         <!-- DETAIL POPUP CONTAINER -->
         <VBox fx:id="paneMainContainer" alignment="CENTER" fillWidth="false" visible="false">
-            <VBox prefWidth="450.0" spacing="20" styleClass="detail-card">
+            <VBox prefHeight="350.0" prefWidth="450.0" spacing="20" styleClass="detail-card">
                 <padding>
                     <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
                 </padding>
@@ -62,10 +63,25 @@
                     <HBox alignment="CENTER_RIGHT">
                         <Button fx:id="buttonExitOverlay" onMouseClicked="#onMouseClickExitOverlay" styleClass="exit-button" text="X" />
                     </HBox>
-                    <Label fx:id="labelEquipmentName" styleClass="detail-header" text="Equipment Name" />
-                    <Label fx:id="labelEquipmentDetails" styleClass="detail-body" text="Details go here..." wrapText="true" />
+               <HBox alignment="CENTER" prefHeight="350.0" prefWidth="200.0">
+                  <children>
+                     <ImageView fx:id="equipmentImage" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                        <HBox.margin>
+                           <Insets />
+                        </HBox.margin></ImageView>
+                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
+                        <children>
+                                <Label fx:id="labelEquipmentName" styleClass="detail-header" text="Equipment Name" wrapText="true" />
+                                <Label fx:id="labelEquipmentDetails" styleClass="detail-body" text="Details go here..." wrapText="true" />
+                        </children>
+                        <padding>
+                           <Insets left="15.0" />
+                        </padding>
+                     </VBox>
+                  </children>
+               </HBox>
                     <HBox alignment="CENTER_RIGHT">
-                        <Button styleClass="reserve-button" text="Reserve" />
+                        <Button styleClass="borrow-button" text="Borrow" />
                     </HBox>
                 </children>
             </VBox>

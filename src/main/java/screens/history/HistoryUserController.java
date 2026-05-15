@@ -1,4 +1,4 @@
-package screens.historyUser;
+package screens.history;
 
 import data.Transaction;
 import data.User;

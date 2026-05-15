@@ -1,4 +1,6 @@
-package utilities.service;
+package utilities.manager;
+
+import javafx.scene.image.Image;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,9 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class ImageService {
+public class ImageManager {
 
-    private static final String UPLOAD_DIR = "src/main/resources/images/inventory/";
+    private static final String UPLOAD_EQUIPMENT = "src/main/resources/images/inventory/";
 
     /**
      * Saves an image into the project resources folder.
@@ -21,7 +23,7 @@ public class ImageService {
 
         try {
 
-            File directory = new File(UPLOAD_DIR);
+            File directory = new File(UPLOAD_EQUIPMENT);
 
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -29,7 +31,7 @@ public class ImageService {
 
             String uniqueFileName = System.currentTimeMillis() + "_" + sourceFile.getName();
 
-            Path targetPath = Paths.get(UPLOAD_DIR + uniqueFileName);
+            Path targetPath = Paths.get(UPLOAD_EQUIPMENT + uniqueFileName);
 
             Files.copy(
                     sourceFile.toPath(),
@@ -68,5 +70,30 @@ public class ImageService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static Image getSafeImage(String path, double width, double height) {
+        // 1. Check if the String itself is valid
+        if (path == null || path.isBlank()) {
+            return getPlaceholderEquipment(width, height);
+        }
+
+        // 2. Check if the file actually exists in your resources
+        // getClass().getResource() returns null if the path is invalid
+        var resource = ImageManager.class.getResource(path);
+
+        if (resource == null) {
+            System.err.println("IMAGE NOT FOUND: " + path);
+            return getPlaceholderEquipment(width, height);
+        }
+
+        // 3. Load the image now that we know the URL is safe
+        // (Using the 6-parameter constructor for performance)
+        return new Image(resource.toExternalForm(), width, height, true, true, true);
+    }
+
+    private static Image getPlaceholderEquipment(double w, double h) {
+        var placeholder = ImageManager.class.getResource("/media/equipments/placeholder-equipment.png");
+        return new Image(placeholder.toExternalForm(), w, h, true, true, true);
     }
 }

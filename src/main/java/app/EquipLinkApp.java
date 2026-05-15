@@ -22,9 +22,12 @@ public class EquipLinkApp extends Application {
             if(currentUser == null)
                  loader = new FXMLLoader(getClass().getResource("/screens/login/Login.fxml"));
             else if(currentUser.getUserType().equals("admin"))
-                loader = new FXMLLoader(getClass().getResource("/screens/dashboard/dashboardAdmin.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/screens/dashboard/DashboardAdmin.fxml"));
             else
                 loader = new FXMLLoader(getClass().getResource("/screens/home/HomeUser.fxml"));
+            //these two else conditions will be condensed into one once the shell is done.
+            //use case: once user is logged in, the next screen is the shell, and shell is the one to
+            //figure out which dashboard to use, admin or user
 
             Parent root = loader.load();
 

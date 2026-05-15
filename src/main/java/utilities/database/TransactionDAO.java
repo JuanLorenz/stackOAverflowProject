@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionDAO implements GeneralDAO<Transaction> {
+public class TransactionDAO implements ContractDAO<Transaction> {
 
     private final String FIND_ALL = """
             SELECT\s
@@ -29,7 +29,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
 
     @Override
     public boolean save(Transaction transaction) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(INSERT_TRANSACTION, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setInt(1, transaction.getEquipment().getEquipmentID());
@@ -62,7 +62,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
 
     @Override
     public Transaction findByID(int id) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_TRANSACTION_ID)) {
 
             statement.setInt(1, id);
@@ -81,7 +81,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
     public List<Transaction> findAll() {
         List<Transaction> transactions = new ArrayList<>();
 
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_ALL)) {
 
             ResultSet rs = statement.executeQuery();
@@ -99,7 +99,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
     public List<Transaction> findAllByUserId(int userId) {
         List<Transaction> transactions = new ArrayList<>();
 
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_USER_ID)) {
 
             statement.setInt(1, userId);
@@ -117,7 +117,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
     }
 
     public boolean updateReturn(int id, LocalDate dateReturned) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(UPDATE_RETURN)) {
 
             statement.setObject(1, dateReturned);
@@ -151,8 +151,7 @@ public class TransactionDAO implements GeneralDAO<Transaction> {
                         .setInventory(rs.getInt("e_total"),
                                 rs.getInt("e_avail"))
                         .build(),
-                rs.getObject("dateBorrowed", LocalDate.class),
-                rs.getObject("dateReturned", LocalDate.class)
+                rs.getObject("dateBorrowed", LocalDate.class)
         );
     }
 }

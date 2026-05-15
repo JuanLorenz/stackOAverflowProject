@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements GeneralDAO<User> {
+public class UserDAO implements ContractDAO<User> {
     // tried my best to adhere to single responsibility principle
     private final String FIND_ALL = "SELECT * FROM users";
     private final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
@@ -25,7 +25,7 @@ public class UserDAO implements GeneralDAO<User> {
      */
     @Override
     public User findByID(int id) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_ID)) {
 
             statement.setInt(1, id);
@@ -43,7 +43,7 @@ public class UserDAO implements GeneralDAO<User> {
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_ALL)) {
 
             ResultSet rs = statement.executeQuery();
@@ -62,7 +62,7 @@ public class UserDAO implements GeneralDAO<User> {
      */
     @Override
     public boolean save(User user) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(INSERT_USER)) {
 
             statement.setString(1, user.getName());
@@ -88,7 +88,7 @@ public class UserDAO implements GeneralDAO<User> {
      * null - if user does not exist
      */
     public User findByEmail(String email) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_EMAIL)) {
 
             statement.setString(1, email);
@@ -110,7 +110,7 @@ public class UserDAO implements GeneralDAO<User> {
      */
     public boolean changeUserDetails(String currentEmail, String newEmail, String name, String password) {
         try (
-                Connection c = MySqlConnection.getConnection();
+                Connection c = ConnectionSQL.getConnection();
                 PreparedStatement statement = c.prepareStatement(CHANGE_USER_DETAILS)
         ) {
 

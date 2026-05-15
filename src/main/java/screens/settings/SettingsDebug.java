@@ -1,4 +1,4 @@
-package screens.appshell;
+package screens.settings;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ApplicationShellDebug extends Application {
+public class SettingsDebug extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -18,11 +18,11 @@ public class ApplicationShellDebug extends Application {
     public void start(Stage primaryStage) {
         try {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ApplicationShell.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Settings.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("ApplicationShell Debug");
+            primaryStage.setTitle("Settings Debug");
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(960);
             primaryStage.setMinHeight(640);

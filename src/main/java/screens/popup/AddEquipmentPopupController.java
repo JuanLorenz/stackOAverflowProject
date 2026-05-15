@@ -1,4 +1,4 @@
-package screens.dashboard;
+package screens.popup;
 
 import data.equipment.Equipment;
 import javafx.event.ActionEvent;

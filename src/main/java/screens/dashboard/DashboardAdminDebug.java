@@ -1,4 +1,4 @@
-package screens.historyUser;
+package screens.dashboard;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,13 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class TestApp extends Application {
+public class DashboardAdminDebug extends Application {
+    @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(TestApp.class.getResource("HistoryUser.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(DashboardAdminDebug.class.getResource("DashboardAdmin.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 420);
-        stage.setTitle("EquipLink");
+        stage.setTitle("DashboardAdmin Debug");
         stage.setResizable(true);
-        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }

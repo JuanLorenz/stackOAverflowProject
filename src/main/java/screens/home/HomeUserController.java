@@ -115,7 +115,7 @@ public class HomeUserController {
 
         LocalDate today = LocalDate.now();
         ObservableList<Transaction> borrowedList = FXCollections.observableArrayList(
-                new Transaction(1, currentUser, eq1, today, today)
+                new Transaction(1, currentUser, eq1, today)
 //                new Transaction(2, user, eq2, today, today),
 //                new Transaction(3, user, eq3, today, today)
         );

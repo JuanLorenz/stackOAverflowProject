@@ -7,13 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DashboardAdminApplication extends Application {
+public class DashboardUserDebug extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(DashboardAdminApplication.class.getResource("dashboardAdmin.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(DashboardUserDebug.class.getResource("DashboardUser.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 420);
-        stage.setTitle("WILDInv");
-        stage.setResizable(true);
+        stage.setTitle("DashboardUser Debug");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

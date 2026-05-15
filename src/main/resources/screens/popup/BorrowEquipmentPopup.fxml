@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.reserve.ReserveController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.BorrowEquipmentPopupController">
    <children>
       <VBox alignment="CENTER" layoutY="-4.0" prefHeight="408.0" prefWidth="600.0">
          <children>
-            <Label prefHeight="47.0" prefWidth="228.0" text="Reserve Equipment">
+            <Label prefHeight="47.0" prefWidth="228.0" text="Borrow Equipment">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -39,7 +39,7 @@
                            <HBox.margin>
                               <Insets right="100.0" />
                            </HBox.margin></Button>
-                        <Button fx:id="reserve" onAction="#onReserveButtonClicked" mnemonicParsing="false" prefHeight="26.0" prefWidth="77.0" text="Reserve" />
+                        <Button fx:id="borrow" onAction="#onBorrowButtonClicked" mnemonicParsing="false" prefHeight="26.0" prefWidth="77.0" text="Borrow" />
                      </children>
                      <VBox.margin>
                         <Insets top="30.0" />

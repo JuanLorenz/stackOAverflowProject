@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EquipmentDAO implements GeneralDAO<Equipment> {
+public class EquipmentDAO implements ContractDAO<Equipment> {
 
     private final String FIND_ALL = "SELECT * FROM equipment";
     private final String FIND_BY_ID = "SELECT * FROM equipment WHERE equipmentID = ?";
@@ -18,7 +18,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
 
     @Override
     public boolean save(Equipment equipment) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(INSERT_EQUIPMENT, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, equipment.getEquipmentName());
@@ -55,7 +55,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
 
     @Override
     public Equipment findByID(int id) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_ID)) {
 
             statement.setInt(1, id);
@@ -74,7 +74,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
     public List<Equipment> findAll() {
         List<Equipment> equipments = new ArrayList<>();
 
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_ALL)) {
 
             ResultSet rs = statement.executeQuery();
@@ -90,7 +90,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
     }
 
     public Equipment findByName(String name) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_NAME)) {
 
             statement.setString(1, name);
@@ -106,7 +106,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
     }
 
     public boolean updateCondition(int id, String condition) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(UPDATE_CONDITION)) {
 
             statement.setString(1, condition);
@@ -121,7 +121,7 @@ public class EquipmentDAO implements GeneralDAO<Equipment> {
     }
 
     public boolean updateQuantity(int id, int total, int available) {
-        try (Connection c = MySqlConnection.getConnection();
+        try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(UPDATE_QUANTITY)) {
 
             statement.setInt(1, total);

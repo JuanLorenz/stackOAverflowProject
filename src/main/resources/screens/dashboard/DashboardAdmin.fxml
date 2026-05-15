@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane style="-fx-background-color: white;" stylesheets="@dashboardAdminStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardAdminController">
+<StackPane style="-fx-background-color: white;" stylesheets="@DashboardAdminStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.dashboard.DashboardAdminController">
     <children>
 
         <!-- Main dashboard content -->
@@ -68,9 +68,9 @@
         <Pane fx:id="paneOverlayShadow" onMouseClicked="#onMouseClickExitOverlay" opacity="0.4" style="-fx-background-color: black;" visible="false" />
 
         <!-- Add Equipment -->
-        <fx:include fx:id="paneAddEquipmentContainer" source="AddEquipmentPopup.fxml" visible="false" />
+        <fx:include fx:id="paneAddEquipmentContainer" source="../popup/AddEquipmentPopup.fxml" visible="false" />
 
         <!-- Update Equipment -->
-        <fx:include fx:id="paneUpdateEquipmentContainer" source="UpdateEquipmentPopup.fxml" visible="false" />
+        <fx:include fx:id="paneUpdateEquipmentContainer" source="../popup/UpdateEquipmentPopup.fxml" visible="false" />
     </children>
 </StackPane>
