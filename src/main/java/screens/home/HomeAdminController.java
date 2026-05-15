@@ -30,7 +30,7 @@ public class HomeAdminController {
 
         try {
             Parent root = FXMLLoader.load(
-                    Objects.requireNonNull(getClass().getResource("/screens/home/AddAdminPopup.fxml"))
+                    Objects.requireNonNull(getClass().getResource("/screens/popup/AddAdminPopup.fxml"))
             );
 
             Stage dialog = new Stage();

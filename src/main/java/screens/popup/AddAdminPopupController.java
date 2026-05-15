@@ -1,4 +1,4 @@
-package screens.home;
+package screens.popup;
 
 import data.User;
 import javafx.event.ActionEvent;

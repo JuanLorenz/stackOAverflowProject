@@ -65,7 +65,7 @@
                         <ImageView fx:id="imgProfile" fitHeight="116.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="false">
 
                            <image>
-                              <Image url="@../../media/images/placeholder-profile.png" />
+                              <Image url="@../../media/profiles/placeholder-profile.png" />
                            </image>
 
                            <clip>

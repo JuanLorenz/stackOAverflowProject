@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import utilities.database.UserDAO;
-import utilities.service.ImageService;
+import utilities.manager.ImageManager;
 import utilities.manager.SerializeManager;
 import utilities.service.AuthService;
 
@@ -91,7 +91,7 @@ public class SettingsController {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
 
-            profileImagePath = ImageService.saveImage(selectedFile);
+            profileImagePath = ImageManager.saveImage(selectedFile);
 
             imgProfile.setImage(
                     new Image(selectedFile.toURI().toString())
@@ -109,14 +109,14 @@ public class SettingsController {
 
         if (profileImagePath != null && !profileImagePath.equals("/images/placeholder.png")) {
 
-            boolean deleted = ImageService.deleteImage(profileImagePath);
+            boolean deleted = ImageManager.deleteImage(profileImagePath);
 
             System.out.println("Image deleted: " + deleted);
         }
 
         profileImagePath = null;
 
-        imgProfile.setImage(new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-img.png")).toExternalForm()));
+        imgProfile.setImage(new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-equipment.png")).toExternalForm()));
 
         // TODO: Update db probably if ma delete ang profile img
     }

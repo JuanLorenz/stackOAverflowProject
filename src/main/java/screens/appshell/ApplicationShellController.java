@@ -25,7 +25,7 @@ public class ApplicationShellController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Could not find the login FXML file!");
+            System.out.println("Could not find the FXML file!");
         }
     }
     @FXML

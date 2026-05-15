@@ -1,4 +1,4 @@
-package screens.dashboard;
+package screens.history;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,13 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DashboardApplication extends Application {
-    @Override
+public class HistoryUserDebug extends Application {
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(DashboardApplication.class.getResource("DashboardUser.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HistoryUserDebug.class.getResource("HistoryUser.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 420);
-        stage.setTitle("WILDInv");
-        stage.setResizable(false);
+        stage.setTitle("HistoryUser Debug");
+        stage.setResizable(true);
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }

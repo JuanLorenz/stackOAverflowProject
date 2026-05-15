@@ -20,7 +20,7 @@ import utilities.service.EquipmentService;
 import java.util.List;
 import java.util.Objects;
 
-public class DashboardController {
+public class DashboardUserController {
 
     public Pane paneOverlayShadow;
     public Pane paneMainContainer;
@@ -67,7 +67,7 @@ public class DashboardController {
                 String path = item.getImagePath();
                 lowres = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm(), 100, 100, true, true, true);
             } catch (Exception e) {
-                lowres = new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-img.png")).toExternalForm(), 100, 100, true, true, true);
+                lowres = new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-equipment.png")).toExternalForm(), 100, 100, true, true, true);
             }
 
             ImageView image = new ImageView(lowres);

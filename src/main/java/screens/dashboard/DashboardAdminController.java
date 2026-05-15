@@ -17,14 +17,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import screens.popup.AddEquipmentPopupController;
+import screens.popup.UpdateEquipmentPopupController;
 import utilities.service.EquipmentService;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Objects;
 
@@ -89,7 +85,7 @@ public class DashboardAdminController {
                 String path = item.getImagePath();
                 lowres = new Image(Objects.requireNonNull(getClass().getResource(path)).toExternalForm(), 100, 100, true, true, true);
             } catch (Exception e) {
-                lowres = new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-img.png")).toExternalForm(), 100, 100, true, true, true);
+                lowres = new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-equipment.png")).toExternalForm(), 100, 100, true, true, true);
             }
 
             ImageView image = new ImageView(lowres);

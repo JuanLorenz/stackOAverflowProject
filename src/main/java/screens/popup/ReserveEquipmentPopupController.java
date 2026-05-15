@@ -1,4 +1,4 @@
-package screens.reserve;
+package screens.popup;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import utilities.manager.SceneManager;
 
-public class ReserveController {
+public class ReserveEquipmentPopupController {
     @FXML private TextField equipmentName;
     @FXML private TextField purpose;
     @FXML private TextField affiliation;
