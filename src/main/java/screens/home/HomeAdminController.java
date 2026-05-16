@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import utilities.database.UserDAO;
 import utilities.manager.SceneManager;
@@ -119,6 +118,7 @@ public class HomeAdminController {
         lblEmptyAdminList.setVisible(filteredAdmins.isEmpty());
     }
 
+    //this is to make the listview items unclickable
     public static class NoSelectionModel<T> extends MultipleSelectionModel<T> {
         @Override public ObservableList<Integer> getSelectedIndices() { return FXCollections.emptyObservableList(); }
         @Override public ObservableList<T> getSelectedItems() { return FXCollections.emptyObservableList(); }

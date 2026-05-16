@@ -39,7 +39,6 @@ public class DashboardAdminController {
     private final EquipmentService equipmentService = new EquipmentService();
 
     public void initialize(){
-        equipmentContainer.getChildren().clear();
         Task<List<Equipment>> loadTask = new Task<>() {
             @Override
             protected List<Equipment> call() {

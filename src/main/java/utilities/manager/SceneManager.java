@@ -45,6 +45,7 @@ public class SceneManager {
             Parent popupNode = loader.load();
 
             // Pass data if the popup implements DataReceiver (e.g., UpdatePopup)
+            // this is if the popup needs data to be displayed (e.g., EquipmentName)
             if (data != null && loader.getController() instanceof DataReceiver) {
                 ((DataReceiver<T>) loader.getController()).setData(data);
             }
