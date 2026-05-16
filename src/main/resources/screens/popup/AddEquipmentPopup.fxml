@@ -4,33 +4,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<Pane fx:id="addEquipmentPopUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" visible="false" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.AddEquipmentPopupController">
+<Pane fx:id="addEquipmentPopUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@AddEquipmentPopupStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.AddEquipmentPopupController">
     <children>
-        <VBox alignment="CENTER" layoutX="25.0" layoutY="10.0" prefWidth="600.0" style="-fx-background-color: white;">
+        <VBox alignment="CENTER" layoutX="25.0" layoutY="10.0" prefWidth="600.0" styleClass="popup-container">
             <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <HBox HBox.hgrow="ALWAYS" />
-                      <!-- HEADER -->
-                      <Label alignment="CENTER" text="Add Equipment">
-                          <font>
-                              <Font name="System Bold" size="24.0" />
-                          </font>
-                      </Label>
-                  <HBox HBox.hgrow="ALWAYS" />
-                  <Button fx:id="buttonX" mnemonicParsing="false" onAction="#onXClicked" text="X" />
-               </children>
-               <VBox.margin>
-                  <Insets left="30.0" right="15.0" top="30.0" />
-               </VBox.margin>
-            </HBox>
+                <HBox alignment="CENTER">
+                    <children>
+                        <HBox HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin></HBox>
+                        <Label alignment="CENTER" styleClass="popup-header" text="Add Equipment" />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <Button fx:id="buttonX" mnemonicParsing="false" onAction="#onXClicked" styleClass="popup-close-button" text="X">
+                            <HBox.margin>
+                                <Insets right="15.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                    <VBox.margin>
+                        <Insets left="30.0" right="15.0" top="30.0" />
+                    </VBox.margin>
+                </HBox>
 
-                <!-- FORM BODY -->
                 <HBox prefHeight="300.0" prefWidth="600.0">
                     <children>
-                        <!-- IMAGE SECTION -->
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="250.0">
                             <children>
                                 <ImageView fx:id="equipmentImage" fitHeight="219.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
@@ -38,22 +37,21 @@
                                         <Insets bottom="10.0" top="15.0" />
                                     </VBox.margin>
                                 </ImageView>
-                                <Button fx:id="uploadImage" mnemonicParsing="false" onAction="#onUploadImgClicked" text="Upload Image" />
+                                <Button fx:id="uploadImage" mnemonicParsing="false" onAction="#onUploadImgClicked" styleClass="popup-img-button" text="Upload Image" />
                             </children>
                             <HBox.margin>
                                 <Insets left="20.0" right="20.0" />
                             </HBox.margin>
                         </VBox>
 
-                        <!-- INPUT FIELDS SECTION -->
                         <VBox alignment="CENTER" prefHeight="300.0" prefWidth="300.0" spacing="15.0">
                             <children>
-                                <TextField fx:id="equipmentName" promptText="Equipment Name" />
-                                <TextField fx:id="equipmentCategory" promptText="Category" />
-                                <TextField fx:id="equipmentModelNo" promptText="Model No." />
-                                <TextField fx:id="equipmentSerialNo" promptText="Serial No." />
-                                <TextField fx:id="equipmentCondition" promptText="Condition" />
-                                <TextField fx:id="equipmentTotalQty" promptText="Total Quantity" />
+                                <TextField fx:id="equipmentName" promptText="Equipment Name" styleClass="popup-text-field" />
+                                <TextField fx:id="equipmentCategory" promptText="Category" styleClass="popup-text-field" />
+                                <TextField fx:id="equipmentModelNo" promptText="Model No." styleClass="popup-text-field" />
+                                <TextField fx:id="equipmentSerialNo" promptText="Serial No." styleClass="popup-text-field" />
+                                <TextField fx:id="equipmentCondition" promptText="Condition" styleClass="popup-text-field" />
+                                <TextField fx:id="equipmentTotalQty" promptText="Total Quantity" styleClass="popup-text-field" />
                             </children>
                             <padding>
                                 <Insets left="15.0" right="15.0" />
@@ -65,17 +63,14 @@
                     </VBox.margin>
                 </HBox>
 
-                <!-- FOOTER BUTTONS -->
-                <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="600.0">
+                <HBox alignment="CENTER_RIGHT" prefHeight="80.0">
                     <children>
-                        <Button fx:id="add" mnemonicParsing="false" onAction="#onAddClicked" prefWidth="80.0" text="Add">
-                     <HBox.margin>
-                        <Insets right="25.0" />
-                     </HBox.margin></Button>
+                        <Button fx:id="add" mnemonicParsing="false" onAction="#onAddClicked" prefWidth="120.0" styleClass="popup-confirm-button" text="Add">
+                            <HBox.margin>
+                                <Insets right="30.0" />
+                            </HBox.margin>
+                        </Button>
                     </children>
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
                 </HBox>
             </children>
         </VBox>
