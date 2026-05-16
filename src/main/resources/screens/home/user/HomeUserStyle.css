@@ -1,0 +1,63 @@
+/* CONTAINERS & TABLES */
+.gradient-container {
+    /* Multi-stop gradient: Blue -> Cyan -> Green */
+    -fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
+    -fx-background-radius: 30;
+    -fx-padding: 25;
+}
+
+.custom-table {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Hides default headers */
+.custom-table .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+    -fx-opacity: 0;
+}
+
+.custom-table:focused { -fx-background-color: transparent; }
+.custom-table .scroll-bar:horizontal, .custom-table .scroll-bar:vertical { -fx-opacity: 0; }
+
+/* Base styling for row height */
+.custom-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-cell-size: 55px;
+}
+.custom-table .table-row-cell:filled { -fx-background-color: transparent; }
+.custom-table .table-row-cell:filled:hover { -fx-background-color: transparent; }
+
+/* Apply white background ONLY to item column cells (White pill effect) */
+.custom-table .table-row-cell:filled .item-column {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 6 15 6 0;
+}
+.custom-table .table-row-cell:filled:hover .item-column { -fx-background-color: #f0f0f0; }
+
+.custom-table .table-cell {
+    -fx-text-fill: #333333;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+    -fx-padding: 0 15 0 25;
+}
+
+.custom-table .action-column { -fx-padding: 0; }
+
+/* BUTTONS */
+.btn-return {
+    -fx-background-color: #ff4d4d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 20px;
+    -fx-padding: 8px 25px;
+    -fx-cursor: hand;
+}
+.btn-return:hover { -fx-background-color: #e63939; }
+.btn-return:pressed { -fx-background-color: #cc0000; }

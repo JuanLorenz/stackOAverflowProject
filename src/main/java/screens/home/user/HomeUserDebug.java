@@ -1,4 +1,4 @@
-package screens.home;
+package screens.home.user;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

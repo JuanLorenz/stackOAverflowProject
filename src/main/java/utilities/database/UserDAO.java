@@ -178,4 +178,24 @@ public class UserDAO implements ContractDAO<User> {
                 rs.getString("profilePhotoPath")
         );
     }
+
+    public boolean updateUserBlockStatus(int userId, boolean isBlocked) {
+
+        // IMPORTANT: Make sure "isBlocked" matches the exact column name in your database!
+        // If you used the u_ prefix convention, change it to "u_is_blocked".
+        String query = "UPDATE users SET isBlocked = ? WHERE id = ?";
+
+        try (Connection c = ConnectionSQL.getConnection();
+             PreparedStatement statement = c.prepareStatement(query)) {
+
+            statement.setBoolean(1, isBlocked);
+            statement.setInt(2, userId);
+
+            return statement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Failed to update user block status: " + e.getMessage());
+            return false;
+        }
+    }
 }

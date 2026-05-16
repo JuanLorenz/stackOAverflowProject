@@ -7,7 +7,9 @@ import data.equipment.EquipmentBuilder;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransactionDAO implements ContractDAO<Transaction> {
 
@@ -15,6 +17,7 @@ public class TransactionDAO implements ContractDAO<Transaction> {
             SELECT\s
                 t.*,\s
                 u.id AS u_id, u.name AS u_name, u.email AS u_email, u.password AS u_pw, u.userType AS u_type,
+                u.isBlocked AS u_blocked, u.profilePhotoPath AS u_photo_path,
                 e.equipmentID AS e_id, e.equipmentName AS e_name, e.category AS e_cat, e.modelNo AS e_model,\s
                 e.serialNo AS e_serial, e.condition AS e_cond, e.totalQty AS e_total,\s
                 e.availableQty AS e_avail, e.imagePath AS e_path
@@ -47,88 +50,89 @@ public class TransactionDAO implements ContractDAO<Transaction> {
                 }
                 return true;
             }
-        } catch (SQLException e) {
-            System.err.println("Failed to save transaction: " + e.getMessage());
-            return false;
-        }
-
+        } catch (SQLException e) { return false; }
         return false;
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
-    }
+    public boolean delete(int id) { return false; }
 
     @Override
     public Transaction findByID(int id) {
         try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_TRANSACTION_ID)) {
-
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
-
-            if (rs.next()) {
-                return mapTransaction(rs);
-            }
-        } catch (SQLException e) {
-            System.err.println("Database connection or query failed: " + e.getMessage());
-        }
+            if (rs.next()) return mapTransaction(rs);
+        } catch (SQLException e) {}
         return null;
     }
 
     @Override
     public List<Transaction> findAll() {
         List<Transaction> transactions = new ArrayList<>();
-
         try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_ALL)) {
-
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                transactions.add(mapTransaction(rs));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Database connection or query failed: " + e.getMessage());
-        }
-
+            while (rs.next()) transactions.add(mapTransaction(rs));
+        } catch (SQLException e) {}
         return transactions;
     }
 
     public List<Transaction> findAllByUserId(int userId) {
         List<Transaction> transactions = new ArrayList<>();
-
         try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(FIND_BY_USER_ID)) {
-
             statement.setInt(1, userId);
             ResultSet rs = statement.executeQuery();
-
-            while (rs.next()) {
-                transactions.add(mapTransaction(rs));
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Failed to fetch user history: " + e.getMessage());
-        }
-
+            while (rs.next()) transactions.add(mapTransaction(rs));
+        } catch (SQLException e) {}
         return transactions;
+    }
+
+    // --- NEW: Active Items Only ---
+    public List<Transaction> findActiveByUserId(int userId) {
+        List<Transaction> activeTransactions = new ArrayList<>();
+        String query = FIND_ALL + " WHERE u.id = ? AND t.dateReturned IS NULL";
+
+        try (Connection c = ConnectionSQL.getConnection();
+             PreparedStatement statement = c.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) activeTransactions.add(mapTransaction(rs));
+        } catch (SQLException e) {}
+        return activeTransactions;
+    }
+
+    // --- NEW: History Counts ---
+    public Map<String, Integer> getHistoryCountByCategory(int userId) {
+        Map<String, Integer> categoryCounts = new HashMap<>();
+        String query = """
+            SELECT e.category, COUNT(t.transactionID) AS category_count
+            FROM transaction t
+            JOIN equipment e ON t.equipmentID = e.equipmentID
+            WHERE t.userID = ? AND t.dateReturned IS NOT NULL
+            GROUP BY e.category
+            """;
+
+        try (Connection c = ConnectionSQL.getConnection();
+             PreparedStatement statement = c.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                categoryCounts.put(rs.getString("category"), rs.getInt("category_count"));
+            }
+        } catch (SQLException e) {}
+        return categoryCounts;
     }
 
     public boolean updateReturn(int id, LocalDate dateReturned) {
         try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(UPDATE_RETURN)) {
-
             statement.setObject(1, dateReturned);
             statement.setInt(2, id);
-
             return statement.executeUpdate() > 0;
-
-        } catch (SQLException e) {
-            System.err.println("Failed to update equipment: " + e.getMessage());
-            return false;
-        }
+        } catch (SQLException e) { return false; }
     }
 
     private Transaction mapTransaction(ResultSet rs) throws SQLException {
@@ -144,14 +148,9 @@ public class TransactionDAO implements ContractDAO<Transaction> {
                         rs.getString("u_photo_path")
                 ),
                 EquipmentBuilder.start(rs.getString("e_cat"))
-                        .setInfo(rs.getInt("e_id"),
-                                rs.getString("e_name"),
-                                rs.getString("e_model"))
-                        .setDetails(rs.getString("e_serial"),
-                                rs.getString("e_cond"),
-                                rs.getString("e_path"))
-                        .setInventory(rs.getInt("e_total"),
-                                rs.getInt("e_avail"))
+                        .setInfo(rs.getInt("e_id"), rs.getString("e_name"), rs.getString("e_model"))
+                        .setDetails(rs.getString("e_serial"), rs.getString("e_cond"), rs.getString("e_path"))
+                        .setInventory(rs.getInt("e_total"), rs.getInt("e_avail"))
                         .build(),
                 rs.getObject("dateBorrowed", LocalDate.class)
         );

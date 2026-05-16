@@ -37,4 +37,6 @@ module com.example.stackoaverflowproject {
     exports screens.history;
     exports screens.popup;
     opens screens.popup to javafx.fxml;
+    exports screens.home.user;
+    opens screens.home.user to javafx.fxml;
 }

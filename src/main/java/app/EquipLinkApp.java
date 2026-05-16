@@ -20,14 +20,9 @@ public class EquipLinkApp extends Application {
             FXMLLoader loader;
 
             if(currentUser == null)
-                 loader = new FXMLLoader(getClass().getResource("/screens/login/Login.fxml"));
-            else if(currentUser.getUserType().equals("admin"))
-                loader = new FXMLLoader(getClass().getResource("/screens/dashboard/DashboardAdmin.fxml"));
+                loader = new FXMLLoader(getClass().getResource("/screens/login/Login.fxml"));
             else
-                loader = new FXMLLoader(getClass().getResource("/screens/home/HomeUser.fxml"));
-            //these two else conditions will be condensed into one once the shell is done.
-            //use case: once user is logged in, the next screen is the shell, and shell is the one to
-            //figure out which dashboard to use, admin or user
+                loader = new FXMLLoader(getClass().getResource("/screens/appshell/ApplicationShell.fxml"));
 
             Parent root = loader.load();
 
@@ -36,8 +31,8 @@ public class EquipLinkApp extends Application {
             primaryStage.setScene(scene);
 
             // It's good practice to keep minimum dimensions
-            primaryStage.setMinWidth(1066);
-            primaryStage.setMinHeight(600);
+            primaryStage.setMinWidth(960);  //old: 1066
+            primaryStage.setMinHeight(640); //old: 600
 
             primaryStage.setMaximized(true);
             primaryStage.show();
