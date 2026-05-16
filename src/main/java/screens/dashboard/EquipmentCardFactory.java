@@ -1,52 +1,47 @@
 package screens.dashboard;
 
 import data.equipment.Equipment;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import utilities.manager.ImageManager;
+
 import java.util.function.Consumer;
 
 public class EquipmentCardFactory {
 
-    /**
-     * Creates a styled equipment card.
-     * @param item The equipment data
-     * @param onCardClicked The action to perform when the card is clicked
-     */
-    public static VBox createCard(Equipment item, Consumer<Equipment> onCardClicked) {
-        VBox card = new VBox();
-        card.getStyleClass().add("equipment-card");
+    public static Button createCard(Equipment item, Consumer<Equipment> onClickAction) {
+        int WIDTH = 150;
+        int HEIGHT = 150;
 
-        // 1. Apply category-specific border color
-        String borderClass = "border-" + item.getCategory().toLowerCase().replace(" ", "");
-        card.getStyleClass().add(borderClass);
+        Button btn = new Button();
+        btn.getStyleClass().add("equipment-card");
+        btn.setPrefSize(180, 220);
 
-        // 2. Setup Equipment Image
-        ImageView iv = new ImageView();
-        try {
-            // Note: Use the Factory class to get the resource
-            iv.setImage(new Image(EquipmentCardFactory.class.getResource(item.getImagePath()).toExternalForm()));
-        } catch (Exception e) {
-            iv.setImage(new Image(EquipmentCardFactory.class.getResource("/media/images/placeholder.png").toExternalForm()));
-        }
-        iv.setFitHeight(100);
-        iv.setFitWidth(100);
-        iv.setPreserveRatio(true);
+        // Image Handling
+        Image lowres = ImageManager.getSafeImage(item.getImagePath(), WIDTH, HEIGHT);
+        ImageView image = new ImageView(lowres);
+        image.setFitWidth(WIDTH);
+        image.setFitHeight(HEIGHT);
+        image.setPreserveRatio(true);
 
-        // 3. Setup Label
-        Label nameLabel = new Label(item.getEquipmentName());
-        nameLabel.getStyleClass().add("card-label");
+        // Text Handling
+        Label name = new Label(item.getEquipmentName());
+        name.setStyle("-fx-font-size: 14px; -fx-font-family: 'Segoe UI Semibold';");
+        name.setWrapText(true);
+        name.setAlignment(Pos.CENTER);
 
-        card.getChildren().addAll(iv, nameLabel);
+        VBox card = new VBox(15, image, name);
+        card.setAlignment(Pos.CENTER);
 
-        // 4. Handle Click Event via the Callback
-        card.setOnMouseClicked(event -> {
-            if (onCardClicked != null) {
-                onCardClicked.accept(item);
-            }
-        });
+        btn.setGraphic(card);
 
-        return card;
+        // Pass the equipment object back to the controller's specific logic
+        btn.setOnAction(event -> onClickAction.accept(item));
+
+        return btn;
     }
 }
