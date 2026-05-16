@@ -53,7 +53,7 @@ public class LoginController {
             showStatus(Color.GREEN, "Login successful!");
 
             // Switch to the dashboard
-            SceneManager.switchScene(event, "/screens/home/HomeUser.fxml");
+            SceneManager.switchScene(event, "/screens/home/user/HomeUser.fxml");
 
         } else {
             // Fail: Clear password field and show error
