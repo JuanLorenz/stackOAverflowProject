@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import utilities.manager.ImageManager;
+
 import java.util.function.Consumer;
 
 public class EquipmentCardFactory {
@@ -24,6 +25,7 @@ public class EquipmentCardFactory {
         Image lowres = ImageManager.getSafeImage(item.getImagePath(), WIDTH, HEIGHT);
         ImageView image = new ImageView(lowres);
         image.setFitWidth(WIDTH);
+        image.setFitHeight(HEIGHT);
         image.setPreserveRatio(true);
 
         // Text Handling

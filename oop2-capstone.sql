@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2026 at 04:25 AM
+-- Generation Time: May 16, 2026 at 11:52 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,16 +56,16 @@ CREATE TABLE `equipment` (
 --
 
 INSERT INTO `equipment` (`equipmentID`, `equipmentName`, `category`, `modelNo`, `serialNo`, `condition`, `totalQty`, `availableQty`, `imagePath`) VALUES
-(1, 'Digital Multimeter', 'Engineering', 'Fluke-115', 'EN-FLK-9921', 'Good', 15, 12, ''),
-(3, 'Oscilloscope', 'Engineering', 'TDS2024C', 'EN-OSC-4402', 'New', 5, 5, ''),
-(4, 'Soldering Station', 'Engineering', 'WE1010NA', 'EN-SLD-1188', 'Used', 20, 18, ''),
-(5, 'Function Generator', 'Engineering', 'AFG1022', 'EN-FGEN-339', 'Good', 8, 8, ''),
-(6, 'Laser Level', 'Engineering', 'GLL3-330', 'EN-LLV-7710', 'New', 4, 3, ''),
-(7, 'Digital Balances', 'Chemistry', 'ENT-220', 'CH-BAL-8821', 'Good', 10, 9, ''),
-(8, 'Magnetic Stirrer', 'Chemistry', 'MS-H280', 'CH-STR-1104', 'New', 12, 12, ''),
-(9, 'Spectrophotometer', 'Chemistry', 'GEN-10S', 'CH-SPEC-553', 'Good', 3, 2, ''),
-(10, 'Centrifuge', 'Chemistry', '5424-R', 'CH-CEN-0091', 'Good', 5, 4, ''),
-(11, 'pH Meter', 'Chemistry', 'HI-98103', 'CH-PHM-2234', 'New', 15, 14, ''),
+(1, 'Digital Multimeter', 'Engineering', 'Fluke-115', 'EN-FLK-9921', 'Good', 15, 12, 'media/equipments/digital multimeter.jpg'),
+(3, 'Oscilloscope', 'Engineering', 'TDS2024C', 'EN-OSC-4402', 'New', 5, 5, 'media/equipments/oscilloscope.jpg'),
+(4, 'Soldering Station', 'Engineering', 'WE1010NA', 'EN-SLD-1188', 'Used', 20, 18, 'media/equipments/soldering station.jpg'),
+(5, 'Function Generator', 'Engineering', 'AFG1022', 'EN-FGEN-339', 'Good', 8, 8, 'media/equipments/function generator.jpg'),
+(6, 'Laser Level', 'Engineering', 'GLL3-330', 'EN-LLV-7710', 'New', 4, 3, 'media/equipments/laser level.jpg'),
+(7, 'Digital Balances', 'Chemistry', 'ENT-220', 'CH-BAL-8821', 'Good', 10, 9, 'media/equipments/digital balance.jpg'),
+(8, 'Magnetic Stirrer', 'Chemistry', 'MS-H280', 'CH-STR-1104', 'New', 12, 12, 'media/equipments/magnetic stirrer.jpg'),
+(9, 'Spectrophotometer', 'Chemistry', 'GEN-10S', 'CH-SPEC-553', 'Good', 3, 2, 'media/equipments/spectrophotometer.jpg'),
+(10, 'Centrifuge', 'Chemistry', '5424-R', 'CH-CEN-0091', 'Good', 5, 4, 'media/equipments/centrifuge.jpg'),
+(11, 'pH Meter', 'Chemistry', 'HI-98103', 'CH-PHM-2234', 'New', 15, 14, 'media/equipments/ph meter.jpg'),
 (12, 'Stopwatch', 'Physical Education', 'SL-800', 'PE-STW-1122', 'Good', 30, 25, ''),
 (13, 'Volleyball Net', 'Physical Education', 'VBN-PRO', 'PE-VBN-4400', 'New', 4, 4, ''),
 (14, 'Plyometric Box Set', 'Physical Education', 'PB-3IN1', 'PE-PLY-6601', 'Good', 5, 5, ''),
@@ -132,7 +132,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `userType`, `isBlocked`, `profilePhotoPath`) VALUES
-(1, 'Admin', 'admin@cit.edu', '$2a$10$F8KENnm9mHA7gadGdm4lLOhPSiRBbAhbcc3lfRBnUyTbmDmJcwGpq', 'admin', NULL, '');
+(1, 'Admin', 'admin@cit.edu', '$2a$10$F8KENnm9mHA7gadGdm4lLOhPSiRBbAhbcc3lfRBnUyTbmDmJcwGpq', 'admin', NULL, ''),
+(2, 'Khylle Josh', 'khylle.josh@cit.edu', '$2a$10$0hVisMFb5uuXXfolNFgKh.jvsCfncHLDrbaF7NMlr.zGCyWcNyEnu', 'user', 0, 'media/profiles/1778921094490_khylle pfp.jpg'),
+(3, 'Snow Rebusit', 'snow.rebusit@cit.edu', '$2a$10$UtXVm0pRJUHI2KeWYqQ9Mehy1vaZ./lOsgpdODr9KSWpOWUf0hkg.', 'user', 0, '');
 
 --
 -- Indexes for dumped tables
@@ -192,7 +194,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

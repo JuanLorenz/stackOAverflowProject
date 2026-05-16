@@ -13,7 +13,7 @@ public class DashboardUserDebug extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(DashboardUserDebug.class.getResource("DashboardUser.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 420);
         stage.setTitle("DashboardUser Debug");
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
     }
