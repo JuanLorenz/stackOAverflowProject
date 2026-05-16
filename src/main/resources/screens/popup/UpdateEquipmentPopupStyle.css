@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
+
+/* --- MAIN CONTROLLER BOX --- */
+.popup-container {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 40px;
+    -fx-border-radius: 40px;
+    /* Added padding/border to ensure it looks like a card */
+    -fx-padding: 20px;
+    -fx-border-color: #EEEEEE;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 25, 0, 0, 10);
+}
+
+/* --- ITEM NAME HEADER --- */
+.popup-container .popup-header {
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 24px;
+    -fx-text-fill: #1E1E1E;
+}
+
+/* --- EDITABLE FIELDS --- */
+.popup-container .popup-text-field {
+    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #5BAEFF;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px 18px 10px 18px;
+    -fx-prompt-text-fill: #B3B3B3;
+    -fx-text-fill: #333333;
+}
+
+.popup-container .popup-text-field:focused {
+    -fx-border-color: #26BDFC;
+    -fx-border-width: 2px;
+}
+
+/* --- INFO LABELS --- */
+.popup-container .info-header-label {
+    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 14px;
+    -fx-text-fill: #1E1E1E;
+}
+
+.popup-container .info-value-label {
+    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-font-weight: 400;
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+}
+
+/* --- ACTION BUTTONS --- */
+.popup-container .popup-confirm-button {
+    -fx-background-color: #26BDFC;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 14px;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px 35px 10px 35px;
+    -fx-cursor: hand;
+}
+
+.popup-container .popup-confirm-button:hover {
+    -fx-background-color: #1A9ECF;
+}
+
+.popup-container .popup-img-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #555555;
+    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.popup-container .popup-close-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FF4D4D;
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-cursor: hand;
+}

@@ -10,7 +10,7 @@
     <children>
 
         <!-- Main dashboard content -->
-        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0">
+        <VBox styleClass="dashboard-scope" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1000.0">
             <padding>
                 <Insets bottom="30.0" left="20.0" right="30.0" top="30.0" />
             </padding>
