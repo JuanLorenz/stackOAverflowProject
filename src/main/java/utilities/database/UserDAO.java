@@ -15,7 +15,7 @@ public class UserDAO implements ContractDAO<User> {
     private final String FIND_ALL = "SELECT * FROM users";
     private final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
     private final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
-    private final String INSERT_USER   = "INSERT INTO users (name, email, password, userType) VALUES (?, ?, ?, ?)";
+    private final String INSERT_USER = "INSERT INTO users (name, email, password, userType, isBlocked, profilePhotoPath) VALUES (?, ?, ?, ?, ?, ?)";
     private final String CHANGE_USER_DETAILS = "UPDATE users SET name = ?, email = ?, password = ? WHERE email = ?";
 
     /**
@@ -69,6 +69,8 @@ public class UserDAO implements ContractDAO<User> {
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());// already hashed
             statement.setString(4, user.getUserType());
+            statement.setBoolean(5, user.isBlocked());
+            statement.setString(6, user.getProfilePhotoPath());
             return statement.executeUpdate() > 0; // true if row was inserted
 
         } catch (SQLException e) {
@@ -143,7 +145,9 @@ public class UserDAO implements ContractDAO<User> {
                 rs.getString("name"),
                 rs.getString("email"),
                 rs.getString("password"),
-                rs.getString("userType")
+                rs.getString("userType"),
+                rs.getBoolean("isBlocked"),
+                rs.getString("profilePhotoPath")
         );
     }
 }
