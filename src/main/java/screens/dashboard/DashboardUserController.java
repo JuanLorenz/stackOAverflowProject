@@ -7,6 +7,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -88,7 +89,7 @@ public class DashboardUserController {
     private void renderGrid() {
         equipmentGrid.getChildren().clear();
         for (Equipment item : filteredData) {
-            VBox card = EquipmentCardFactory.createCard(item, this::openBorrowPopup);
+            Button card = EquipmentCardFactory.createCard(item, this::openBorrowPopup);
             equipmentGrid.getChildren().add(card);
         }
     }
