@@ -1,6 +1,7 @@
 package screens.dashboard;
 
 import data.equipment.Equipment;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -18,10 +19,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import screens.popup.BorrowEquipmentPopupController;
+import utilities.manager.SceneManager;
 import utilities.service.EquipmentService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DashboardUserController {
@@ -88,10 +92,13 @@ public class DashboardUserController {
 
     private void renderGrid() {
         equipmentGrid.getChildren().clear();
+        List<Button> cards = new ArrayList<>();
         for (Equipment item : filteredData) {
             Button card = EquipmentCardFactory.createCard(item, this::openBorrowPopup);
-            equipmentGrid.getChildren().add(card);
+            cards.add(card);
         }
+
+        Platform.runLater(() -> equipmentGrid.getChildren().setAll(cards));
     }
 
     private void updateCategoryUI(String category) {
@@ -109,23 +116,7 @@ public class DashboardUserController {
     }
 
     private void openBorrowPopup(Equipment item) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/screens/popup/BorrowEquipmentPopup.fxml"));
-            Parent popupRoot = loader.load();
-
-            BorrowEquipmentPopupController controller = loader.getController();
-            controller.setEquipment(item);
-
-            // Pass the overlayPane to the controller so it can "close" itself
-            controller.setOverlayPane(overlayPane);
-
-            overlayPane.getChildren().clear();
-            overlayPane.getChildren().add(popupRoot);
-            overlayPane.setVisible(true);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SceneManager.showOverlay("/screens/popup/BorrowEquipmentPopup.fxml", item);
     }
 
     private void setupCategoryMapping() {

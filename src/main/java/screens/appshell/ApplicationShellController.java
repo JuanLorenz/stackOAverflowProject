@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -25,8 +26,10 @@ public class ApplicationShellController {
 
     @FXML public ImageView ivProfilePic;
     @FXML public Label labelUserName;
+    @FXML public Pane globalShadow;
+    @FXML public StackPane globalOverlayHolder;
 
-    @FXML private BorderPane rootPane;
+    @FXML private StackPane shellRoot;
     @FXML private VBox sidebar;
     @FXML private VBox sidebarContent;
     @FXML private StackPane contentArea;
@@ -44,15 +47,14 @@ public class ApplicationShellController {
         try {
             ivProfilePic.setSmooth(true);
             ivProfilePic.setPreserveRatio(true);
+
             User currentUser = SerializeManager.deserializeUser();
             userType = currentUser != null ? currentUser.getUserType() : "user";
 
-            // Populate the shell UI with the initial user data on load
             updateProfileUI(currentUser);
-
-            // Load initial view
             showHome();
 
+            SceneManager.setOverlayComponents(globalOverlayHolder, globalShadow);
         } catch (Exception e) {
             System.out.println("Failed to initialize shell.");
             e.printStackTrace();
@@ -171,5 +173,11 @@ public class ApplicationShellController {
         if(userType.equals("admin")) loadView("/screens/history/BorrowRecords.fxml");
         else loadView("/screens/history/HistoryRecords.fxml");
         setActiveButton(btnRecords);
+    }
+
+
+    @FXML public void onCloseOverlayRequest() {
+        // This allows clicking the dark shadow to close the popup
+        SceneManager.closeOverlay();
     }
 }

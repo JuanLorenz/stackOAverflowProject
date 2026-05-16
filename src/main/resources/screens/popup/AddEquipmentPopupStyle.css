@@ -2,7 +2,6 @@
    EquipLink - Add Equipment Popup Styles
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap');
 
 /* --- MAIN CONTROLLER BOX --- */
 .popup-container {
@@ -15,7 +14,7 @@
 
 /* --- TITLE HEADER ("Add Equipment") --- */
 .popup-header {
-    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-weight: 700;
     -fx-font-size: 24px;
     -fx-text-fill: #1E1E1E;
@@ -23,7 +22,7 @@
 
 /* --- FORM TEXT FIELDS --- */
 .popup-container .popup-text-field {
-    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-font-family: "Segoe UI", sans-serif;
     -fx-background-color: #FFFFFF;
     -fx-border-color: #5BAEFF; /* Clean blue input outlines */
     -fx-border-width: 1.5px;
@@ -53,7 +52,7 @@
 .popup-container .popup-confirm-button {
     -fx-background-color: #26BDFC;
     -fx-text-fill: #FFFFFF;
-    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-weight: 700;
     -fx-font-size: 14px;
     -fx-background-radius: 20px;
@@ -69,7 +68,7 @@
 .popup-container .popup-img-button {
     -fx-background-color: transparent;
     -fx-text-fill: #555555;
-    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-weight: 600;
     -fx-font-size: 13px;
     -fx-cursor: hand;
@@ -83,7 +82,7 @@
 .popup-container .popup-close-button {
     -fx-background-color: transparent;
     -fx-text-fill: #FF4D4D;
-    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-weight: 700;
     -fx-font-size: 18px;
     -fx-cursor: hand;
