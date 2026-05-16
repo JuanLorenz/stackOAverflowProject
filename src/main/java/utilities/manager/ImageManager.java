@@ -1,6 +1,8 @@
 package utilities.manager;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,19 +13,39 @@ import java.nio.file.StandardCopyOption;
 
 public class ImageManager {
 
-    private static final String UPLOAD_EQUIPMENT = "src/main/resources/images/inventory/";
+    private static final String EQUIPMENT_DIR = "src/main/resources/media/equipments/";
 
-    /**
-     * Saves an image into the project resources folder.
-     *
-     * @param sourceFile the image selected by the user
-     * @return database-friendly image path
-     */
+    public static File chooseImage(Button triggerButton) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"));
+        return fileChooser.showOpenDialog(triggerButton.getScene().getWindow());
+    }
+
+    // 2. Logic to SAVE the file
+    public static String saveEquipmentImage(File file) {
+        if (file == null) return "media/equipments/placeholder-equipment.png";
+
+        try {
+            Path dir = Paths.get(EQUIPMENT_DIR);
+            if (!Files.exists(dir)) Files.createDirectories(dir);
+
+            String fileName = System.currentTimeMillis() + "_" + file.getName();
+            Path target = dir.resolve(fileName);
+
+            Files.copy(file.toPath(), target, StandardCopyOption.REPLACE_EXISTING);
+            return "media/images/equipmentImages/" + fileName;
+        } catch (IOException e) {
+            System.out.println("Failed to save file " + file.getName());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String saveImage(File sourceFile) {
 
         try {
 
-            File directory = new File(UPLOAD_EQUIPMENT);
+            File directory = new File(EQUIPMENT_DIR);
 
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -31,7 +53,7 @@ public class ImageManager {
 
             String uniqueFileName = System.currentTimeMillis() + "_" + sourceFile.getName();
 
-            Path targetPath = Paths.get(UPLOAD_EQUIPMENT + uniqueFileName);
+            Path targetPath = Paths.get(EQUIPMENT_DIR + uniqueFileName);
 
             Files.copy(
                     sourceFile.toPath(),
@@ -49,12 +71,6 @@ public class ImageManager {
         }
     }
 
-    /**
-     * Deletes an image from the inventory folder.
-     *
-     * @param imagePath database image path
-     * @return true if deleted successfully
-     */
     public static boolean deleteImage(String imagePath) {
 
         try {
