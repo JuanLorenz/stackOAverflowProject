@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox minWidth="512.0" style="-fx-padding: 30;" styleClass="root" stylesheets="@HistoryUserStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.history.HistoryUserController">
+<VBox minWidth="512.0" style="-fx-padding: 50;" styleClass="root" stylesheets="@HistoryUserStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.history.HistoryUserController">
    <children>
       <Label style="-fx-font-weight: bold; -fx-font-size: 30;" styleClass="labelHistory" text="History">
          <VBox.margin>
@@ -42,7 +42,6 @@
                            <children>
                            </children>
                        </VBox>
-
                    </children>
                </VBox>
            </content>

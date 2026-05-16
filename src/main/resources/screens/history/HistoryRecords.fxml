@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox minWidth="512.0" spacing="20" style="-fx-padding: 50;" stylesheets="@HistoryRecordsStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.history.HistoryRecordsController">
+
+    <Label style="-fx-font-size: 30; -fx-font-weight: bold;" text="Borrow Records" />
+
+    <HBox spacing="20">
+        <Button fx:id="btnActive" onAction="#handleShowActive" styleClass="toggle-button-left" text="Actively Borrowed" />
+        <Button fx:id="btnReturned" onAction="#handleShowReturned" styleClass="toggle-button-right" text="Returned" />
+    </HBox>
+
+    <Label fx:id="lblStatusHeader" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Actively Borrowed" />
+
+    <TextField fx:id="tfSearch" maxWidth="350" promptText="Search Borrower or Equipment" />
+
+    <ScrollPane fitToWidth="true" styleClass="transparent-scroll" VBox.vgrow="ALWAYS">
+        <VBox fx:id="tableWrapper" spacing="15" styleClass="table-container">
+            <children>
+                <HBox fx:id="tableHeader" alignment="CENTER" styleClass="header-box" />
+                <VBox fx:id="rowsContainer" spacing="12" />
+            </children>
+        </VBox>
+    </ScrollPane>
+</VBox>
