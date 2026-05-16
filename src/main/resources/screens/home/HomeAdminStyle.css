@@ -170,3 +170,31 @@
     -fx-background-color: transparent;
     -fx-pref-height: 0;
 }
+
+.list-cell {
+    -fx-padding: 6 10 10 10;
+}
+
+.admins-list-view .list-cell:selected {
+    -fx-opacity: 0.90;
+}
+
+.admins-list-view .list-cell:selected .label {
+    -fx-text-fill: black;
+}
+
+.admins-list-view .list-cell:selected {
+    -fx-background-color: transparent;
+}
+
+.admins-list-view .list-cell:selected .label {
+    -fx-text-fill: black;
+}
+
+.admins-list-view .list-cell:selected .button {
+    -fx-background-color: #ff4d4d;
+}
+
+.admins-list-view .list-cell:selected .button .label {
+    -fx-text-fill: white;
+}

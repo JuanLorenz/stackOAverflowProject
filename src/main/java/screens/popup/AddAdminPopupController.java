@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.*;
+import screens.home.HomeAdminController;
 import utilities.manager.SerializeManager;
 import utilities.service.RegisterService;
 
@@ -21,6 +22,11 @@ public class AddAdminPopupController {
     public TextField txtfldEmail;
     public Button btnAdd;
     public Label lblError;
+    private HomeAdminController homeController;
+
+    public void setHomeController(HomeAdminController homeController) {
+        this.homeController = homeController;
+    }
 
     public void handleAddAdmin(ActionEvent event) throws IOException {
         User currUser = SerializeManager.deserializeUser();
@@ -35,7 +41,7 @@ public class AddAdminPopupController {
 
                 registerService.register(txtfldName.getText(),txtfldEmail.getText(),txtfldPassword.getText(),"admin");
 
-                //handle listview changes here
+                homeController.loadAdmins();
 
                 handleClose(event);
             }else{
