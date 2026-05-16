@@ -1,58 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.BorrowEquipmentPopupController">
+<VBox fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="20.0" styleClass="popup-container" stylesheets="@BorrowEquipmentPopupStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.BorrowEquipmentPopupController">
+
+   <padding>
+      <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+   </padding>
+
    <children>
-      <VBox alignment="CENTER" layoutY="-4.0" prefHeight="408.0" prefWidth="600.0">
+      <!-- TOP BAR -->
+      <StackPane prefWidth="500.0">
          <children>
-            <Label prefHeight="47.0" prefWidth="228.0" text="Borrow Equipment">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <VBox alignment="CENTER" maxHeight="500.0" maxWidth="300.0" prefHeight="218.0" prefWidth="434.0">
-               <children>
-                  <TextField fx:id= "equipmentName" promptText="Equipment Name">
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="15.0" right="15.0" />
-                     </VBox.margin></TextField>
-                  <TextField fx:id="purpose" promptText="Research Title, Project Code, Event, etc.">
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="15.0" right="15.0" />
-                     </VBox.margin></TextField>
-                  <TextField fx:id="affiliation" promptText="Affiliations, Univeristy, etc.">
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="15.0" right="15.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="supervisor" promptText="Supervisor">
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="15.0" right="15.0" />
-                     </VBox.margin></TextField>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="back" onAction="#onBackButtonClicked" mnemonicParsing="false" prefWidth="79.0" text="Back">
-                           <HBox.margin>
-                              <Insets right="100.0" />
-                           </HBox.margin></Button>
-                        <Button fx:id="borrow" onAction="#onBorrowButtonClicked" mnemonicParsing="false" prefHeight="26.0" prefWidth="77.0" text="Borrow" />
-                     </children>
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="30.0" />
-               </VBox.margin></VBox>
+            <Button fx:id="btnBack" onAction="#handleBack" styleClass="back-button" text="←" StackPane.alignment="CENTER_LEFT" />
+            <Label fx:id="lblEquipmentName" styleClass="title-label" text="EquipmentName" />
          </children>
-         <padding>
-            <Insets bottom="10.0" />
-         </padding>
-      </VBox>
+      </StackPane>
+
+      <HBox alignment="CENTER" spacing="30.0">
+         <children>
+            <!-- Image Section -->
+            <StackPane styleClass="image-container">
+               <children>
+                  <ImageView fx:id="ivEquipmentImage" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+
+            <!-- Details Section -->
+            <VBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Label fx:id="lblModelNo" styleClass="info-label" text="Model no: xxxxx" />
+                  <Label fx:id="lblSerialNo" styleClass="info-label" text="Serial no: xxxxx" />
+                  <Label fx:id="lblCategory" styleClass="info-label" text="Category: PE" />
+                  <Label fx:id="lblCondition" styleClass="info-label" text="Condition: xxx" />
+                  <Label fx:id="lblAvailableQty" styleClass="info-label" text="Available Qty: n" />
+
+                  <StackPane alignment="BOTTOM_RIGHT">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                     <children>
+                        <Button fx:id="btnReserve" onAction="#handleReserve" prefHeight="40.0" prefWidth="120.0" styleClass="reserve-button" text="Reserve" />
+                     </children>
+                  </StackPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
-</Pane>
+</VBox>
