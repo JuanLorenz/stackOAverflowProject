@@ -6,13 +6,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import screens.settings.SettingsController; // Imported SettingsController
 import utilities.manager.SerializeManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -40,11 +43,32 @@ public class ApplicationShellController {
             //assert currentUser != null;
             userType = currentUser.getUserType();
 
+            // Populate the shell UI with the initial user data on load
+            updateProfileUI(currentUser);
+
             // Load initial view
             showHome();
         } catch (Exception e) {
             System.out.println("Failed to initialize shell.");
             e.printStackTrace();
+        }
+    }
+
+    // --- NEW: Dedicated method to refresh the UI when data changes ---
+    public void updateProfileUI(User user) {
+        if (user != null) {
+            labelUserName.setText(user.getName());
+
+            String photoPath = user.getProfilePhotoPath();
+            if (photoPath != null && !photoPath.equals("/images/placeholder.png") && !photoPath.isEmpty()) {
+                try {
+                    ivProfilePic.setImage(new Image(new File(photoPath).toURI().toString()));
+                } catch (Exception e) {
+                    System.out.println("Could not load user profile image.");
+                }
+            } else {
+                ivProfilePic.setImage(new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-equipment.png")).toExternalForm()));
+            }
         }
     }
 
@@ -85,9 +109,18 @@ public class ApplicationShellController {
         clickedButton.getStyleClass().add("menu-button-active");
     }
 
+    // --- MODIFIED: Used FXMLLoader instance to pass the shell reference ---
     private void loadView(String fxmlPath) {
         try {
-            Parent view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
+            Parent view = loader.load();
+
+            // Check if the loaded view is Settings, and if so, pass 'this'
+            Object controller = loader.getController();
+            if (controller instanceof SettingsController) {
+                ((SettingsController) controller).setAppShellController(this);
+            }
+
             contentArea.getChildren().setAll(view);
         } catch (IOException e) {
             System.out.println("Failed to load " + fxmlPath);

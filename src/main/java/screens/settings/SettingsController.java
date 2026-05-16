@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import screens.appshell.ApplicationShellController; // Imported AppShellController
 import utilities.database.UserDAO;
 import utilities.manager.ImageManager;
 import utilities.manager.SerializeManager;
@@ -20,7 +21,6 @@ import java.io.File;
 import java.util.Objects;
 
 public class SettingsController {
-
 
     public Label lblError;
 
@@ -44,6 +44,14 @@ public class SettingsController {
 
     private String profileImagePath;
 
+    // --- NEW: Reference to the parent shell ---
+    private ApplicationShellController appShellController;
+
+    // --- NEW: Setter for the app shell ---
+    public void setAppShellController(ApplicationShellController appShellController) {
+        this.appShellController = appShellController;
+    }
+
     @FXML
     private void onClickSaveChanges(ActionEvent actionEvent) {
 
@@ -62,12 +70,18 @@ public class SettingsController {
             if (!confirmPassword.equals(newPassword)) {
                 lblError.setText("Passwords don't match");
             }else{
-                    currUser.setName(name);
-                    currUser.setPassword(confirmPassword);
-                    currUser.setEmail(email);
-                    SerializeManager.serializeUser(currUser);
-                    lblError.setTextFill(Color.web("#90EE90"));
-                    lblError.setText("Change successful.");
+                currUser.setName(name);
+                currUser.setPassword(confirmPassword);
+                currUser.setEmail(email);
+                SerializeManager.serializeUser(currUser);
+
+                lblError.setTextFill(Color.web("#90EE90"));
+                lblError.setText("Change successful.");
+
+                // --- NEW: Update the shell immediately ---
+                if (appShellController != null) {
+                    appShellController.updateProfileUI(currUser);
+                }
             }
         }else{
             lblError.setText("Some fields are empty");
@@ -98,13 +112,15 @@ public class SettingsController {
                     new Image(selectedFile.toURI().toString())
             );
 
-
             currUser.setProfilePhotoPath(profileImagePath);
             SerializeManager.serializeUser(currUser);
 
             System.out.println("Saved image path: " + profileImagePath);
 
-
+            // --- NEW: Update the shell immediately ---
+            if (appShellController != null) {
+                appShellController.updateProfileUI(currUser);
+            }
         }
     }
 
@@ -127,5 +143,9 @@ public class SettingsController {
 
         imgProfile.setImage(new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-equipment.png")).toExternalForm()));
 
+        // --- NEW: Update the shell immediately ---
+        if (appShellController != null) {
+            appShellController.updateProfileUI(currUser);
+        }
     }
 }
