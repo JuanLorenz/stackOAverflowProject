@@ -65,9 +65,9 @@
         <Pane fx:id="paneOverlayShadow" onMouseClicked="#onMouseClickExitOverlay" opacity="0.4" style="-fx-background-color: black;" visible="false" />
 
         <!-- Add Equipment -->
-        <fx:include fx:id="paneAddEquipmentContainer" source="../popup/AddEquipmentPopup.fxml" visible="false" />
+        <fx:include fx:id="paneAddEquipmentContainer" source="../popup/AddEquipmentPopup.fxml" />
 
         <!-- Update Equipment -->
-        <fx:include fx:id="paneUpdateEquipmentContainer" source="../popup/UpdateEquipmentPopup.fxml" visible="false" />
+        <fx:include fx:id="paneUpdateEquipmentContainer" source="../popup/UpdateEquipmentPopup.fxml"/>
     </children>
 </StackPane>

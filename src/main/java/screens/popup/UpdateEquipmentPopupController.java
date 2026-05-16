@@ -94,14 +94,10 @@ public class UpdateEquipmentPopupController {
                 System.out.println("Failure in saving image");
             }
         }
-        int originalTotalQty = editedEquipment.getTotalQty();
-        int newTotalQty = Integer.parseInt(updateEquipmentTotalQty.getText());
-        int difference = newTotalQty - originalTotalQty;
-        int originalAvailQty = editedEquipment.getAvailableQty();
 
-        editedEquipment.setCondition((updateEquipmentCondition.getText().isEmpty())? editedEquipment.getCondition() : updateEquipmentCondition.getText());
-        editedEquipment.setTotalQty((newTotalQty == 0) ? originalTotalQty : newTotalQty);
-        editedEquipment.setAvailableQty(originalAvailQty + difference);
+        equipmentService.updateEquipment(editedEquipment.getEquipmentName(),
+                ((updateEquipmentCondition.getText().isEmpty())? editedEquipment.getCondition() : updateEquipmentCondition.getText()),
+                ((updateEquipmentTotalQty.getText().isEmpty()) ? editedEquipment.getTotalQty() : Integer.parseInt(updateEquipmentTotalQty.getText())));
 
         System.out.println("Successfully updated equipment");
     }
