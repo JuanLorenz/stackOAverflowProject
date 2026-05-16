@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane prefHeight="511.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.AddAdminPopupController">
+<StackPane prefHeight="500.0" prefWidth="500.0" maxHeight="500" maxWidth="500" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.AddAdminPopupController">
 
     <!-- Main Card -->
     <VBox alignment="CENTER" prefWidth="360.0" style="-fx-background-color: white;                  -fx-border-color: #e0e0e0;                  -fx-border-width: 1px;                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 24, 0, 0, 6);">

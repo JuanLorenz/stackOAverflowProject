@@ -1,7 +1,6 @@
 package screens.home;
 
 import data.User;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -9,9 +8,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
 import utilities.database.UserDAO;
 import utilities.manager.SceneManager;
 
@@ -19,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdminController {
-    @FXML private ListView<User> adminsListView;
-    @FXML private Label lblEmptyAdminList;
-    @FXML private TextField txtfldSearchField;
+    @FXML public ListView<User> adminsListView;
+    @FXML public Label lblEmptyAdminList;
+    @FXML public TextField txtfldSearchField;
 
     private List<User> allAdmins = new ArrayList<>();
     private final ObservableList<User> filteredAdmins = FXCollections.observableArrayList();
@@ -29,15 +27,14 @@ public class HomeAdminController {
 
     @FXML
     public void initialize() {
-        setupCellFactory();
-
-        // Listen for search typing
-        txtfldSearchField.textProperty().addListener((obs, old, newValue) -> handleSearch(newValue));
-
+        setupListView();
         loadAdmins();
+        adminsListView.setSelectionModel(new NoSelectionModel<>());
+        // Reactive search listener
+        txtfldSearchField.textProperty().addListener((obs, old, newValue) -> handleSearch(newValue));
     }
 
-    private void setupCellFactory() {
+    private void setupListView() {
         adminsListView.setCellFactory(param -> new ListCell<>() {
             private final HBox outer = new HBox(12);
             private final HBox card = new HBox();
@@ -45,17 +42,27 @@ public class HomeAdminController {
             private final Button btnDelete = new Button("Delete Admin");
 
             {
-                outer.setPadding(new Insets(5, 10, 5, 10));
+                // 1. The 'outer' container acts as the row.
+                // We add bottom padding here to create the 'GAP' between rows.
+                outer.setPadding(new Insets(0, 0, 15, 0)); // 15px gap below every row
                 outer.setAlignment(Pos.CENTER_LEFT);
 
                 card.setAlignment(Pos.CENTER_LEFT);
-                card.setPadding(new Insets(10, 16, 10, 16));
-                card.setStyle("-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);");
+                card.setPadding(new Insets(12, 20, 12, 20));
+                card.getStyleClass().add("admin-list-card");
+
+                // 2. The 'card' is what actually looks like the row (White background)
+                card.getStyleClass().add("admin-list-card");
                 HBox.setHgrow(card, Priority.ALWAYS);
                 card.getChildren().add(lblInfo);
 
-                btnDelete.setStyle("-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;");
+                btnDelete.getStyleClass().add("delete-admin-button");
+                btnDelete.setFocusTraversable(false);
+
                 outer.getChildren().addAll(card, btnDelete);
+
+                // 3. Make the actual cell background disappear completely
+                setStyle("-fx-background-color: transparent; -fx-padding: 0;");
             }
 
             @Override
@@ -64,7 +71,7 @@ public class HomeAdminController {
                 if (empty || user == null) {
                     setGraphic(null);
                 } else {
-                    lblInfo.setText(user.getName() + " (" + user.getEmail() + ")");
+                    lblInfo.setText(user.getName() + " - " + user.getEmail());
                     btnDelete.setOnAction(e -> handleDeleteAdmin(user.getId()));
                     setGraphic(outer);
                 }
@@ -73,32 +80,31 @@ public class HomeAdminController {
     }
 
     public void loadAdmins() {
-        Task<List<User>> task = new Task<>() {
+        Task<List<User>> fetchTask = new Task<>() {
             @Override protected List<User> call() { return userDAO.getAllAdmins(); }
         };
 
-        task.setOnSucceeded(e -> {
-            allAdmins = task.getValue();
+        fetchTask.setOnSucceeded(e -> {
+            allAdmins = fetchTask.getValue();
             filteredAdmins.setAll(allAdmins);
             adminsListView.setItems(filteredAdmins);
             lblEmptyAdminList.setVisible(allAdmins.isEmpty());
         });
 
-        new Thread(task).start();
-    }
-
-    @FXML
-    private void handleDeleteAdmin(int id) {
-        if (userDAO.removeUser(id)) {
-            loadAdmins();
-        }
+        new Thread(fetchTask).start();
     }
 
     @FXML
     public void handleAddAdmin() {
-        // We pass "this::loadAdmins" as data. 
-        // The SceneManager will inject this Runnable into the Popup Controller!
+        // Use the centralized SceneManager!
+        // We pass "this::loadAdmins" (a Runnable) as the data.
         SceneManager.showOverlay("/screens/popup/AddAdminPopup.fxml", (Runnable) this::loadAdmins);
+    }
+
+    private void handleDeleteAdmin(int id) {
+        if (userDAO.removeUser(id)) {
+            loadAdmins();
+        }
     }
 
     private void handleSearch(String query) {
@@ -111,5 +117,23 @@ public class HomeAdminController {
                     .toList());
         }
         lblEmptyAdminList.setVisible(filteredAdmins.isEmpty());
+    }
+
+    public static class NoSelectionModel<T> extends MultipleSelectionModel<T> {
+        @Override public ObservableList<Integer> getSelectedIndices() { return FXCollections.emptyObservableList(); }
+        @Override public ObservableList<T> getSelectedItems() { return FXCollections.emptyObservableList(); }
+        @Override public void selectIndices(int index, int... indices) {}
+        @Override public void selectAll() {}
+        @Override public void selectFirst() {}
+        @Override public void selectLast() {}
+        @Override public void clearAndSelect(int index) {}
+        @Override public void select(int index) {}
+        @Override public void select(T obj) {}
+        @Override public void clearSelection(int index) {}
+        @Override public void clearSelection() {}
+        @Override public boolean isSelected(int index) { return false; }
+        @Override public boolean isEmpty() { return true; }
+        @Override public void selectPrevious() {}
+        @Override public void selectNext() {}
     }
 }
