@@ -5,6 +5,7 @@ import utilities.database.EquipmentDAO;
 import data.equipment.EquipmentBuilder;
 
 import java.util.List;
+import java.util.Objects;
 
 public class EquipmentService {
     private final EquipmentDAO equipmentDAO = new EquipmentDAO();
@@ -13,17 +14,29 @@ public class EquipmentService {
         return equipmentDAO.findAll();
     }
 
-    public Boolean addNewEquipment(String name, String category, String modelNo, String serialNo, String condition, int totalQty, String imgPath) {
+    public String addNewEquipment(String name, String category, String modelNo, String serialNo, String condition, int totalQty, String imgPath) {
         Equipment e = EquipmentBuilder.start(category)
                 .setInfo(0, name, modelNo)                  // 0 id is placeholder
                 .setDetails(serialNo, condition, imgPath)
                 .setInventory(totalQty, totalQty)
                 .build();
 
-        if (equipmentDAO.save(e)) {
-            return true;
+        Equipment check = equipmentDAO.findByName(name);
+        if (check != null) {
+            return "Equipment already exists!";
         }
 
-        return false;
+        if (equipmentDAO.save(e)) {
+            return "Equipment added successfully!";
+        }
+
+        return "Cannot connect to database.";
+    }
+
+    public boolean updateEquipment(String name, String condition, int totalQty) {
+        Equipment e = equipmentDAO.findByName(name);
+
+        return equipmentDAO.updateCondition(e.getEquipmentID(), condition)
+                && equipmentDAO.updateQuantity(e.getEquipmentID(), totalQty, e.getAvailableQty());
     }
 }
