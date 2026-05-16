@@ -39,13 +39,13 @@ public class ImageManager {
                     StandardCopyOption.REPLACE_EXISTING
             );
 
-            return "/images/inventory/" + uniqueFileName;
+            return "media/profiles/" + uniqueFileName;
 
         } catch (IOException e) {
 
             e.printStackTrace();
 
-            return "/images/placeholder.png";
+            return "/media/profiles/placeholder-profile.png";
         }
     }
 

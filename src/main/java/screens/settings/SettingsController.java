@@ -62,13 +62,12 @@ public class SettingsController {
             if (!confirmPassword.equals(newPassword)) {
                 lblError.setText("Passwords don't match");
             }else{
-                UserDAO userDAO = new UserDAO();
-                if (userDAO.changeUserDetails(currUser.getEmail(),email,name,confirmPassword)){
+                    currUser.setName(name);
+                    currUser.setPassword(confirmPassword);
+                    currUser.setEmail(email);
+                    SerializeManager.serializeUser(currUser);
                     lblError.setTextFill(Color.web("#90EE90"));
                     lblError.setText("Change successful.");
-                }else{
-                    lblError.setText("Error: Change unsuccessful, contact admin");
-                }
             }
         }else{
             lblError.setText("Some fields are empty");
@@ -79,6 +78,8 @@ public class SettingsController {
 
         FileChooser fileChooser = new FileChooser();
 
+        User currUser = SerializeManager.deserializeUser();
+        assert currUser != null;
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter(
                         "Image Files",
@@ -97,9 +98,13 @@ public class SettingsController {
                     new Image(selectedFile.toURI().toString())
             );
 
+
+            currUser.setProfilePhotoPath(profileImagePath);
+            SerializeManager.serializeUser(currUser);
+
             System.out.println("Saved image path: " + profileImagePath);
 
-            //TODO: upload to database ang file path
+
         }
     }
 
@@ -107,17 +112,20 @@ public class SettingsController {
 
         imgProfile.setImage(null);
 
+        User currUser = SerializeManager.deserializeUser();
+        assert currUser != null;
+
         if (profileImagePath != null && !profileImagePath.equals("/images/placeholder.png")) {
 
             boolean deleted = ImageManager.deleteImage(profileImagePath);
 
             System.out.println("Image deleted: " + deleted);
-        }
 
-        profileImagePath = null;
+            currUser.setProfilePhotoPath(null);
+            SerializeManager.serializeUser(currUser);
+        }
 
         imgProfile.setImage(new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-equipment.png")).toExternalForm()));
 
-        // TODO: Update db probably if ma delete ang profile img
     }
 }

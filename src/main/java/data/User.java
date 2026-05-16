@@ -35,4 +35,20 @@ public class User implements Serializable {
     public String getProfilePhotoPath() { return profilePhotoPath; }
 
     public void setUserAccessStatus(boolean isBlocked) { this.isBlocked = isBlocked; }
+
+    public void setProfilePhotoPath(String profilePhotoPath) {
+        this.profilePhotoPath = profilePhotoPath;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
