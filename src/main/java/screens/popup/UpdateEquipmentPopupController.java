@@ -54,11 +54,11 @@ public class UpdateEquipmentPopupController {
         imagePath = equipment.getImagePath();
         editedEquipment = equipment;
 
-        labelEquipmentName.setText(equipment.getEquipmentName());
-        labelEquipmentModelNo.setText(equipment.getModelNo());
-        labelEquipmentSerialNo.setText(equipment.getSerialNo());
-        labelEquipmentCondition.setText(equipment.getCondition());
-        labelEquipmentAvailable.setText(equipment.getAvailableQty() + "/" + equipment.getTotalQty());
+        labelEquipmentName.setText(labelEquipmentName.getText() + equipment.getEquipmentName());
+        labelEquipmentModelNo.setText(labelEquipmentModelNo.getText() + equipment.getModelNo());
+        labelEquipmentSerialNo.setText(labelEquipmentSerialNo.getText() + equipment.getSerialNo());
+        labelEquipmentCondition.setText(labelEquipmentCondition.getText() + equipment.getCondition());
+        labelEquipmentAvailable.setText(labelEquipmentAvailable.getText() + equipment.getAvailableQty() + "/" + equipment.getTotalQty());
         EquipmentImage.setImage(new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm()));
     }
 
@@ -80,9 +80,13 @@ public class UpdateEquipmentPopupController {
         // A copy will only be created and saved in the system once the update is clicked
         if(selectedImage != null){
             try{
-                Files.copy(selectedImage.toPath(), Path.of(imagePath), StandardCopyOption.REPLACE_EXISTING);
 
-                Image image = new Image(imagePath);
+                Path toOverride = Path.of(imagePath).toAbsolutePath();
+                EquipmentImage.setImage(null);
+
+                Files.copy(selectedImage.toPath(), toOverride, StandardCopyOption.REPLACE_EXISTING);
+
+                Image image = new Image(toOverride.toUri().toString() + "?" + System.currentTimeMillis());
                 EquipmentImage.setImage(image);
 
                 System.out.println("Successfully overrode the past image in equipmentImage folder");
@@ -90,14 +94,10 @@ public class UpdateEquipmentPopupController {
                 System.out.println("Failure in saving image");
             }
         }
-        int originalTotalQty = editedEquipment.getTotalQty();
-        int newTotalQty = Integer.parseInt(updateEquipmentTotalQty.getText());
-        int difference = newTotalQty - originalTotalQty;
-        int originalAvailQty = editedEquipment.getAvailableQty();
 
-        editedEquipment.setCondition((updateEquipmentCondition.getText().isEmpty())? editedEquipment.getCondition() : updateEquipmentCondition.getText());
-        editedEquipment.setTotalQty((newTotalQty == 0) ? originalTotalQty : newTotalQty);
-        editedEquipment.setAvailableQty(originalAvailQty + difference);
+        equipmentService.updateEquipment(editedEquipment.getEquipmentName(),
+                ((updateEquipmentCondition.getText().isEmpty())? editedEquipment.getCondition() : updateEquipmentCondition.getText()),
+                ((updateEquipmentTotalQty.getText().isEmpty()) ? editedEquipment.getTotalQty() : Integer.parseInt(updateEquipmentTotalQty.getText())));
 
         System.out.println("Successfully updated equipment");
     }
