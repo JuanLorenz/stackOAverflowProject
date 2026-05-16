@@ -88,38 +88,9 @@ public class DashboardUserController {
     private void renderGrid() {
         equipmentGrid.getChildren().clear();
         for (Equipment item : filteredData) {
-            equipmentGrid.getChildren().add(createEquipmentCard(item));
+            VBox card = EquipmentCardFactory.createCard(item, this::openBorrowPopup);
+            equipmentGrid.getChildren().add(card);
         }
-    }
-
-    private VBox createEquipmentCard(Equipment item) {
-        VBox card = new VBox();
-        card.getStyleClass().add("equipment-card");
-
-        // Apply category-specific border color
-        String borderClass = "border-" + item.getCategory().toLowerCase().replace(" ", "");
-        card.getStyleClass().add(borderClass);
-
-        // Equipment Image (from database path)
-        ImageView iv = new ImageView();
-        try {
-            iv.setImage(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
-        } catch (Exception e) {
-            iv.setImage(new Image(getClass().getResource("/media/images/placeholder.png").toExternalForm()));
-        }
-        iv.setFitHeight(100);
-        iv.setFitWidth(100);
-        iv.setPreserveRatio(true);
-
-        Label nameLabel = new Label(item.getEquipmentName());
-        nameLabel.getStyleClass().add("card-label");
-
-        card.getChildren().addAll(iv, nameLabel);
-
-        // Click event to open popup
-        card.setOnMouseClicked(event -> openBorrowPopup(item));
-
-        return card;
     }
 
     private void updateCategoryUI(String category) {
