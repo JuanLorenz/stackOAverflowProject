@@ -16,7 +16,7 @@ public class BorrowEquipmentPopupController {
 
     @FXML private Label lblEquipmentName, lblModelNo, lblSerialNo, lblCategory, lblCondition, lblAvailableQty;
     @FXML private ImageView ivEquipmentImage;
-    @FXML private Button btnReserve, btnBack;
+    @FXML private Button btnBorrow, btnBack;
     private StackPane overlayPane;
 
     private Equipment selectedEquipment;
@@ -46,7 +46,7 @@ public class BorrowEquipmentPopupController {
         }
 
         // Fixed color as requested
-        btnReserve.setStyle("-fx-background-color: #FF4946 !important;");
+        btnBorrow.setStyle("-fx-background-color: #FF4946 !important;");
     }
 
     @FXML
@@ -55,7 +55,7 @@ public class BorrowEquipmentPopupController {
     }
 
     @FXML
-    private void handleReserve() {
+    private void handleBorrow() {
         if (selectedEquipment.getAvailableQty() <= 0) {
             showAlert("Out of Stock", "This item is currently unavailable.");
             return;

@@ -41,8 +41,8 @@
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-/* Fixed Reserve Button Color */
-.reserve-button {
+/* Fixed Borrow Button Color */
+.borrow-button {
     -fx-background-color: #FF4946;
     -fx-background-radius: 12;
     -fx-text-fill: white;
@@ -51,6 +51,6 @@
     -fx-cursor: hand;
 }
 
-.reserve-button:hover {
+.borrow-button:hover {
     -fx-opacity: 0.85;
 }

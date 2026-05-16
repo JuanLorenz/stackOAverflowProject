@@ -46,7 +46,7 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                      <children>
-                        <Button fx:id="btnReserve" onAction="#handleReserve" prefHeight="40.0" prefWidth="120.0" styleClass="reserve-button" text="Reserve" />
+                        <Button fx:id="btnBorrow" onAction="#handleBorrow" prefHeight="40.0" prefWidth="120.0" styleClass="borrow-button" text="Borrow" />
                      </children>
                   </StackPane>
                </children>
