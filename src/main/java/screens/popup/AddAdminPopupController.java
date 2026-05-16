@@ -2,61 +2,61 @@ package screens.popup;
 
 import data.User;
 import javafx.event.ActionEvent;
-import javafx.scene.*;
-import javafx.scene.control.Button;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.*;
-import screens.home.HomeAdminController;
+import utilities.manager.DataReceiver;
+import utilities.manager.SceneManager;
 import utilities.manager.SerializeManager;
 import utilities.service.RegisterService;
 
-import java.io.IOException;
+public class AddAdminPopupController implements DataReceiver<Runnable> {
 
-public class AddAdminPopupController {
+    @FXML private PasswordField txtfldPassword;
+    @FXML private TextField txtfldName, txtfldEmail;
+    @FXML private Label lblError;
 
+    private Runnable refreshCallback; // The "Job" to do after adding
+    private final RegisterService registerService = new RegisterService();
 
-    public PasswordField txtfldPassword;
-    public TextField txtfldName;
-    public TextField txtfldEmail;
-    public Button btnAdd;
-    public Label lblError;
-    private HomeAdminController homeController;
-
-    public void setHomeController(HomeAdminController homeController) {
-        this.homeController = homeController;
+    @Override
+    public void setData(Runnable callback) {
+        this.refreshCallback = callback;
     }
 
-    public void handleAddAdmin(ActionEvent event) throws IOException {
+    @FXML
+    public void handleAddAdmin(ActionEvent event) {
         User currUser = SerializeManager.deserializeUser();
-        assert currUser != null;
+        if (currUser == null) return;
 
         lblError.setText("");
 
-        if (!txtfldEmail.getText().isEmpty() && !txtfldName.getText().isEmpty() && !txtfldPassword.getText().isEmpty()){
-            if (!currUser.getEmail().equals(txtfldEmail.getText())){
-
-                RegisterService registerService = new RegisterService();
-
-                registerService.register(txtfldName.getText(),txtfldEmail.getText(),txtfldPassword.getText(),"admin");
-
-                homeController.loadAdmins();
-
-                handleClose(event);
-            }else{
-                lblError.setText("Email is already taken");
-            }
-        }else{
+        if (txtfldEmail.getText().isEmpty() || txtfldName.getText().isEmpty() || txtfldPassword.getText().isEmpty()) {
             lblError.setText("Some fields are empty");
+            return;
         }
 
+        if (currUser.getEmail().equals(txtfldEmail.getText())) {
+            lblError.setText("Email is already taken");
+            return;
+        }
 
+        // Register the user
+        int success = registerService.register(txtfldName.getText(), txtfldEmail.getText(), txtfldPassword.getText(), "admin");
+
+        if (success == 1) {
+            // Run the refresh logic in the Home screen
+            if (refreshCallback != null) refreshCallback.run();
+            // Close the global overlay
+            SceneManager.closeOverlay();
+        } else {
+            lblError.setText("Registration failed.");
+        }
     }
 
-    public void handleClose(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+    @FXML
+    public void handleClose() {
+        SceneManager.closeOverlay();
     }
 }

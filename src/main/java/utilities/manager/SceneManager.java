@@ -14,6 +14,13 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SceneManager {
+    private static StackPane globalOverlayContainer;
+    private static Pane globalShadow;
+
+    public static void setOverlayComponents(StackPane container, Pane shadow) {
+        globalOverlayContainer = container;
+        globalShadow = shadow;
+    }
 
     public static void switchScene(ActionEvent event, String fxmlPath) {
         try {
@@ -32,41 +39,34 @@ public class SceneManager {
         }
     }
 
-    public static void pauseScene(int millis) {
-        //low-priority, probably won't get implemented
-    }
-
-    /**
-     * Loads a popup FXML into an overlay container.
-     * @param container The StackPane that holds the popups (e.g., paneMainContainer)
-     * @param shadow The background dimming pane (e.g., paneOverlayShadow)
-     * @param fxmlPath Path to the popup FXML
-     * @param data The object to pass (e.g., the Equipment object)
-     */
-    public static <T> void showOverlay(StackPane container, Pane shadow, String fxmlPath, T data) {
+    public static <T> void showOverlay(String fxmlPath, T data) {
         try {
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxmlPath));
             Parent popupNode = loader.load();
 
-            // Check if the controller needs data
-            Object controller = loader.getController();
-            if (controller instanceof DataReceiver) {
-                ((DataReceiver<T>) controller).setData(data);
+            // Pass data if the popup implements DataReceiver (e.g., UpdatePopup)
+            // this is if the popup needs data to be displayed (e.g., EquipmentName)
+            if (data != null && loader.getController() instanceof DataReceiver) {
+                ((DataReceiver<T>) loader.getController()).setData(data);
             }
 
-            // Inject into UI
-            container.getChildren().setAll(popupNode);
-            container.setVisible(true);
-            shadow.setVisible(true);
-
+            globalOverlayContainer.getChildren().setAll(popupNode);
+            globalOverlayContainer.setVisible(true);
+            globalShadow.setVisible(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void closeOverlay(StackPane container, Pane shadow) {
-        container.setVisible(false);
-        shadow.setVisible(false);
-        container.getChildren().clear(); // Free up memory
+    public static void closeOverlay() {
+        if (globalOverlayContainer != null) {
+            globalOverlayContainer.setVisible(false);
+            globalShadow.setVisible(false);
+            globalOverlayContainer.getChildren().clear();
+        }
+    }
+
+    public static void pauseScene(int millis) {
+        //low-priority, probably won't get implemented
     }
 }

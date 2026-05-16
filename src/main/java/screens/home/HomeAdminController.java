@@ -1,192 +1,139 @@
-        package screens.home;
+package screens.home;
 
-        import data.User;
+import data.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import utilities.database.UserDAO;
+import utilities.manager.SceneManager;
 
-        import javafx.geometry.Insets;
-        import javafx.geometry.Pos;
+import java.util.ArrayList;
+import java.util.List;
 
-        import javafx.geometry.VPos;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.Label;
-        import javafx.scene.control.ListCell;
-        import javafx.scene.layout.*;
+public class HomeAdminController {
+    @FXML public ListView<User> adminsListView;
+    @FXML public Label lblEmptyAdminList;
+    @FXML public TextField txtfldSearchField;
 
-        import java.util.*;
+    private List<User> allAdmins = new ArrayList<>();
+    private final ObservableList<User> filteredAdmins = FXCollections.observableArrayList();
+    private final UserDAO userDAO = new UserDAO();
 
-        import javafx.collections.FXCollections;
-        import javafx.collections.ObservableList;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.scene.Parent;
-        import javafx.scene.control.ListView;
-        import javafx.scene.control.TextField;
-        import javafx.scene.image.ImageView;
-        import javafx.scene.input.KeyEvent;
-        import javafx.scene.input.MouseEvent;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Node;
-        import javafx.scene.Scene;
-        import javafx.scene.paint.Color;
-        import javafx.stage.Modality;
-        import javafx.stage.Stage;
-        import javafx.stage.StageStyle;
-        import screens.popup.AddAdminPopupController;
-        import utilities.database.UserDAO;
+    @FXML
+    public void initialize() {
+        setupListView();
+        loadAdmins();
+        adminsListView.setSelectionModel(new NoSelectionModel<>());
+        // Reactive search listener
+        txtfldSearchField.textProperty().addListener((obs, old, newValue) -> handleSearch(newValue));
+    }
 
-        import java.io.IOException;
-        import java.util.Objects;
+    private void setupListView() {
+        adminsListView.setCellFactory(param -> new ListCell<>() {
+            private final HBox outer = new HBox(12);
+            private final HBox card = new HBox();
+            private final Label lblInfo = new Label();
+            private final Button btnDelete = new Button("Delete Admin");
 
-        public class HomeAdminController {
-            public Button addAdminButton;
-            public ListView adminsListView;
-            public Label lblEmptyAdminList;
-            public TextField txtfldSearchField;
-            public ImageView btnMenu;
-            private List<User> allAdmins = new ArrayList<>();
-            private final ObservableList<User> filteredAdmins = FXCollections.observableArrayList();
+            {
+                // 1. The 'outer' container acts as the row.
+                // We add bottom padding here to create the 'GAP' between rows.
+                outer.setPadding(new Insets(0, 0, 15, 0)); // 15px gap below every row
+                outer.setAlignment(Pos.CENTER_LEFT);
 
-            @FXML
-            public void initialize() {
+                card.setAlignment(Pos.CENTER_LEFT);
+                card.setPadding(new Insets(12, 20, 12, 20));
+                card.getStyleClass().add("admin-list-card");
 
-                adminsListView.setCellFactory(param -> new ListCell<User>() {
+                // 2. The 'card' is what actually looks like the row (White background)
+                card.getStyleClass().add("admin-list-card");
+                HBox.setHgrow(card, Priority.ALWAYS);
+                card.getChildren().add(lblInfo);
 
-                    private final HBox outer = new HBox();
-                    private final HBox card = new HBox();
-                    private final Label lblInfo = new Label();
-                    private final Region spacer = new Region();
-                    private final Button btnDelete = new Button("Delete Admin");
+                btnDelete.getStyleClass().add("delete-admin-button");
+                btnDelete.setFocusTraversable(false);
 
-                    {
-                        outer.setPadding(new Insets(5, 10, 5, 10));
-                        outer.setSpacing(12);
-                        outer.setAlignment(Pos.CENTER_LEFT);
-                        outer.setStyle("-fx-background-color: transparent;");
-                        outer.setMaxWidth(Double.MAX_VALUE);
+                outer.getChildren().addAll(card, btnDelete);
 
-                        card.setAlignment(Pos.CENTER_LEFT);
-                        card.setPadding(new Insets(10, 16, 10, 16));
-                        card.setStyle("-fx-background-color: white; -fx-background-radius: 12;");
-                        HBox.setHgrow(card, Priority.ALWAYS); // card stretches, button stays fixed
-
-                        card.getChildren().add(lblInfo);
-
-                        btnDelete.setStyle(
-                                "-fx-background-color: #ff4d4d;" +
-                                        "-fx-text-fill: white;" +
-                                        "-fx-font-weight: bold;" +
-                                        "-fx-background-radius: 10;" +
-                                        "-fx-padding: 6 18 6 18;" +
-                                        "-fx-cursor: hand;"
-                        );
-
-                        outer.getChildren().addAll(card, btnDelete);
-                    }
-
-                    @Override
-                    protected void updateItem(User user, boolean empty) {
-                        super.updateItem(user, empty);
-
-                        if (empty || user == null) {
-                            setGraphic(null);
-                            setText(null);
-                            setStyle("-fx-background-color: transparent;");
-                            setPrefHeight(0);
-                            return;
-                        }
-
-                        lblInfo.setText(user.getName() + " - " + user.getEmail());
-                        btnDelete.setOnAction(event -> handleDeleteAdmin(user.getId()));
-
-                        setPrefHeight(60);
-                        setStyle("-fx-background-color: transparent; -fx-padding: 0;");
-                        setGraphic(outer);
-                    }
-                });
-
-                loadAdmins();
+                // 3. Make the actual cell background disappear completely
+                setStyle("-fx-background-color: transparent; -fx-padding: 0;");
             }
 
-            private void handleDeleteAdmin(int id) {
-                UserDAO userDAO = new UserDAO();
-                boolean success = userDAO.removeUser(id);
-
-                if (success) {
-                    loadAdmins();
+            @Override
+            protected void updateItem(User user, boolean empty) {
+                super.updateItem(user, empty);
+                if (empty || user == null) {
+                    setGraphic(null);
                 } else {
-                    System.out.println("Failed to delete user");
+                    lblInfo.setText(user.getName() + " - " + user.getEmail());
+                    btnDelete.setOnAction(e -> handleDeleteAdmin(user.getId()));
+                    setGraphic(outer);
                 }
             }
+        });
+    }
 
-            public void handleAddAdmin(ActionEvent event) {
-                try {
+    public void loadAdmins() {
+        Task<List<User>> fetchTask = new Task<>() {
+            @Override protected List<User> call() { return userDAO.getAllAdmins(); }
+        };
 
-                    FXMLLoader loader = new FXMLLoader(
-                            Objects.requireNonNull(
-                                    getClass().getResource("/screens/popup/AddAdminPopup.fxml")
-                            )
-                    );
+        fetchTask.setOnSucceeded(e -> {
+            allAdmins = fetchTask.getValue();
+            filteredAdmins.setAll(allAdmins);
+            adminsListView.setItems(filteredAdmins);
+            lblEmptyAdminList.setVisible(allAdmins.isEmpty());
+        });
 
-                    Parent root = loader.load();
+        new Thread(fetchTask).start();
+    }
 
-                    AddAdminPopupController popupController = loader.getController();
+    @FXML
+    public void handleAddAdmin() {
+        // Use the centralized SceneManager!
+        // We pass "this::loadAdmins" (a Runnable) as the data.
+        SceneManager.showOverlay("/screens/popup/AddAdminPopup.fxml", (Runnable) this::loadAdmins);
+    }
 
-                    popupController.setHomeController(this);
-
-                    Stage dialog = new Stage();
-                    dialog.initModality(Modality.APPLICATION_MODAL);
-                    dialog.initStyle(StageStyle.TRANSPARENT);
-                    dialog.setTitle("Add Admin");
-
-                    Scene scene = new Scene(root);
-                    scene.setFill(Color.TRANSPARENT);
-
-                    dialog.setScene(scene);
-
-                    Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    dialog.initOwner(owner);
-
-                    dialog.showAndWait();
-
-                    loadAdmins();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            public void handleSearch(KeyEvent keyEvent) {
-
-                String query = txtfldSearchField.getText().toLowerCase().trim();
-
-                if (query.isEmpty()) {
-                    filteredAdmins.setAll(allAdmins);
-                } else {
-                    filteredAdmins.setAll(
-                            allAdmins.stream()
-                                    .filter(user ->
-                                            user.getName().toLowerCase().contains(query) ||
-                                                    user.getEmail().toLowerCase().contains(query)
-                                    )
-                                    .toList()
-                    );
-                }
-
-                lblEmptyAdminList.setVisible(filteredAdmins.isEmpty());
-            }
-
-            public void handleMenu(MouseEvent mouseEvent) {
-            }
-
-            public void loadAdmins() {
-
-                UserDAO userDAO = new UserDAO();
-
-                allAdmins = userDAO.getAllAdmins();
-
-                filteredAdmins.setAll(allAdmins);
-
-                adminsListView.setItems(filteredAdmins);
-
-                lblEmptyAdminList.setVisible(allAdmins.isEmpty());
-            }
+    private void handleDeleteAdmin(int id) {
+        if (userDAO.removeUser(id)) {
+            loadAdmins();
         }
+    }
+
+    private void handleSearch(String query) {
+        if (query == null || query.isBlank()) {
+            filteredAdmins.setAll(allAdmins);
+        } else {
+            String lower = query.toLowerCase().trim();
+            filteredAdmins.setAll(allAdmins.stream()
+                    .filter(u -> u.getName().toLowerCase().contains(lower) || u.getEmail().toLowerCase().contains(lower))
+                    .toList());
+        }
+        lblEmptyAdminList.setVisible(filteredAdmins.isEmpty());
+    }
+
+    //this is to make the listview items unclickable
+    public static class NoSelectionModel<T> extends MultipleSelectionModel<T> {
+        @Override public ObservableList<Integer> getSelectedIndices() { return FXCollections.emptyObservableList(); }
+        @Override public ObservableList<T> getSelectedItems() { return FXCollections.emptyObservableList(); }
+        @Override public void selectIndices(int index, int... indices) {}
+        @Override public void selectAll() {}
+        @Override public void selectFirst() {}
+        @Override public void selectLast() {}
+        @Override public void clearAndSelect(int index) {}
+        @Override public void select(int index) {}
+        @Override public void select(T obj) {}
+        @Override public void clearSelection(int index) {}
+        @Override public void clearSelection() {}
+        @Override public boolean isSelected(int index) { return false; }
+        @Override public boolean isEmpty() { return true; }
+        @Override public void selectPrevious() {}
+        @Override public void selectNext() {}
+    }
+}

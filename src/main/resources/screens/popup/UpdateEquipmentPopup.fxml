@@ -40,11 +40,13 @@
                     <children>
                         <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                             <children>
-                                <ImageView fx:id="EquipmentImage" fitHeight="220.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                                    <VBox.margin>
-                                        <Insets bottom="10.0" top="15.0" />
-                                    </VBox.margin>
-                                </ImageView>
+                                <StackPane minWidth="200.0" prefWidth="200.0" alignment="CENTER">
+                                    <ImageView fx:id="EquipmentImage" fitHeight="220.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                        <VBox.margin>
+                                            <Insets bottom="10.0" top="15.0" />
+                                        </VBox.margin>
+                                    </ImageView>
+                                </StackPane>
                                 <HBox alignment="CENTER">
                                     <children>
                                         <!-- Added styleClass="popup-img-button" -->

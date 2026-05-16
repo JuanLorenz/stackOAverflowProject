@@ -3,31 +3,31 @@ package screens.popup;
 import data.equipment.Equipment;
 import data.User;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import utilities.manager.DataReceiver;
+import utilities.manager.ImageManager;
+import utilities.manager.SceneManager;
 import utilities.manager.SerializeManager;
 import utilities.service.TransactionService;
 
-public class BorrowEquipmentPopupController {
+public class BorrowEquipmentPopupController implements DataReceiver<Equipment> {
 
     @FXML private Label lblEquipmentName, lblModelNo, lblSerialNo, lblCategory, lblCondition, lblAvailableQty;
     @FXML private ImageView ivEquipmentImage;
     @FXML private Button btnBorrow, btnBack;
-    private StackPane overlayPane;
 
     private Equipment selectedEquipment;
     private final TransactionService transactionService = new TransactionService();
     private final User currentUser = SerializeManager.deserializeUser();
 
-    public void setOverlayPane(StackPane pane) {
-        this.overlayPane = pane;
-    }
-
-    public void setEquipment(Equipment item) {
+    @Override
+    public void setData(Equipment item) {
         this.selectedEquipment = item;
 
         // Fill Labels
@@ -39,11 +39,7 @@ public class BorrowEquipmentPopupController {
         lblAvailableQty.setText("Available: " + item.getAvailableQty());
 
         // Set Image
-        try {
-            ivEquipmentImage.setImage(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
-        } catch (Exception e) {
-            ivEquipmentImage.setImage(new Image(getClass().getResource("/media/images/placeholder.png").toExternalForm()));
-        }
+        ivEquipmentImage.setImage(ImageManager.getSafeImage(item.getImagePath(), 250, 250));
 
         // Fixed color as requested
         btnBorrow.setStyle("-fx-background-color: #FF4946 !important;");
@@ -51,7 +47,7 @@ public class BorrowEquipmentPopupController {
 
     @FXML
     private void handleBack() {
-        closePopup();
+        SceneManager.closeOverlay();
     }
 
     @FXML
@@ -66,16 +62,9 @@ public class BorrowEquipmentPopupController {
 
         if (success) {
             showAlert("Success!", "Equipment reserved successfully.");
-            closePopup();
+            SceneManager.closeOverlay();
         } else {
             showAlert("Error", "Could not complete reservation.");
-        }
-    }
-
-    private void closePopup() {
-        if (overlayPane != null) {
-            overlayPane.setVisible(false);
-            overlayPane.getChildren().clear();
         }
     }
 
