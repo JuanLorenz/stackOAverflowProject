@@ -24,6 +24,7 @@ public class EquipmentCardFactory {
         Image lowres = ImageManager.getSafeImage(item.getImagePath(), WIDTH, HEIGHT);
         ImageView image = new ImageView(lowres);
         image.setFitWidth(WIDTH);
+        image.setFitHeight(HEIGHT);
         image.setPreserveRatio(true);
 
         // Text Handling

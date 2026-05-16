@@ -92,6 +92,7 @@ public class ImageManager {
             return loadFromResource(placeholder, width, height);
         }
 
+
         // Ensure path starts with / for getResource
         String formattedPath = path.startsWith("/") ? path : "/" + path;
         var resource = ImageManager.class.getResource(formattedPath);
