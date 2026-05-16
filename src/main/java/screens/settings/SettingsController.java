@@ -11,52 +11,76 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-import screens.appshell.ApplicationShellController; // Imported AppShellController
-import utilities.database.UserDAO;
+import screens.appshell.ApplicationShellController;
 import utilities.manager.ImageManager;
 import utilities.manager.SerializeManager;
 import utilities.service.AuthService;
 
 import java.io.File;
-import java.util.Objects;
 
 public class SettingsController {
 
     public Label lblError;
 
-    @FXML
-    private TextField txtfldName;
-
-    @FXML
-    private TextField txtfldEmail;
-
-    @FXML
-    private PasswordField txtfldNewPassword;
-
-    @FXML
-    private PasswordField txtfldConfirmPassword;
-
-    @FXML
-    private ImageView imgProfile;
-
-    @FXML
-    private Button btnSaveChanges;
+    @FXML private TextField txtfldName;
+    @FXML private TextField txtfldEmail;
+    @FXML private PasswordField txtfldNewPassword;
+    @FXML private PasswordField txtfldConfirmPassword;
+    @FXML private ImageView imgProfile;
+    @FXML private Button btnSaveChanges;
 
     private String profileImagePath;
 
-    // --- NEW: Reference to the parent shell ---
     private ApplicationShellController appShellController;
 
-    // --- NEW: Setter for the app shell ---
     public void setAppShellController(ApplicationShellController appShellController) {
         this.appShellController = appShellController;
     }
 
+    // --- RECORRECTED: Initialize method to load current user data ---
+    @FXML
+    public void initialize() {
+        User currUser = SerializeManager.deserializeUser();
+
+        if (currUser != null) {
+            txtfldName.setText(currUser.getName());
+            txtfldEmail.setText(currUser.getEmail());
+
+            profileImagePath = currUser.getProfilePhotoPath();
+
+            if (profileImagePath != null && !profileImagePath.isEmpty() && !profileImagePath.contains("placeholder")) {
+                String cleanPath = profileImagePath.startsWith("/") ? profileImagePath : "/" + profileImagePath;
+                try {
+                    File imageFile = new File("src/main/resources" + cleanPath);
+                    if (imageFile.exists()) {
+                        imgProfile.setImage(new Image(imageFile.toURI().toString()));
+                    } else {
+                        var resource = getClass().getResource(cleanPath);
+                        if (resource != null) imgProfile.setImage(new Image(resource.toExternalForm()));
+                        else loadPlaceholderImage();
+                    }
+                } catch (Exception e) {
+                    loadPlaceholderImage();
+                }
+            } else {
+                loadPlaceholderImage();
+            }
+        }
+    }
+
+    private void loadPlaceholderImage() {
+        try {
+            String placeholderPath = "/" + ImageManager.TYPE_PROFILE + "placeholder-profile.png";
+            var res = getClass().getResource(placeholderPath);
+            if (res != null) imgProfile.setImage(new Image(res.toExternalForm()));
+        } catch (Exception e) {
+            System.out.println("Could not find placeholder in Settings.");
+        }
+    }
+
     @FXML
     private void onClickSaveChanges(ActionEvent actionEvent) {
-
         User currUser = SerializeManager.deserializeUser();
-        AuthService authServ = new AuthService();
 
         String name = txtfldName.getText();
         String email = txtfldEmail.getText();
@@ -69,7 +93,7 @@ public class SettingsController {
             assert currUser != null;
             if (!confirmPassword.equals(newPassword)) {
                 lblError.setText("Passwords don't match");
-            }else{
+            } else {
                 currUser.setName(name);
                 currUser.setPassword(confirmPassword);
                 currUser.setEmail(email);
@@ -78,46 +102,33 @@ public class SettingsController {
                 lblError.setTextFill(Color.web("#90EE90"));
                 lblError.setText("Change successful.");
 
-                // --- NEW: Update the shell immediately ---
                 if (appShellController != null) {
                     appShellController.updateProfileUI(currUser);
                 }
             }
-        }else{
+        } else {
             lblError.setText("Some fields are empty");
         }
     }
 
     public void onClickUploadNewProfile(ActionEvent actionEvent) {
+        // USING YOUR NEW CENTRALIZED FILE CHOOSER!
+        File selectedFile = ImageManager.chooseImage(btnSaveChanges);
 
-        FileChooser fileChooser = new FileChooser();
-
-        User currUser = SerializeManager.deserializeUser();
-        assert currUser != null;
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter(
-                        "Image Files",
-                        "*.png",
-                        "*.jpg",
-                        "*.jpeg"
-                )
-        );
-
-        File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
+            User currUser = SerializeManager.deserializeUser();
+            assert currUser != null;
 
-            profileImagePath = ImageManager.saveImage(selectedFile,"media/profiles/");
+            // USING YOUR CENTRALIZED UPDATE LOGIC!
+            profileImagePath = ImageManager.updateImage(currUser.getProfilePhotoPath(), selectedFile, ImageManager.TYPE_PROFILE);
 
-            imgProfile.setImage(
-                    new Image(selectedFile.toURI().toString())
-            );
+            imgProfile.setImage(new Image(selectedFile.toURI().toString()));
 
             currUser.setProfilePhotoPath(profileImagePath);
             SerializeManager.serializeUser(currUser);
 
             System.out.println("Saved image path: " + profileImagePath);
 
-            // --- NEW: Update the shell immediately ---
             if (appShellController != null) {
                 appShellController.updateProfileUI(currUser);
             }
@@ -125,25 +136,19 @@ public class SettingsController {
     }
 
     public void onClickDeleteProfile(ActionEvent actionEvent) {
-
-        imgProfile.setImage(null);
-
         User currUser = SerializeManager.deserializeUser();
         assert currUser != null;
 
-        if (profileImagePath != null && !profileImagePath.equals("/images/placeholder.png")) {
-
+        if (profileImagePath != null && !profileImagePath.contains("placeholder")) {
             boolean deleted = ImageManager.deleteImage(profileImagePath);
-
             System.out.println("Image deleted: " + deleted);
 
             currUser.setProfilePhotoPath(null);
             SerializeManager.serializeUser(currUser);
         }
 
-        imgProfile.setImage(new Image(Objects.requireNonNull(getClass().getResource("/images/placeholder-equipment.png")).toExternalForm()));
+        loadPlaceholderImage();
 
-        // --- NEW: Update the shell immediately ---
         if (appShellController != null) {
             appShellController.updateProfileUI(currUser);
         }

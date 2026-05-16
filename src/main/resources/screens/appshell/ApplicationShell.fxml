@@ -96,8 +96,7 @@
                     <!-- LOGOUT SECTION -->
                     <VBox alignment="BOTTOM_CENTER" prefHeight="100.0">
                         <children>
-                            <Button fx:id="btnLogout" maxWidth="180.0" prefHeight="45.0" styleClass="logout-button" text="Logout">
-                                <graphic>
+                            <Button fx:id="btnLogout" onAction="#onClickLogout" maxWidth="180.0" prefHeight="45.0" styleClass="logout-button" text="Logout">                                <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0"><Image url="@../../media/icons/icon-logout.png" /></ImageView>
                                 </graphic>
                             </Button>
