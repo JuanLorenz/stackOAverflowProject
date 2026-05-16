@@ -64,6 +64,22 @@ public abstract class Equipment {
         return totalQty;
     }
 
+    public void setEquipmentName(String equipmentName) {
+        this.equipmentName = equipmentName;
+    }
+
+    public void setModelNo(String modelNo) {
+        this.modelNo = modelNo;
+    }
+
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public int getAvailableQty() {
         return availableQty;
     }

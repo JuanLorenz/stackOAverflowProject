@@ -1,0 +1,99 @@
+/* 1. Global Background & Font */
+.root {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Segoe UI", "System", sans-serif;
+}
+
+/* 2. Toggle Buttons (Segmented Look) */
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20 8 20;
+    -fx-transition: 0.2s;
+}
+
+/* Left Button */
+.toggle-button-left {
+    -fx-background-radius: 15;
+    -fx-background-color: #bdc3c7; /* Gray (Inactive) */
+    -fx-text-fill: white;
+}
+
+/* Right Button */
+.toggle-button-right {
+    -fx-background-radius: 15;
+    -fx-background-color: #bdc3c7; /* Gray (Inactive) */
+    -fx-text-fill: white;
+}
+
+/* The "Active" state for the buttons */
+.button-active {
+    -fx-background-color: #3498db; /* Blue (Active) */
+}
+
+.button:hover {
+    -fx-opacity: 0.9;
+}
+
+/* 3. Search Field (Pill Shape) */
+.text-field {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #cccccc;
+    -fx-background-color: transparent;
+    -fx-padding: 8 15 8 15;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+    -fx-background-color: white;
+}
+
+/* 4. The Gradient Table Container */
+.table-container {
+    /* Multi-stop gradient: Blue -> Cyan -> Green */
+    -fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
+    -fx-background-radius: 30;
+    -fx-padding: 25;
+}
+
+/* 5. ScrollPane Transparency (Crucial) */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Custom Scrollbar Styling */
+.scroll-pane .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+    -fx-background-radius: 5;
+}
+
+/* 6. The Header & Row Boxes */
+.header-box {
+    -fx-background-color: rgba(255, 255, 255, 1); /* Semi-transparent white */
+    -fx-background-radius: 15;
+    -fx-padding: 15;
+}
+
+.header-box .label {
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.history-row {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 8, 0, 0, 2);
+}
+
+.history-row .label {
+    -fx-text-fill: #444444;
+    -fx-font-weight: 500;
+}

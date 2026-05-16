@@ -84,7 +84,7 @@ public class AddEquipmentPopupController {
             }
         }
 
-        if(equipmentService.addNewEquipment(equipmentName.getText(), equipmentCategory.getText(),
+        if (equipmentService.addNewEquipment(equipmentName.getText(), equipmentCategory.getText(),
                 equipmentModelNo.getText(), equipmentSerialNo.getText(), equipmentCondition.getText(),
                 Integer.parseInt(equipmentTotalQty.getText()), imagePath)){
             System.out.println("Successfully added a new equipment");

@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import utilities.manager.SerializeManager;
 import utilities.service.TransactionService;
 
-public class HistoryUserController {
+public class HistoryRecordsController {
     public ComboBox<String> cbCategory;
     public TextField tfSearchEquipment;
     public VBox tableWrapper;

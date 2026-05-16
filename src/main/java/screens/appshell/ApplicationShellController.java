@@ -117,7 +117,7 @@ public class ApplicationShellController {
     }
 
     @FXML public void showRecords() {
-        loadView("/screens/history/HistoryUser.fxml");
+        loadView("/screens/history/HistoryRecords.fxml");
         setActiveButton(btnRecords);
     }
 }
