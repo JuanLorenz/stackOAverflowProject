@@ -10,12 +10,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import screens.dashboard.DashboardAdminController;
+import utilities.manager.SceneManager;
+import utilities.service.EquipmentService;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Objects;
 
 public class UpdateEquipmentPopupController {
@@ -33,6 +37,18 @@ public class UpdateEquipmentPopupController {
     private String imagePath;
     private File selectedImage;
     private Equipment editedEquipment;
+    private final EquipmentService equipmentService = new EquipmentService();
+    private DashboardAdminController mainController;
+
+    public void initialize(){
+        updateEquipmentCondition.setText("");
+        updateEquipmentTotalQty.setText("");
+        EquipmentImage.setImage(null);
+    }
+
+    public void setMaincontroller(DashboardAdminController dac){
+        mainController = dac;
+    }
 
     public void display(Equipment equipment){
         imagePath = equipment.getImagePath();
@@ -61,6 +77,7 @@ public class UpdateEquipmentPopupController {
     }
 
     public void onUpdateClicked(ActionEvent actionEvent) {
+        // A copy will only be created and saved in the system once the update is clicked
         if(selectedImage != null){
             try{
                 Files.copy(selectedImage.toPath(), Path.of(imagePath), StandardCopyOption.REPLACE_EXISTING);
@@ -83,5 +100,9 @@ public class UpdateEquipmentPopupController {
         editedEquipment.setAvailableQty(originalAvailQty + difference);
 
         System.out.println("Successfully updated equipment");
+    }
+
+    public void onXClicked(ActionEvent actionEvent) {
+        mainController.popUpScreenExit();
     }
 }

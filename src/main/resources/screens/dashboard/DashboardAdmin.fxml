@@ -52,9 +52,6 @@
                 <ScrollPane fx:id="scrollpaneEquipment" fitToWidth="true" styleClass="content-scrollpane" VBox.vgrow="ALWAYS">
                     <content>
                         <TilePane fx:id="equipmentContainer" hgap="25.0" maxWidth="1.7976931348623157E308" vgap="25.0">
-<!--                            <padding>-->
-<!--                                <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />-->
-<!--                            </padding>-->
                         </TilePane>
                     </content>
                  <VBox.margin>

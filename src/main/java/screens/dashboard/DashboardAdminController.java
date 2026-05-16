@@ -28,24 +28,13 @@ public class DashboardAdminController {
 
     @FXML public Pane paneOverlayShadow;
     @FXML public Pane paneAddEquipmentContainer;
-    @FXML public AddEquipmentPopupController paneAddEquipmentController;
-
+    @FXML public AddEquipmentPopupController paneAddEquipmentContainerController;
     @FXML public Pane paneUpdateEquipmentContainer;
     @FXML public UpdateEquipmentPopupController paneUpdateEquipmentContainerController;
 
     @FXML public Button buttonAddEquipment;
     @FXML public TilePane equipmentContainer;
     @FXML public TextField textfieldSearchEquipment;
-    @FXML private TextField equipmentName;
-    @FXML private TextField equipmentCategory;
-    @FXML private TextField equipmentModelNo;
-    @FXML private TextField equipmentSerialNo;
-    @FXML private TextField equipmentCondition;
-    @FXML private TextField equipmentTotalQty;
-    @FXML private ImageView equipmentImage;
-    @FXML private Button uploadImage;
-    @FXML private Button back;
-    @FXML private Button add;
 
     private String imagePath;
     private ObservableList<Equipment> items = FXCollections.observableArrayList();
@@ -53,6 +42,13 @@ public class DashboardAdminController {
     private final EquipmentService equipmentService = new EquipmentService();
 
     public void initialize(){
+        if(paneAddEquipmentContainerController != null){
+            paneAddEquipmentContainerController.setMaincontroller(this);
+        }
+        if(paneUpdateEquipmentContainerController != null){
+            paneUpdateEquipmentContainerController.setMaincontroller(this);
+        }
+
         items.addAll(equipmentService.getAllEquipment());
         filteredList = new FilteredList<>(items, p -> true);
 
@@ -113,6 +109,7 @@ public class DashboardAdminController {
     }
 
     public void onAddEquipmentClicked(ActionEvent actionEvent) {
+        paneAddEquipmentContainerController.initialize();
         paneOverlayShadow.setVisible(true);
         paneAddEquipmentContainer.setVisible(true);
     }
@@ -138,4 +135,9 @@ public class DashboardAdminController {
         paneUpdateEquipmentContainer.setVisible(false);
     }
 
+    public void popUpScreenExit(){
+        paneOverlayShadow.setVisible(false);
+        paneAddEquipmentContainer.setVisible(false);
+        paneUpdateEquipmentContainer.setVisible(false);
+    }
 }

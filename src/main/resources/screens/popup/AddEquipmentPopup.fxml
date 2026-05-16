@@ -10,15 +10,22 @@
     <children>
         <VBox alignment="CENTER" layoutX="25.0" layoutY="10.0" prefWidth="600.0" style="-fx-background-color: white;">
             <children>
-                <!-- HEADER -->
-                <Label text="Add Equipment">
-                    <font>
-                        <Font name="System Bold" size="24.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets top="30.0" />
-                    </VBox.margin>
-                </Label>
+            <HBox alignment="CENTER">
+               <children>
+                  <HBox HBox.hgrow="ALWAYS" />
+                      <!-- HEADER -->
+                      <Label alignment="CENTER" text="Add Equipment">
+                          <font>
+                              <Font name="System Bold" size="24.0" />
+                          </font>
+                      </Label>
+                  <HBox HBox.hgrow="ALWAYS" />
+                  <Button fx:id="buttonX" mnemonicParsing="false" onAction="#onXClicked" text="X" />
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" right="15.0" top="30.0" />
+               </VBox.margin>
+            </HBox>
 
                 <!-- FORM BODY -->
                 <HBox prefHeight="300.0" prefWidth="600.0">

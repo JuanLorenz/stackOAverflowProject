@@ -1,51 +1,99 @@
-.gradient-container {
-    -fx-background-color: linear-gradient(to bottom right, #3ca4ff, #42e6a4);
+/* Import Google Fonts directly into the stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* --- MAIN CONTROLLER BACKGROUND --- */
+.root {
+    -fx-background-color: #FFFFFF;
+}
+
+/* --- TOP HEADER TEXT --- */
+.label {
+    -fx-font-family: 'Montserrat', sans-serif;
+    -fx-text-fill: #1E1E1E;
+}
+
+/* --- SEARCH INPUT BAR --- */
+.text-field {
+    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-radius: 20px;
     -fx-background-radius: 20px;
-    -fx-padding: 15px;
+    -fx-padding: 8px 15px 8px 15px;
+    -fx-text-fill: #666666;
 }
 
-.custom-table {
-    -fx-background-color: transparent;
-    -fx-table-cell-border-color: transparent;
-    -fx-border-color: transparent;
+.text-field:focused {
+    -fx-border-color: #26BDFC; /* Highlights matching the EquipLink Blue */
 }
 
-.custom-table .column-header-background {
-    -fx-max-height: 0;
-    -fx-pref-height: 0;
-    -fx-min-height: 0;
-    -fx-opacity: 0;
-}
-
-/*.custom-table:focused {*/
-/*    -fx-background-color: transparent;*/
-/*}*/
-
-.custom-table .scroll-bar:horizontal,
-.custom-table .scroll-bar:vertical {
-    -fx-opacity: 0;
-}
-
-.custom-table .table-row-cell {
-    -fx-background-color: transparent;
-    -fx-cell-size: 45px;
-}
-
-.custom-table .table-row-cell:filled {
-    -fx-background-color: white;
-    -fx-background-radius: 20px;
-    -fx-background-insets: 6 0 6 0;
-}
-
-.custom-table .table-cell {
-    -fx-text-fill: #333333;
-    -fx-font-size: 14px;
+/* --- "+ ADD EQUIPMENT" BUTTON --- */
+.button {
+    -fx-font-family: 'Montserrat', sans-serif;
     -fx-font-weight: bold;
-    -fx-alignment: center-left;
-    -fx-padding: 0 15 0 15;
+    -fx-font-size: 13px;
+    -fx-background-color: #26BDFC;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 20px 10px 20px;
+    -fx-cursor: hand;
 }
 
-.custom-table .table-row-cell:filled:hover {
-    -fx-background-color: #f4f4f4;
+.button:hover {
+    -fx-background-color: #1A9ECF; /* Subtle shade change on mouse hover */
 }
 
+/* --- SCROLLPANE CLEANUP --- */
+/* Completely strips the default gray boxing from image_47da73.png */
+.content-scrollpane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.content-scrollpane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Clean, modern styling for the scrollbar element */
+.content-scrollpane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.content-scrollpane .scroll-bar:vertical .thumb {
+    -fx-background-color: #DDDDDD;
+    -fx-background-radius: 4px;
+}
+
+/* --- EQUIPMENT DISPLAY CARDS --- */
+.equipment-card {
+    /* Resets default button styling */
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #1E1E1E;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+
+    /* Subtle modern UI drop shadow */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 5);
+    -fx-padding: 20px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.equipment-card:hover {
+    /* Scale effect on hover to match a modern interface feel */
+    -fx-effect: dropshadow(three-pass-box, rgba(38, 189, 252, 0.3), 20, 0, 0, 8);
+    -fx-border-color: #26BDFC;
+}
+
+/* Text styles inside the equipment cards */
+.equipment-card-label {
+    -fx-font-family: 'Open Sans', sans-serif;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
