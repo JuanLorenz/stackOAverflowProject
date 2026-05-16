@@ -12,11 +12,12 @@ public class Transaction {
     private LocalDate dueDate;
     private LocalDate dateReturned;
 
-    public Transaction(int transactionID, User user, Equipment equipment, LocalDate dateBorrowed) {
+    public Transaction(int transactionID, User user, Equipment equipment, LocalDate dateBorrowed, LocalDate dateReturned) {
         this.transactionID = transactionID;
         this.user = user;
         this.equipment = equipment;
         this.dateBorrowed = dateBorrowed;
+        this.dateReturned = dateReturned;
         //REMOVED INIT FOR dateReturned SINCE IT DOESN'T MAKE SENSE
         dueDate = dateBorrowed.plusDays(30);
     }
@@ -55,6 +56,10 @@ public class Transaction {
 
     public LocalDate getDateReturned() {
         return dateReturned;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
     public void setDateReturned(LocalDate dateReturned) {
