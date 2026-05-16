@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2026 at 05:51 PM
+-- Generation Time: May 16, 2026 at 04:25 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `oop2-capstone`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blockedusers`
+--
+
+CREATE TABLE `blockedusers` (
+  `blockedUsersID` int(11) NOT NULL,
+  `userID` int(11) DEFAULT NULL,
+  `blockedUntil` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -110,19 +122,28 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `userType` varchar(255) DEFAULT NULL
+  `userType` varchar(255) DEFAULT NULL,
+  `isBlocked` tinyint(1) DEFAULT NULL,
+  `profilePhotoPath` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `userType`) VALUES
-(1, 'Admin', 'admin@cit.edu', '$2a$10$F8KENnm9mHA7gadGdm4lLOhPSiRBbAhbcc3lfRBnUyTbmDmJcwGpq', 'admin');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `userType`, `isBlocked`, `profilePhotoPath`) VALUES
+(1, 'Admin', 'admin@cit.edu', '$2a$10$F8KENnm9mHA7gadGdm4lLOhPSiRBbAhbcc3lfRBnUyTbmDmJcwGpq', 'admin', NULL, '');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `blockedusers`
+--
+ALTER TABLE `blockedusers`
+  ADD PRIMARY KEY (`blockedUsersID`),
+  ADD KEY `userID` (`userID`);
 
 --
 -- Indexes for table `equipment`
@@ -150,6 +171,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `blockedusers`
+--
+ALTER TABLE `blockedusers`
+  MODIFY `blockedUsersID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `equipment`
 --
 ALTER TABLE `equipment`
@@ -170,6 +197,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `blockedusers`
+--
+ALTER TABLE `blockedusers`
+  ADD CONSTRAINT `blockedusers_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `transaction`
