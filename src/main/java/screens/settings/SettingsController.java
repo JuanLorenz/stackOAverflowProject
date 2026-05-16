@@ -92,7 +92,7 @@ public class SettingsController {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
 
-            profileImagePath = ImageManager.saveImage(selectedFile);
+            profileImagePath = ImageManager.saveImage(selectedFile,"media/profiles/");
 
             imgProfile.setImage(
                     new Image(selectedFile.toURI().toString())
