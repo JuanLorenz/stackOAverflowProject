@@ -92,6 +92,16 @@ public class ImageManager {
             return loadFromResource(placeholder, width, height);
         }
 
+        try {
+            File file = new File(BASE_RES + path);
+            if (file.exists()) {
+                // Loading with 'true' for background loading to keep UI smooth
+                return new Image(file.toURI().toString(), width, height, true, true, true);
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading file from disk: " + path);
+        }
+
         // Ensure path starts with / for getResource
         String formattedPath = path.startsWith("/") ? path : "/" + path;
         var resource = ImageManager.class.getResource(formattedPath);

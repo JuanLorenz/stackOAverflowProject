@@ -89,13 +89,13 @@ public class SettingsController {
 
         lblError.setTextFill(Color.web("#ff0000"));
 
-        if (!name.isEmpty() && !email.isEmpty() && !newPassword.isEmpty() && !confirmPassword.isEmpty()){
+        if (!name.isEmpty() && !email.isEmpty()){
             assert currUser != null;
             if (!confirmPassword.equals(newPassword)) {
                 lblError.setText("Passwords don't match");
             } else {
                 currUser.setName(name);
-                currUser.setPassword(confirmPassword);
+                if(!newPassword.isEmpty()) currUser.setPassword(confirmPassword);
                 currUser.setEmail(email);
                 SerializeManager.serializeUser(currUser);
 
@@ -121,17 +121,12 @@ public class SettingsController {
 
             // USING YOUR CENTRALIZED UPDATE LOGIC!
             profileImagePath = ImageManager.updateImage(currUser.getProfilePhotoPath(), selectedFile, ImageManager.TYPE_PROFILE);
-
             imgProfile.setImage(new Image(selectedFile.toURI().toString()));
 
             currUser.setProfilePhotoPath(profileImagePath);
             SerializeManager.serializeUser(currUser);
 
             System.out.println("Saved image path: " + profileImagePath);
-
-            if (appShellController != null) {
-                appShellController.updateProfileUI(currUser);
-            }
         }
     }
 
