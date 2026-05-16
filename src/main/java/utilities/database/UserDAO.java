@@ -2,6 +2,7 @@ package utilities.database;
 
 import data.User;
 import org.mindrot.jbcrypt.BCrypt;
+import utilities.manager.SerializeManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +19,8 @@ public class UserDAO implements ContractDAO<User> {
     private final String INSERT_USER = "INSERT INTO users (name, email, password, userType, isBlocked, profilePhotoPath) VALUES (?, ?, ?, ?, ?, ?)";
     private final String CHANGE_USER_DETAILS = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?";
     private final String CHANGE_USER_PROFILE = "UPDATE users SET profilePhotoPath = ? WHERE id =?";
+    private final String DELETE_USER = "DELETE FROM users WHERE id = ?";
+    private final String RETRIEVE_ALL_OF_TYPE = "SELECT * FROM users WHERE userType = ?";
 
     /**
      * Finds the user in the database given an ID.
@@ -48,7 +51,7 @@ public class UserDAO implements ContractDAO<User> {
              PreparedStatement statement = c.prepareStatement(FIND_ALL)) {
 
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 users.add(mapUser(rs));
             }
 
@@ -148,6 +151,67 @@ public class UserDAO implements ContractDAO<User> {
 
             statement.setString(1, profileImagePath);
             statement.setInt(2, id);
+
+            int rowsUpdated = statement.executeUpdate();
+
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+
+            System.err.println(
+                    "Database connection or query failed: " + e.getMessage()
+            );
+        }
+        return false;
+    }
+
+    public List<User> getAllAdmins() {
+        System.out.println("getAllAdmins method called");
+
+        User currUser = SerializeManager.deserializeUser();
+
+        List<User> admins = new ArrayList<>();
+        try (
+                Connection c = ConnectionSQL.getConnection();
+                PreparedStatement statement = c.prepareStatement(RETRIEVE_ALL_OF_TYPE)
+        ) {
+
+            statement.setString(1, "admin");
+
+            System.out.println("Filtering by userType = admin");
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("Row found");
+                User user = new User(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("userType"),
+                        rs.getBoolean("isBlocked"),
+                        rs.getString("profilePhotoPath"));
+                if (!user.equals(currUser)){
+                    admins.add(user);
+                }
+            }
+
+            System.out.println("Admins successfully got");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return admins;
+    }
+
+    public boolean removeUser(int id){
+        try (
+                Connection c = ConnectionSQL.getConnection();
+                PreparedStatement statement = c.prepareStatement(DELETE_USER)
+        ) {
+
+            statement.setInt(1, id);
 
             int rowsUpdated = statement.executeUpdate();
 

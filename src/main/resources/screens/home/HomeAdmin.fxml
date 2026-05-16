@@ -17,7 +17,7 @@
                 <Insets left="20.0" top="26.0" />
             </HBox.margin>
         </ImageView>
-        <VBox spacing="12.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #ffffff; -fx-padding: 24 32 28 32;">
+        <VBox spacing="12.0" style="-fx-background-color: #ffffff; -fx-padding: 24 32 28 32;" HBox.hgrow="ALWAYS">
 
             <stylesheets>
                 <URL value="@HomeAdminStyle.css" />
@@ -40,9 +40,15 @@
                 <Button fx:id="addAdminButton" onAction="#handleAddAdmin" style="-fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9); -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 50px; -fx-padding: 10 24 10 24; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.35), 8, 0, 0, 3);" styleClass="add-admin-button" text="+ Add Admin" />
             </HBox>
 
-            <StackPane VBox.vgrow="ALWAYS" maxWidth="Infinity" maxHeight="Infinity" style="-fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9); -fx-background-radius: 20px; -fx-padding: 14; -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.25), 16, 0, 0, 4);" styleClass="gradient-card">
+            <StackPane maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9); -fx-background-radius: 20px; -fx-padding: 14; -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.25), 16, 0, 0, 4);" styleClass="gradient-card" VBox.vgrow="ALWAYS">
 
-                <ListView fx:id="adminsListView" maxWidth="Infinity" maxHeight="Infinity" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-padding: 0; -fx-border-color: transparent; -fx-focus-color: transparent;-fx-faint-focus-color: transparent;" styleClass="admins-list-view" />
+                <ListView fx:id="adminsListView" maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-background-insets: 0; -fx-padding: 0; -fx-border-color: transparent; -fx-focus-color: transparent;-fx-faint-focus-color: transparent;" styleClass="admins-list-view">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></ListView>
 
                 <Label fx:id="lblEmptyAdminList" style="-fx-font-family: 'Arial Black'; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white;" styleClass="empty-label" text="No other Admins for now..." />
 
