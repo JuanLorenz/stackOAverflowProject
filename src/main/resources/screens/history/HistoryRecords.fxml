@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox minWidth="512.0" style="-fx-padding: 50;" styleClass="root" stylesheets="@HistoryUserStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.history.HistoryRecordsController">
+<VBox minWidth="1024.0" style="-fx-padding: 50;" styleClass="root" stylesheets="@HistoryUserStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.history.HistoryRecordsController">
    <children>
       <Label style="-fx-font-weight: bold; -fx-font-size: 30;" styleClass="labelHistory" text="History">
          <VBox.margin>
@@ -28,9 +28,9 @@
       </GridPane>
        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
            <content>
-               <VBox fx:id="tableWrapper" styleClass="table-container" spacing="15">
+               <VBox fx:id="tableWrapper" spacing="15" styleClass="table-container">
                    <children>
-                       <HBox fx:id="tableHeader" styleClass="header-box" alignment="CENTER">
+                       <HBox fx:id="tableHeader" alignment="CENTER" styleClass="header-box">
                            <children>
                                <Label alignment="CENTER" maxWidth="Infinity" styleClass="header-label" text="Borrow Date" HBox.hgrow="ALWAYS" />
                                <Label alignment="CENTER" maxWidth="Infinity" styleClass="header-label" text="Equipment Name" HBox.hgrow="ALWAYS" />

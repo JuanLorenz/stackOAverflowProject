@@ -129,7 +129,7 @@ public class DashboardUserController {
     }
 
     private void setupCategoryMapping() {
-        // Colors from your 2nd picture
+        // Colors
         categoryColors.put("Engineering", "#B0825F");
         categoryColors.put("Chemistry", "#FFB347");
         categoryColors.put("Physical Education", "#FF6B6B");
@@ -139,7 +139,7 @@ public class DashboardUserController {
         categoryColors.put("Architecture", "#5DADE2");
         categoryColors.put("Agriculture", "#82E0AA");
 
-        // Icons from your 3rd picture
+        // Icons
         categoryIcons.put("Engineering", "icon-engineering.png");
         categoryIcons.put("Chemistry", "icon-chemistry.png");
         categoryIcons.put("Physical Education", "icon-physical-education.png");

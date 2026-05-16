@@ -42,7 +42,7 @@ public class BorrowEquipmentPopupController {
         try {
             ivEquipmentImage.setImage(new Image(getClass().getResource(item.getImagePath()).toExternalForm()));
         } catch (Exception e) {
-            ivEquipmentImage.setImage(new Image(getClass().getResource("/media/images/placeholder.png").toExternalForm()));
+            ivEquipmentImage.setImage(new Image(getClass().getResource("/media/equipments/placeholder-equipment.png").toExternalForm()));
         }
 
         // Fixed color as requested
