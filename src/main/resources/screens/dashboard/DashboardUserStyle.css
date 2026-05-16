@@ -1,93 +1,77 @@
-/* --- HEADER SECTION --- */
-.orange-header {
-    -fx-background-color: #FBB03B; /* Prototype Orange */
+.main-container {
+    -fx-background-color: white;
 }
 
 .dashboard-title {
-    -fx-font-size: 32px;
+    -fx-font-size: 28px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #2c3e50;
 }
 
-/* --- SEARCH BAR --- */
-.search-field {
+/* Search Bar Pill */
+.search-bar {
     -fx-background-radius: 25;
     -fx-border-radius: 25;
-    -fx-padding: 10 20;
-    -fx-border-color: #CCCCCC;
-    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-padding: 10 20 10 20;
+    -fx-font-size: 14px;
+    -fx-background-color: transparent;
 }
 
-/* --- EQUIPMENT GRID CARDS --- */
+/* Category Dropdown Pill */
+.category-container {
+    -fx-background-radius: 25;
+    -fx-pref-height: 45;
+    /* Default color (Teal) */
+    -fx-background-color: #45D8C9;
+}
+
+.category-combo {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.category-combo .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Remove default combo box arrow box background */
+.category-combo .arrow-button { -fx-background-color: transparent; }
+.category-combo .arrow { -fx-background-color: white; }
+
+/* ScrollPane Styling */
+.transparent-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+.transparent-scroll .viewport { -fx-background-color: transparent; }
+
+/* Equipment Card Base */
 .equipment-card {
     -fx-background-color: white;
-    -fx-background-radius: 25;
-    -fx-border-radius: 25;
-    -fx-border-color: #333333;
-    -fx-border-width: 1.5;
-    -fx-cursor: hand;
-}
-
-.equipment-card:hover {
-    -fx-background-color: #F9F9F9;
-    /* Adds a subtle "lifted" shadow effect on hover */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
-}
-
-/* --- SCROLLBAR AREA --- */
-.content-scrollpane {
-    -fx-background-color: transparent;
-}
-.content-scrollpane .viewport {
-    -fx-background-color: white;
-}
-
-/* --- POPUP / DETAIL MODAL --- */
-.detail-card {
-    -fx-background-color: white;
     -fx-background-radius: 30;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 20, 0, 0, 0);
+    -fx-min-width: 160;
+    -fx-min-height: 180;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+    /* Soft heavy shadow */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 15, 0, 0, 5);
 }
 
-/* NEW: Style for the Equipment Name inside the popup */
-.detail-header {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
+.card-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
     -fx-text-fill: #333333;
-    -fx-font-family: "Segoe UI Semibold", sans-serif;
 }
 
-/* NEW: Style for the technical details/specs text */
-.detail-body {
-    -fx-font-size: 14px;
-    -fx-text-fill: #555555;
-    -fx-font-family: "Segoe UI", sans-serif;
-    -fx-line-spacing: 5px; /* Adds space between lines of specs */
-}
-
-/* --- BUTTONS --- */
-.borrow-button {
-    -fx-background-color: #FF5F5F;
-    -fx-text-fill: white;
-    -fx-background-radius: 15;
-    -fx-font-weight: bold;
-    -fx-padding: 10 25;
-    -fx-cursor: hand;
-}
-/* ADDED: Feedback when hovering over Reserve */
-.borrow-button:hover {
-    -fx-background-color: #E55454;
-}
-
-.exit-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: #999;
-    -fx-font-size: 18;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-}
-/* ADDED: Make the X turn red when hovering */
-.exit-button:hover {
-    -fx-text-fill: #FF5F5F;
-}
+/* Category Border Colors */
+.border-engineering             { -fx-border-color: #B0825F; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-chemistry               { -fx-border-color: #FFB347; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-physicaleducation       { -fx-border-color: #FF6B6B; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-multimedia              { -fx-border-color: #9B7CC3; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-medicalsciences         { -fx-border-color: #48C9B0; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-informationtechnology   { -fx-border-color: #4461CC; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-architecture            { -fx-border-color: #5DADE2; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-agriculture             { -fx-border-color: #82E0AA; -fx-border-width: 3; -fx-border-radius: 30; }

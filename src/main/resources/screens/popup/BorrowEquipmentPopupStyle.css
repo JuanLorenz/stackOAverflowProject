@@ -1,0 +1,56 @@
+.popup-container {
+    -fx-background-color: white;
+    -fx-background-radius: 40;
+    -fx-border-radius: 40;
+    -fx-border-color: #333333;
+    -fx-border-width: 1;
+    /* Keeps the popup from stretching */
+    -fx-pref-width: 550px;
+}
+
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+/* Back Button Styling */
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 0 10 0 0;
+}
+
+.back-button:hover {
+    -fx-text-fill: #999999;
+}
+
+.image-container {
+    -fx-border-color: #333333;
+    -fx-border-radius: 25;
+    -fx-background-radius: 25;
+    -fx-padding: 10;
+}
+
+.info-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #444444;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Fixed Reserve Button Color */
+.reserve-button {
+    -fx-background-color: #FF4946;
+    -fx-background-radius: 12;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.reserve-button:hover {
+    -fx-opacity: 0.85;
+}
