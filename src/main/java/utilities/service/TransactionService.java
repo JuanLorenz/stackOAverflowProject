@@ -25,7 +25,8 @@ public class TransactionService {
                 0,              // temporary id
                 u,
                 e,
-                LocalDate.now()
+                LocalDate.now(),
+                null
         );
 
         // update availableQty
