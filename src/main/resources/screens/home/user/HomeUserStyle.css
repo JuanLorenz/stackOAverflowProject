@@ -1,8 +1,9 @@
 /* CONTAINERS & TABLES */
 .gradient-container {
-    -fx-background-color: linear-gradient(to bottom right, #33b5e5, #4cd137);
-    -fx-background-radius: 20px;
-    -fx-padding: 15px;
+    /* Multi-stop gradient: Blue -> Cyan -> Green */
+    -fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
+    -fx-background-radius: 30;
+    -fx-padding: 25;
 }
 
 .custom-table {

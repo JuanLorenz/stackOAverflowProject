@@ -32,24 +32,18 @@ public class ApplicationShellController {
     @FXML private Button btnRecords;
 
     private boolean isSidebarVisible = true;
-    private String initialView;
+    private String userType;
 
     public void initialize() {
         try {
             User currentUser = SerializeManager.deserializeUser();
-            assert currentUser != null;
-            String userType = currentUser.getUserType();
+            //assert currentUser != null;
+            userType = currentUser.getUserType();
 
             // Load initial view
-            if (userType.equals("admin")) {
-                initialView = "/screens/home/HomeAdmin.fxml";
-            } else {
-                initialView = "/screens/home/HomeUser.fxml";
-            }
-
-            setActiveButton(btnHome);
-            loadView(initialView);
+            showHome();
         } catch (Exception e) {
+            System.out.println("Failed to initialize shell.");
             e.printStackTrace();
         }
     }
@@ -88,7 +82,6 @@ public class ApplicationShellController {
         btnDashboard.getStyleClass().remove("menu-button-active");
         btnSettings.getStyleClass().remove("menu-button-active");
         btnRecords.getStyleClass().remove("menu-button-active");
-
         clickedButton.getStyleClass().add("menu-button-active");
     }
 
@@ -97,17 +90,20 @@ public class ApplicationShellController {
             Parent view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             contentArea.getChildren().setAll(view);
         } catch (IOException e) {
+            System.out.println("Failed to load " + fxmlPath);
             e.printStackTrace();
         }
     }
 
     @FXML public void showHome() {
-        loadView("/screens/home/HomeUser.fxml");
+        if(userType.equals("admin")) loadView("/screens/home/HomeAdmin.fxml");
+        else loadView("/screens/home/user/HomeUser.fxml");
         setActiveButton(btnHome);
     }
 
     @FXML public void showDashboard() {
-        loadView("/screens/dashboard/DashboardUser.fxml");
+        if(userType.equals("admin")) loadView("/screens/dashboard/DashboardAdmin.fxml");
+        else loadView("/screens/dashboard/DashboardUser.fxml");
         setActiveButton(btnDashboard);
     }
 
@@ -117,7 +113,8 @@ public class ApplicationShellController {
     }
 
     @FXML public void showRecords() {
-        loadView("/screens/history/HistoryRecords.fxml");
+        if(userType.equals("admin")) loadView("/screens/history/BorrowRecords.fxml");
+        else loadView("/screens/history/HistoryRecords.fxml");
         setActiveButton(btnRecords);
     }
 }
