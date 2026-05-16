@@ -16,7 +16,8 @@ public class UserDAO implements ContractDAO<User> {
     private final String FIND_BY_ID = "SELECT * FROM users WHERE id = ?";
     private final String FIND_BY_EMAIL = "SELECT * FROM users WHERE email = ?";
     private final String INSERT_USER = "INSERT INTO users (name, email, password, userType, isBlocked, profilePhotoPath) VALUES (?, ?, ?, ?, ?, ?)";
-    private final String CHANGE_USER_DETAILS = "UPDATE users SET name = ?, email = ?, password = ? WHERE email = ?";
+    private final String CHANGE_USER_DETAILS = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?";
+    private final String CHANGE_USER_PROFILE = "UPDATE users SET profilePhotoPath = ? WHERE id =?";
 
     /**
      * Finds the user in the database given an ID.
@@ -107,10 +108,10 @@ public class UserDAO implements ContractDAO<User> {
 
     /**
      * Changes the user's field details based on the inputted new values.
-     * @return true - if query successful <br>
+     * @return true - if query successful
      *         false - if query failed
      */
-    public boolean changeUserDetails(String currentEmail, String newEmail, String name, String password) {
+    public boolean changeAccountDetails(int id, String newEmail, String name, String password) {
         try (
                 Connection c = ConnectionSQL.getConnection();
                 PreparedStatement statement = c.prepareStatement(CHANGE_USER_DETAILS)
@@ -119,7 +120,34 @@ public class UserDAO implements ContractDAO<User> {
             statement.setString(1, name);
             statement.setString(2, newEmail);
             statement.setString(3, BCrypt.hashpw(password, BCrypt.gensalt()));
-            statement.setString(4, currentEmail);
+            statement.setInt(4, id);
+
+            int rowsUpdated = statement.executeUpdate();
+
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+
+            System.err.println(
+                    "Database connection or query failed: " + e.getMessage()
+            );
+        }
+        return false;
+    }
+
+    /**
+     * Changes the user's field details based on the inputted new values.
+     * @return true - if query successful
+     *         false - if query failed
+     */
+    public boolean changeAccountProfilePath(int id, String profileImagePath){
+        try (
+                Connection c = ConnectionSQL.getConnection();
+                PreparedStatement statement = c.prepareStatement(CHANGE_USER_PROFILE)
+        ) {
+
+            statement.setString(1, profileImagePath);
+            statement.setInt(2, id);
 
             int rowsUpdated = statement.executeUpdate();
 
