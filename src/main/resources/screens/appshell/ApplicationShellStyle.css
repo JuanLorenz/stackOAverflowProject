@@ -1,70 +1,65 @@
-/* Sidebar Styles */
+/* Sidebar Container */
 .sidebar {
     -fx-background-color: white;
-    -fx-border-color: #f0f0f0;
-    -fx-border-width: 0 1 0 0;
+    /* This creates the vertical line/shadow effect on the right */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 5, 0);
 }
 
+.sidebar .menu-button {
+    -fx-min-width: 240px; /* Forces the button to stay 240px wide always */
+    -fx-ellipsis-string: ""; /* Removes the "..." if it ever tries to appear */
+}
+
+/* User Profile Styling */
+.profile-name {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+/* Navigation Buttons */
 .menu-button {
     -fx-background-color: transparent;
     -fx-alignment: CENTER_LEFT;
-    -fx-font-family: "Segoe UI", sans-serif;
-    -fx-font-size: 14px;
-    -fx-padding: 10 20;
+    -fx-font-family: "Segoe UI Semibold", sans-serif;
+    -fx-font-size: 15px;
+    -fx-padding: 12 30;
     -fx-cursor: hand;
+    -fx-graphic-text-gap: 20px; /* Space between icon and text */
 }
 
+.menu-button:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+/* Active Dashboard State */
 .menu-button-active {
-    -fx-background-color: #5EEAD4; /* Teal color from prototype */
-    -fx-background-radius: 0;
+    -fx-background-color: #5EEAD4; /* Prototype Teal */
+    -fx-text-fill: #111;
 }
 
-/* Header Section */
-.dashboard-header {
-    -fx-background-color: #FFB347; /* Orange color */
+.menu-button-active:hover {
+    -fx-background-color: #4cd5bf; /* A slightly darker shade of Teal */
 }
 
-.header-title {
-    -fx-font-size: 28px;
+/* Logout Button */
+.logout-button {
+    -fx-background-color: #4356D0; /* Prototype Blue */
+    -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-font-size: 15px;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 15px;
 }
 
-/* Search Field */
-.search-field {
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-padding: 8 15;
-    -fx-background-color: white;
-    -fx-border-color: #ddd;
+.logout-button:hover {
+    -fx-background-color: #3644A8;
 }
 
-/* Equipment Card */
-.equipment-card {
-    -fx-background-color: white;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-border-color: #333;
-    -fx-border-width: 1;
+/* Hamburger Button */
+.hamburger-button {
+    -fx-background-color: transparent;
     -fx-cursor: hand;
 }
-.equipment-card:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
-}
-
-/* Overlays */
-.overlay-container {
-    -fx-background-color: white;
-    -fx-background-radius: 30;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 20, 0, 0, 0);
-}
-
-.btn-reserve {
-    -fx-background-color: #FF5F5F;
-    -fx-text-fill: white;
-    -fx-background-radius: 15;
-    -fx-font-weight: bold;
-}
-
-.btn-yes { -fx-background-color: #5EEAD4; -fx-text-fill: white; -fx-background-radius: 10; }
-.btn-cancel { -fx-background-color: #FF5F5F; -fx-text-fill: white; -fx-background-radius: 10; }
