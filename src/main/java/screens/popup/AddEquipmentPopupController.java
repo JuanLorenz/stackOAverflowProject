@@ -10,12 +10,16 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import data.equipment.EquipmentBuilder;
+import screens.dashboard.DashboardAdminController;
+import utilities.database.EquipmentDAO;
+import utilities.manager.SceneManager;
 import utilities.service.EquipmentService;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 public class AddEquipmentPopupController {
 
@@ -32,6 +36,21 @@ public class AddEquipmentPopupController {
     private final EquipmentService equipmentService = new EquipmentService();
     private String imagePath;
     private File selectedImage;
+    private DashboardAdminController mainController;
+
+    public void initialize(){
+        equipmentName.setText("");
+        equipmentCategory.setText("");
+        equipmentModelNo.setText("");
+        equipmentSerialNo.setText("");
+        equipmentCondition.setText("");
+        equipmentTotalQty.setText("");
+        equipmentImage.setImage(null);
+    }
+
+    public void setMaincontroller(DashboardAdminController dac){
+        mainController = dac;
+    }
 
     public void onUploadImgClicked(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -48,7 +67,7 @@ public class AddEquipmentPopupController {
     }
 
     public void onAddClicked(ActionEvent actionEvent) {
-
+        // A copy will only be created and saved in the system once the add is clicked
         if(selectedImage != null){
             try{
                 File imageDestination = new File("src/main/resources/media/images/equipmentImages/", selectedImage.getName());
@@ -65,19 +84,15 @@ public class AddEquipmentPopupController {
             }
         }
 
+        if(equipmentService.addNewEquipment(equipmentName.getText(), equipmentCategory.getText(),
+                equipmentModelNo.getText(), equipmentSerialNo.getText(), equipmentCondition.getText(),
+                Integer.parseInt(equipmentTotalQty.getText()), imagePath)){
+            System.out.println("Successfully added a new equipment");
+        }
+    }
 
-        Equipment addedEquipment = EquipmentBuilder.start(equipmentCategory.getText())
-                .setInfo(equipmentService.getAllEquipment().size(),
-                        equipmentName.getText(),
-                        equipmentModelNo.getText())
-                .setDetails(equipmentSerialNo.getText(),
-                        equipmentCondition.getText(),
-                        imagePath)
-                .setInventory(Integer.parseInt(equipmentTotalQty.getText()),
-                        Integer.parseInt(equipmentTotalQty.getText()))
-                .build();
-
-        System.out.println("Successfully added a new equipment");
+    public void onXClicked(ActionEvent actionEvent) {;
+        mainController.popUpScreenExit();
     }
 
 }

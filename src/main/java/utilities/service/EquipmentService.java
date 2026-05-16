@@ -13,7 +13,7 @@ public class EquipmentService {
         return equipmentDAO.findAll();
     }
 
-    public Equipment addNewEquipment(String name, String category, String modelNo, String serialNo, String condition, int totalQty, String imgPath) {
+    public Boolean addNewEquipment(String name, String category, String modelNo, String serialNo, String condition, int totalQty, String imgPath) {
         Equipment e = EquipmentBuilder.start(category)
                 .setInfo(0, name, modelNo)                  // 0 id is placeholder
                 .setDetails(serialNo, condition, imgPath)
@@ -21,9 +21,9 @@ public class EquipmentService {
                 .build();
 
         if (equipmentDAO.save(e)) {
-            return e;
+            return true;
         }
 
-        return null;
+        return false;
     }
 }
