@@ -139,7 +139,9 @@ public class TransactionDAO implements ContractDAO<Transaction> {
                         rs.getString("u_name"),
                         rs.getString("u_email"),
                         rs.getString("u_pw"),
-                        rs.getString("u_type")
+                        rs.getString("u_type"),
+                        rs.getBoolean("u_blocked"),
+                        rs.getString("u_photo_path")
                 ),
                 EquipmentBuilder.start(rs.getString("e_cat"))
                         .setInfo(rs.getInt("e_id"),

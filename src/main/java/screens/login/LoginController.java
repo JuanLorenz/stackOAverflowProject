@@ -34,7 +34,7 @@ public class LoginController {
         rightSideImage.fitWidthProperty().bind(imageContainer.widthProperty());
         rightSideImage.fitHeightProperty().bind(imageContainer.heightProperty());
     }
-    // "view" when login is clicked
+
     public void onLoginClicked(ActionEvent event) {
         String email = tfEmail.getText();
         String password = tfPassword.getText();
@@ -44,17 +44,15 @@ public class LoginController {
             return;
         }
 
-        // 2. Delegate the database check to your AuthService
+        // Authenticate user details
         User authenticatedUser = authService.login(email, password);
 
         if (authenticatedUser != null) {
-            // 3. Success! Save the session using your SerializeManager
             SerializeManager.serializeUser(authenticatedUser);
 
             showStatus(Color.GREEN, "Login successful!");
 
-            // 4. Switch to the dashboard
-            // Note: Make sure you actually have a dashboard.fxml created in your resources folder!
+            // Switch to the dashboard
             SceneManager.switchScene(event, "/screens/home/HomeUser.fxml");
 
         } else {

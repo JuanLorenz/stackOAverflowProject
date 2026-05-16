@@ -18,7 +18,6 @@ public class RegisterController {
     @FXML private TextField tfEmail;
     @FXML private PasswordField tfPassword;
     @FXML private Label lStatus;
-    @FXML private Button buttonRegister;
     @FXML private ImageView leftSideImage;
     @FXML private StackPane imageContainer;
 
@@ -26,7 +25,6 @@ public class RegisterController {
 
     @FXML
     public void initialize() {
-        // Forces the image to always be the exact size of the container
         leftSideImage.fitWidthProperty().bind(imageContainer.widthProperty());
         leftSideImage.fitHeightProperty().bind(imageContainer.heightProperty());
     }
