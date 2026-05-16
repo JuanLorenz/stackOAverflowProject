@@ -50,17 +50,17 @@
                         <HBox HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER_LEFT" maxHeight="500.0" maxWidth="300.0" prefHeight="218.0" prefWidth="434.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <Label fx:id="labelEquipmentModelNo" text="Model No:">
+                                <Label fx:id="labelEquipmentModelNo" text="Model No: ">
                                     <VBox.margin>
                                         <Insets bottom="10.0" left="15.0" right="15.0" />
                                     </VBox.margin>
                                 </Label>
-                                <Label fx:id="labelEquipmentSerialNo" text="Serial No:">
+                                <Label fx:id="labelEquipmentSerialNo" text="Serial No: ">
                                     <VBox.margin>
                                         <Insets bottom="10.0" left="15.0" right="15.0" />
                                     </VBox.margin>
                                 </Label>
-                                <Label fx:id="labelEquipmentCategory" text="Category:">
+                                <Label fx:id="labelEquipmentCategory" text="Category: ">
                                     <VBox.margin>
                                         <Insets bottom="10.0" left="15.0" right="15.0" />
                                     </VBox.margin>
@@ -105,7 +105,7 @@
                 </HBox>
                 <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0">
                     <children>
-                        <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#onUpdateClicked" prefHeight="26.0" prefWidth="77.0" text="Update">
+                        <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#onUpdateClicked" text="Update">
                      <HBox.margin>
                         <Insets right="30.0" />
                      </HBox.margin></Button>
