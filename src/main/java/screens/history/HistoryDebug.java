@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HistoryUserDebug extends Application {
+public class HistoryDebug extends Application {
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HistoryUserDebug.class.getResource("HistoryUser.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HistoryDebug.class.getResource("HistoryRecords.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 420);
-        stage.setTitle("HistoryUser Debug");
+        stage.setTitle("History Debug");
         stage.setResizable(true);
         stage.setMaximized(true);
         stage.setScene(scene);
