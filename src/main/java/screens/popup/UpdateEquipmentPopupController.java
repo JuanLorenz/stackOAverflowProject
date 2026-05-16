@@ -27,6 +27,7 @@ public class UpdateEquipmentPopupController {
     @FXML public Label labelEquipmentName;
     @FXML public Label labelEquipmentModelNo;
     @FXML public Label labelEquipmentSerialNo;
+    @FXML public Label labelEquipmentCategory;
     @FXML public Label labelEquipmentCondition;
     @FXML public Label labelEquipmentAvailable;
     @FXML public ImageView EquipmentImage;
@@ -41,8 +42,8 @@ public class UpdateEquipmentPopupController {
     private DashboardAdminController mainController;
 
     public void initialize(){
-        updateEquipmentCondition.setText("");
-        updateEquipmentTotalQty.setText("");
+        updateEquipmentCondition.clear();
+        updateEquipmentTotalQty.clear();
         EquipmentImage.setImage(null);
     }
 
@@ -54,11 +55,13 @@ public class UpdateEquipmentPopupController {
         imagePath = equipment.getImagePath();
         editedEquipment = equipment;
 
-        labelEquipmentName.setText(labelEquipmentName.getText() + equipment.getEquipmentName());
-        labelEquipmentModelNo.setText(labelEquipmentModelNo.getText() + equipment.getModelNo());
-        labelEquipmentSerialNo.setText(labelEquipmentSerialNo.getText() + equipment.getSerialNo());
-        labelEquipmentCondition.setText(labelEquipmentCondition.getText() + equipment.getCondition());
-        labelEquipmentAvailable.setText(labelEquipmentAvailable.getText() + equipment.getAvailableQty() + "/" + equipment.getTotalQty());
+        labelEquipmentName.setText(equipment.getEquipmentName());
+        labelEquipmentModelNo.setText("Model No: " + equipment.getModelNo());
+        labelEquipmentSerialNo.setText("Serial No: " + equipment.getSerialNo());
+        labelEquipmentCategory.setText("Category: " + equipment.getCategory());
+        labelEquipmentCondition.setText("Condition: " + equipment.getCondition());
+        labelEquipmentAvailable.setText("Available: " + equipment.getAvailableQty() + "/" + equipment.getTotalQty());
+
         EquipmentImage.setImage(new Image(Objects.requireNonNull(getClass().getResource(imagePath)).toExternalForm()));
     }
 

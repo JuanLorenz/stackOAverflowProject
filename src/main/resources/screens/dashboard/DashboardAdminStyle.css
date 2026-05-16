@@ -1,19 +1,21 @@
-/* Import Google Fonts directly into the stylesheet */
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap');
 
-/* --- MAIN CONTROLLER BACKGROUND --- */
 .root {
     -fx-background-color: #FFFFFF;
 }
 
-/* --- TOP HEADER TEXT --- */
-.label {
+/* --- SCOPED SELECTORS ---
+   By adding .dashboard-scope before the generic selectors,
+   your popups (which are outside this container) won't be affected.
+*/
+
+.dashboard-scope .label {
     -fx-font-family: 'Montserrat', sans-serif;
     -fx-text-fill: #1E1E1E;
 }
 
-/* --- SEARCH INPUT BAR --- */
-.text-field {
+.dashboard-scope .text-field {
     -fx-font-family: 'Open Sans', sans-serif;
     -fx-font-size: 13px;
     -fx-background-color: #FFFFFF;
@@ -24,12 +26,11 @@
     -fx-text-fill: #666666;
 }
 
-.text-field:focused {
-    -fx-border-color: #26BDFC; /* Highlights matching the EquipLink Blue */
+.dashboard-scope .text-field:focused {
+    -fx-border-color: #26BDFC;
 }
 
-/* --- "+ ADD EQUIPMENT" BUTTON --- */
-.button {
+.dashboard-scope .button {
     -fx-font-family: 'Montserrat', sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 13px;
@@ -40,60 +41,48 @@
     -fx-cursor: hand;
 }
 
-.button:hover {
-    -fx-background-color: #1A9ECF; /* Subtle shade change on mouse hover */
+.dashboard-scope .button:hover {
+    -fx-background-color: #1A9ECF;
 }
 
-/* --- SCROLLPANE CLEANUP --- */
-/* Completely strips the default gray boxing from image_47da73.png */
-.content-scrollpane {
+/* --- SCROLLPANE & GRID --- */
+
+.dashboard-scope .content-scrollpane {
     -fx-background-color: transparent;
     -fx-background: transparent;
     -fx-border-color: transparent;
     -fx-padding: 0;
+    -fx-fit-to-width: true; /* Ensures cards fill the gap to the scrollbar */
 }
 
-.content-scrollpane .viewport {
+.dashboard-scope .content-scrollpane .viewport {
     -fx-background-color: transparent;
 }
 
-/* Clean, modern styling for the scrollbar element */
-.content-scrollpane .scroll-bar:vertical {
+.dashboard-scope .content-scrollpane .scroll-bar:vertical {
     -fx-background-color: transparent;
     -fx-pref-width: 8px;
 }
 
-.content-scrollpane .scroll-bar:vertical .thumb {
+.dashboard-scope .content-scrollpane .scroll-bar:vertical .thumb {
     -fx-background-color: #DDDDDD;
     -fx-background-radius: 4px;
 }
 
 /* --- EQUIPMENT DISPLAY CARDS --- */
-.equipment-card {
-    /* Resets default button styling */
+/* These already have a specific class, but we scope them for safety */
+.dashboard-scope .equipment-card {
     -fx-background-color: #FFFFFF;
     -fx-border-color: #1E1E1E;
     -fx-border-width: 2px;
     -fx-border-radius: 30px;
     -fx-background-radius: 30px;
-
-    /* Subtle modern UI drop shadow */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 5);
     -fx-padding: 20px;
     -fx-cursor: hand;
-    -fx-transition: all 0.2s ease-in-out;
 }
 
-.equipment-card:hover {
-    /* Scale effect on hover to match a modern interface feel */
+.dashboard-scope .equipment-card:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(38, 189, 252, 0.3), 20, 0, 0, 8);
     -fx-border-color: #26BDFC;
-}
-
-/* Text styles inside the equipment cards */
-.equipment-card-label {
-    -fx-font-family: 'Open Sans', sans-serif;
-    -fx-font-weight: 600;
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
 }
