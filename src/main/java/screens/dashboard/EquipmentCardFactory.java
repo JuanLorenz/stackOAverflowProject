@@ -20,6 +20,8 @@ public class EquipmentCardFactory {
         Button btn = new Button();
         btn.getStyleClass().add("equipment-card");
         btn.setPrefSize(180, 220);
+        String categoryClass = "border-" + item.getCategory().toLowerCase().replace(" ", "");
+        btn.getStyleClass().add(categoryClass);
 
         // Image Handling
         Image lowres = ImageManager.getSafeImage(item.getImagePath(), WIDTH, HEIGHT);
