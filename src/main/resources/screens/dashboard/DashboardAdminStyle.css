@@ -64,8 +64,12 @@
     -fx-effect: dropshadow(three-pass-box, rgba(38, 189, 252, 0.2), 15, 0, 0, 5);
 }
 
-/* Optional: If you want specific category borders like the user side,
-   the Factory can add these classes dynamically */
-.border-engineering { -fx-border-color: #B0825F; -fx-border-width: 2; -fx-border-radius: 30; }
-.border-chemistry   { -fx-border-color: #FFB347; -fx-border-width: 2; -fx-border-radius: 30; }
-/* ... etc ... */
+/* Category Border Colors */
+.border-engineering             { -fx-border-color: #B0825F; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-chemistry               { -fx-border-color: #FFB347; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-physicaleducation       { -fx-border-color: #FF6B6B; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-multimedia              { -fx-border-color: #9B7CC3; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-medicalsciences         { -fx-border-color: #48C9B0; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-informationtechnology   { -fx-border-color: #4461CC; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-architecture            { -fx-border-color: #5DADE2; -fx-border-width: 3; -fx-border-radius: 30; }
+.border-agriculture             { -fx-border-color: #82E0AA; -fx-border-width: 3; -fx-border-radius: 30; }

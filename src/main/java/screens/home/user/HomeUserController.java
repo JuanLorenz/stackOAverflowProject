@@ -42,6 +42,8 @@ public class HomeUserController {
     @FXML private Button leftArrowBtn;
     @FXML private Button rightArrowBtn;
 
+    private User currentUser;
+
     @FXML
     public void initialize() {
         viewModel = new HomeUserViewModel();
@@ -62,7 +64,7 @@ public class HomeUserController {
         setupArrowVisibilityLogic();
 
         // Check if user got blocked upon loading
-        User currentUser = SerializeManager.deserializeUser();
+        currentUser = SerializeManager.deserializeUser();
         if (currentUser != null && currentUser.isBlocked()) {
             showBlockedWarning();
         }
@@ -94,7 +96,7 @@ public class HomeUserController {
                 returnBtn.getStyleClass().add("btn-return");
                 returnBtn.setOnAction(event -> {
                     Transaction transaction = getTableView().getItems().get(getIndex());
-                    viewModel.returnEquipment(transaction);
+                    viewModel.returnEquipment(transaction, currentUser);
                 });
             }
 
@@ -112,6 +114,7 @@ public class HomeUserController {
         };
         actionColumn.setCellFactory(cellFactory);
     }
+
 
     private void setupSearchAndFilter() {
         categoryComboBox.setItems(FXCollections.observableArrayList(
