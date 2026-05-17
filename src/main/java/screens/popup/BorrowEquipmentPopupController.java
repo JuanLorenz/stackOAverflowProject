@@ -2,6 +2,7 @@ package screens.popup;
 
 import data.equipment.Equipment;
 import data.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -74,5 +75,9 @@ public class BorrowEquipmentPopupController implements DataReceiver<Equipment> {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    public void onXClicked(ActionEvent actionEvent) {
+        SceneManager.closeOverlay();
     }
 }

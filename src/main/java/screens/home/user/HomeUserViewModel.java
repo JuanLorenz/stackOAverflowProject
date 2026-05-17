@@ -11,6 +11,8 @@ import utilities.database.UserDAO;
 import utilities.manager.SerializeManager;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,12 +73,20 @@ public class HomeUserViewModel {
         }
     }
 
-    public void returnEquipment(Transaction transaction) {
+    public void returnEquipment(Transaction transaction, User currentUser) {
         Equipment equipment = transaction.getEquipment();
         boolean transactionUpdated = transactionDAO.updateReturn(transaction.getTransactionID(), LocalDate.now());
 
+        //--Logic for blocking user added ; needs checking
+        long difference = ChronoUnit.DAYS.between(transaction.getDateBorrowed(), LocalDate.now());
+        if(difference > 30){
+            // if returned more than 30 days (due date) of its borrowing time, user is blocked;
+            currentUser.setUserAccessStatus(true);
+        }
+
         if (transactionUpdated) {
             int newAvailableQty = equipment.getAvailableQty() + 1;
+            equipment.setAvailableQty(newAvailableQty);
             equipmentDAO.updateQuantity(equipment.getEquipmentID(), equipment.getTotalQty(), newAvailableQty);
             borrowedItems.remove(transaction); // Removes from UI
         }

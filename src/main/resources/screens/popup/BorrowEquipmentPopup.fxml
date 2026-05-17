@@ -1,30 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="20.0" styleClass="popup-container" stylesheets="@BorrowEquipmentPopupStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.BorrowEquipmentPopupController">
+<VBox fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="20.0" styleClass="popup-container" stylesheets="@BorrowEquipmentPopupStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.BorrowEquipmentPopupController">
 
    <padding>
-      <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+      <Insets bottom="30.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 
    <children>
-      <!-- TOP BAR -->
-      <StackPane prefWidth="500.0">
-         <children>
-            <Button fx:id="btnBack" onAction="#handleBack" styleClass="back-button" text="←" StackPane.alignment="CENTER_LEFT" />
-            <Label fx:id="lblEquipmentName" styleClass="title-label" text="EquipmentName" />
-         </children>
-      </StackPane>
+       <HBox alignment="CENTER">
+           <children>
+               <HBox HBox.hgrow="ALWAYS">
+                   <HBox.margin>
+                       <Insets left="15.0" />
+                   </HBox.margin></HBox>
+               <!-- Added styleClass="popup-header" -->
+               <Label fx:id="lblEquipmentName" styleClass="popup-header">
+                   <font>
+                       <Font name="System Bold" size="24.0" />
+                   </font>
+               </Label>
+               <HBox HBox.hgrow="ALWAYS" />
+               <!-- Added styleClass="popup-close-button" -->
+               <Button fx:id="buttonX" mnemonicParsing="false" onAction="#onXClicked" styleClass="back-button" text="X">
+                   <HBox.margin>
+                       <Insets right="15.0" />
+                   </HBox.margin>
+               </Button>
+           </children>
+           <VBox.margin>
+               <Insets left="30.0" right="15.0" top="30.0" />
+           </VBox.margin>
+       </HBox>
 
       <HBox alignment="CENTER" spacing="30.0">
          <children>
+            <HBox HBox.hgrow="ALWAYS" />
             <!-- Image Section -->
             <StackPane styleClass="image-container">
                <children>
@@ -40,18 +56,28 @@
                   <Label fx:id="lblCategory" styleClass="info-label" text="Category: PE" />
                   <Label fx:id="lblCondition" styleClass="info-label" text="Condition: xxx" />
                   <Label fx:id="lblAvailableQty" styleClass="info-label" text="Available Qty: n" />
-
-                  <StackPane alignment="BOTTOM_RIGHT">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                     <children>
-                        <Button fx:id="btnBorrow" onAction="#handleBorrow" prefHeight="40.0" prefWidth="120.0" styleClass="borrow-button" text="Borrow" />
-                     </children>
-                  </StackPane>
                </children>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
             </VBox>
          </children>
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" top="15.0" />
+         </VBox.margin>
       </HBox>
+
+      <StackPane alignment="BOTTOM_RIGHT">
+         <children>
+            <Button fx:id="btnBorrow" onAction="#handleBorrow" prefHeight="40.0" prefWidth="120.0" styleClass="borrow-button" text="Borrow">
+               <StackPane.margin>
+                  <Insets bottom="15.0" />
+               </StackPane.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets right="30.0" />
+         </VBox.margin>
+      </StackPane>
    </children>
 </VBox>
