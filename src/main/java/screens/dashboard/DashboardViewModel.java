@@ -56,6 +56,21 @@ public class DashboardViewModel {
         new Thread(loadTask).start();
     }
 
+    public void refreshDataQuietly() {
+        Task<List<Equipment>> refreshTask = new Task<>() {
+            @Override
+            protected List<Equipment> call() {
+                return equipmentService.getAllEquipment();
+            }
+        };
+
+        refreshTask.setOnSucceeded(e -> {
+            masterData.setAll(refreshTask.getValue());
+        });
+
+        new Thread(refreshTask).start();
+    }
+
     private void applyFilters() {
         String search = searchQuery.get().toLowerCase().trim();
         String category = selectedCategory.get();

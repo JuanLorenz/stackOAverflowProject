@@ -68,7 +68,11 @@ public class DashboardUserController {
             // Initial UI update
             updateCategoryUI(viewModel.selectedCategoryProperty().get());
         });
+
+        //update equipment quantity if user has returned the equipment
+        viewModel.refreshDataQuietly();
     }
+
 
     private void renderGrid() {
         // We use viewModel.getFilteredData() here

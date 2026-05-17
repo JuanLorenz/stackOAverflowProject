@@ -132,4 +132,12 @@ public class HistoryRecordsController {
 
         return label;
     }
+
+    public void setCategoryFilter(String category) {
+        // Because you already set up a listener on cbCategory in initialize(),
+        // simply changing this value will automatically trigger updateFilter() and refresh the table!
+        if (category != null) {
+            cbCategory.setValue(category);
+        }
+    }
 }

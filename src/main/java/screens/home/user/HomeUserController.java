@@ -7,11 +7,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import screens.home.CategoryCardFactory;
 import utilities.manager.SerializeManager;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 public class HomeUserController {
@@ -36,6 +37,7 @@ public class HomeUserController {
 
     @FXML private TableView<Transaction> borrowedTable;
     @FXML private TableColumn<Transaction, String> itemColumn;
+    @FXML private TableColumn<Transaction, LocalDate> dueDateColumn;
     @FXML private TableColumn<Transaction, Void> actionColumn;
 
     @FXML private Button leftArrowBtn;
@@ -46,9 +48,11 @@ public class HomeUserController {
     @FXML
     public void initialize() {
         viewModel = new HomeUserViewModel();
-        viewModel.loadData(); // Fetches counts, active items, and checks overdue logic
+        viewModel.loadData();
 
-        populateCategoryCards();
+        // Force initial card draw onto the JavaFX UI Thread
+        Platform.runLater(this::populateCategoryCards);
+
         setupTableColumns();
 
         // Setup Search & Filter
@@ -73,22 +77,53 @@ public class HomeUserController {
         Map<String, Integer> counts = viewModel.getHistoryCounts();
 
         cardsContainer.getChildren().addAll(
-                CategoryCardFactory.createCard("Engineering", counts.getOrDefault("Engineering", 0), "#c074cc", this::handleViewHistory),
-                CategoryCardFactory.createCard("Chemistry", counts.getOrDefault("Chemistry", 0), "#ffb74d", this::handleViewHistory),
-                CategoryCardFactory.createCard("Physical Education", counts.getOrDefault("Physical Education", 0), "#ff6b6b", this::handleViewHistory),
-                CategoryCardFactory.createCard("Multi Media", counts.getOrDefault("Multi Media", 0), "#9575cd", this::handleViewHistory),
-                CategoryCardFactory.createCard("Medical Sciences", counts.getOrDefault("Medical Sciences", 0), "#4dd0e1", this::handleViewHistory),
-                CategoryCardFactory.createCard("Agriculture", counts.getOrDefault("Agriculture", 0), "#81c784", this::handleViewHistory),
-                CategoryCardFactory.createCard("Architecture", counts.getOrDefault("Architecture", 0), "#f06292", this::handleViewHistory),
-                CategoryCardFactory.createCard("IT", counts.getOrDefault("IT", 0), "#3f51b5", this::handleViewHistory)
+                CategoryCardFactory.createCard("Engineering", counts.getOrDefault("Engineering", 0), "#c074cc", event -> handleViewHistory("Engineering")),
+                CategoryCardFactory.createCard("Chemistry", counts.getOrDefault("Chemistry", 0), "#ffb74d", event -> handleViewHistory("Chemistry")),
+                CategoryCardFactory.createCard("Physical Education", counts.getOrDefault("Physical Education", 0), "#ff6b6b", event -> handleViewHistory("Physical Education")),
+                CategoryCardFactory.createCard("Multi Media", counts.getOrDefault("Multi Media", 0), "#9575cd", event -> handleViewHistory("Multi Media")),
+                CategoryCardFactory.createCard("Medical Sciences", counts.getOrDefault("Medical Sciences", 0), "#4dd0e1", event -> handleViewHistory("Medical Sciences")),
+                CategoryCardFactory.createCard("Agriculture", counts.getOrDefault("Agriculture", 0), "#81c784", event -> handleViewHistory("Agriculture")),
+                CategoryCardFactory.createCard("Architecture", counts.getOrDefault("Architecture", 0), "#f06292", event -> handleViewHistory("Architecture")),
+                CategoryCardFactory.createCard("IT", counts.getOrDefault("IT", 0), "#3f51b5", event -> handleViewHistory("IT"))
         );
     }
 
+    private void handleViewHistory(String category) {
+        System.out.println("Redirecting to History Screen for: " + category);
+        // Use globally accessible Singleton shell instance to jump views and set selection filters
+        screens.appshell.ApplicationShellController.instance.goToHistoryWithFilter(category);
+    }
+
     private void setupTableColumns() {
+        // 1. Details column
         itemColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getEquipment().getEquipmentName())
         );
 
+        // 2. Due Date Column with Overdue Highlighting Check
+        dueDateColumn.setCellValueFactory(cellData ->
+                new SimpleObjectProperty<>(cellData.getValue().getDueDate())
+        );
+        dueDateColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(LocalDate dueDate, boolean empty) {
+                super.updateItem(dueDate, empty);
+                if (empty || dueDate == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(dueDate.toString());
+
+                    if (LocalDate.now().isAfter(dueDate)) {
+                        setStyle("-fx-text-fill: #ff4d4d; -fx-font-weight: bold;");
+                    } else {
+                        setStyle("-fx-text-fill: #333333; -fx-font-weight: bold;");
+                    }
+                }
+            }
+        });
+
+        // 3. Action returning panel button
         Callback<TableColumn<Transaction, Void>, TableCell<Transaction, Void>> cellFactory = param -> new TableCell<>() {
             private final Button returnBtn = new Button("Return");
             {
@@ -96,6 +131,7 @@ public class HomeUserController {
                 returnBtn.setOnAction(event -> {
                     Transaction transaction = getTableView().getItems().get(getIndex());
                     viewModel.returnEquipment(transaction);
+                    refreshCategoryCards();
                 });
             }
 
@@ -112,6 +148,25 @@ public class HomeUserController {
             }
         };
         actionColumn.setCellFactory(cellFactory);
+    }
+
+    private void refreshCategoryCards() {
+        Platform.runLater(() -> {
+            cardsContainer.getChildren().clear();
+            populateCategoryCards();
+
+            double targetWidth = (categoryScrollPane.getViewportBounds().getWidth() - 55.0) / 4.0;
+            double finalWidth = Math.max(targetWidth, 200.0);
+            for (Node node : cardsContainer.getChildren()) {
+                if (node instanceof VBox) {
+                    ((VBox) node).setPrefWidth(finalWidth);
+                }
+            }
+
+            cardsContainer.requestLayout();
+            cardsContainer.layout();
+            updateArrowVisibility();
+        });
     }
 
     private void setupSearchAndFilter() {
@@ -142,10 +197,6 @@ public class HomeUserController {
         alert.setHeaderText("You have overdue equipment!");
         alert.setContentText("Your account has been temporarily blocked. Please return your overdue equipment to restore access.");
         alert.showAndWait();
-    }
-
-    private void handleViewHistory(ActionEvent event) {
-        System.out.println("Redirecting to History Screen...");
     }
 
     // --- Dynamic Resizing & Scrolling ---

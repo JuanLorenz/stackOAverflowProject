@@ -8,6 +8,7 @@ import utilities.database.TransactionDAO;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public class TransactionService {
     private final EquipmentDAO equipmentDAO = new EquipmentDAO();
@@ -41,24 +42,27 @@ public class TransactionService {
     }
 
     public boolean processReturn(Transaction t) {
-        // check if dateReturned is null
         if (t.getDateReturned() != null) {
             System.err.println("Item already returned!");
             return false;
         }
 
-        // adds dateReturned
         t.setDateReturned(LocalDate.now());
 
-        // update equipment's availableQty
         Equipment e = t.getEquipment();
         e.setAvailableQty(e.getAvailableQty() + 1);
 
-        // update db
-        boolean updateEquipment = equipmentDAO.updateQuantity(e.getEquipmentID(), e.getTotalQty(), e.getAvailableQty());
-        boolean updateTransaction = transactionDAO.updateReturn(t.getTransactionID(), t.getDateReturned());
+        // Let's capture the exact results!
+        System.out.println("--- PROCESSING RETURN ---");
+        System.out.println("Attempting to update Equipment ID: " + e.getEquipmentID());
 
-        // returns false when one of them failed to update
+        boolean updateEquipment = equipmentDAO.updateQuantity(e.getEquipmentID(), e.getTotalQty(), e.getAvailableQty());
+        System.out.println("Did Equipment update in DB? : " + updateEquipment);
+
+        boolean updateTransaction = transactionDAO.updateReturn(t.getTransactionID(), t.getDateReturned());
+        System.out.println("Did Transaction update in DB? : " + updateTransaction);
+        System.out.println("-------------------------");
+
         return updateEquipment && updateTransaction;
     }
 
@@ -72,5 +76,10 @@ public class TransactionService {
 
     public List<Transaction> getUserActiveTransaction(int userId) {
         return transactionDAO.findActiveByUserId(userId);
+    }
+
+
+    public Map<String, Integer> getHistoryCountByCategory(int userId) {
+        return transactionDAO.getHistoryCountByCategory(userId);
     }
 }

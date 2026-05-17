@@ -18,11 +18,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class HomeUserViewModel {
 
     private final ObservableList<Transaction> borrowedItems = FXCollections.observableArrayList();;
-    private Map<String, Integer> historyCounts = new HashMap<>();
+    private Map<String, Integer> historyCounts = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     private final TransactionService transactionService = new TransactionService();
     private final UserService userService = new UserService();
 
@@ -41,6 +42,17 @@ public class HomeUserViewModel {
         // 1. Fetch current active items
         List<Transaction> activeTransactions = transactionService.getUserActiveTransaction(currentUser.getId());
 
+        Map<String, Integer> rawCounts = transactionService.getHistoryCountByCategory(currentUser.getId());
+        historyCounts.clear();
+        if (rawCounts != null) {
+            rawCounts.forEach((category, count) -> {
+                if (category != null) {
+                    historyCounts.put(category.trim(), count);
+                }
+            });
+        }
+
+
         // 2. Delegate "Status Logic" to UserService
         // If the service changed the user (blocked/unblocked), we re-serialize
         if (userService.syncUserStatus(currentUser, activeTransactions)) {
@@ -56,6 +68,15 @@ public class HomeUserViewModel {
         boolean success = transactionService.processReturn(transaction);
 
         if (success) {
+
+            String returnedCategory = transaction.getEquipment().getCategory().trim();
+            for (String mapKey : historyCounts.keySet()) {
+                if (mapKey.equalsIgnoreCase(returnedCategory)) {
+                    historyCounts.compute(mapKey, (k, currentCount) -> Math.max(0, currentCount - 1));
+                    break;
+                }
+            }
+
             // 2. Immediately re-sync user status
             loadData();
         }
