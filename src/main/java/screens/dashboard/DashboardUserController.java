@@ -3,6 +3,7 @@ package screens.dashboard;
 import data.equipment.Equipment;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DashboardUserController {
 
@@ -37,68 +39,52 @@ public class DashboardUserController {
     @FXML private ComboBox<String> cbCategory;
     @FXML private TilePane equipmentGrid;
 
-    private final EquipmentService equipmentService = new EquipmentService();
-    private final ObservableList<Equipment> masterData = FXCollections.observableArrayList();
-    private FilteredList<Equipment> filteredData;
-
     // Maps to keep track of UI themes per category
+    private final DashboardViewModel viewModel = new DashboardViewModel();
     private final Map<String, String> categoryColors = new HashMap<>();
     private final Map<String, String> categoryIcons = new HashMap<>();
 
     @FXML
     public void initialize() {
         setupCategoryMapping();
+        setupComboBox();
 
-        // 1. Initialize ComboBox items
+        // 1. Bind UI properties to ViewModel
+        tfSearch.textProperty().bindBidirectional(viewModel.searchQueryProperty());
+        cbCategory.valueProperty().bindBidirectional(viewModel.selectedCategoryProperty());
+
+        // 2. Multithreaded Data Loading
+        // We show a blank screen/loading state until ensureDataLoaded finishes
+        viewModel.ensureDataLoaded(() -> {
+            // This runs on the UI Thread once the background Task is done
+            renderGrid();
+
+            // Re-render when the filter changes the results
+            viewModel.getFilteredData().addListener((ListChangeListener<Equipment>) c -> renderGrid());
+
+            // Update the Pill colors when category changes
+            viewModel.selectedCategoryProperty().addListener((obs, old, newVal) -> updateCategoryUI(newVal));
+
+            // Initial UI update
+            updateCategoryUI(viewModel.selectedCategoryProperty().get());
+        });
+    }
+
+    private void renderGrid() {
+        // We use viewModel.getFilteredData() here
+        List<Button> cards = viewModel.getFilteredData().stream()
+                .map(item -> EquipmentCardFactory.createCard(item, this::openBorrowPopup))
+                .collect(Collectors.toList());
+
+        Platform.runLater(() -> equipmentGrid.getChildren().setAll(cards));
+    }
+
+    private void setupComboBox() {
         cbCategory.setItems(FXCollections.observableArrayList(
                 "All Equipment", "Engineering", "Chemistry", "Physical Education",
                 "Multi Media", "Medical Sciences", "Information Technology", "Architecture", "Agriculture"
         ));
         cbCategory.setValue("All Equipment");
-        updateCategoryUI("All Equipment"); // Set initial Teal theme
-
-        // 2. Fetch Data
-        masterData.addAll(equipmentService.getAllEquipment());
-        filteredData = new FilteredList<>(masterData, p -> true);
-
-        // 3. Listeners for filtering
-        tfSearch.textProperty().addListener((obs, oldVal, newVal) -> updateFilter());
-        cbCategory.valueProperty().addListener((obs, oldVal, newVal) -> {
-            updateCategoryUI(newVal);
-            updateFilter();
-        });
-
-        // 4. Initial Render
-        renderGrid();
-    }
-
-    private void updateFilter() {
-        String searchText = tfSearch.getText().toLowerCase().trim();
-        String selectedCategory = cbCategory.getValue();
-
-        filteredData.setPredicate(item -> {
-            boolean matchesSearch = searchText.isEmpty() ||
-                    item.getEquipmentName().toLowerCase().contains(searchText) ||
-                    item.getModelNo().toLowerCase().contains(searchText);
-
-            boolean matchesCategory = selectedCategory.equals("All Equipment") ||
-                    item.getCategory().equalsIgnoreCase(selectedCategory);
-
-            return matchesSearch && matchesCategory;
-        });
-
-        renderGrid();
-    }
-
-    private void renderGrid() {
-        equipmentGrid.getChildren().clear();
-        List<Button> cards = new ArrayList<>();
-        for (Equipment item : filteredData) {
-            Button card = EquipmentCardFactory.createCard(item, this::openBorrowPopup);
-            cards.add(card);
-        }
-
-        Platform.runLater(() -> equipmentGrid.getChildren().setAll(cards));
     }
 
     private void updateCategoryUI(String category) {
