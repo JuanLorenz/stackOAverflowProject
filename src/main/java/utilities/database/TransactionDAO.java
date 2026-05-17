@@ -27,7 +27,7 @@ public class TransactionDAO implements ContractDAO<Transaction> {
             """;
     private final String FIND_BY_TRANSACTION_ID = FIND_ALL + " WHERE t.transactionID = ?";
     private final String FIND_BY_USER_ID = FIND_ALL + " WHERE u.id = ?";
-    private final String INSERT_TRANSACTION = "INSERT INTO transaction (equipmentID, userID, dateBorrowed, dateReturned) VALUES (?, ?, ?, ?)";
+    private final String INSERT_TRANSACTION = "INSERT INTO transaction (equipmentID, userID, dateBorrowed, dateReturned, dueDate) VALUES (?, ?, ?, ?, ?)";
     private final String UPDATE_RETURN = "UPDATE transaction SET dateReturned = ? WHERE transactionID = ?";
 
     @Override
@@ -39,6 +39,7 @@ public class TransactionDAO implements ContractDAO<Transaction> {
             statement.setInt(2, transaction.getUser().getId());
             statement.setObject(3, transaction.getDateBorrowed());
             statement.setObject(4, null);
+            statement.setObject(5, transaction.getDueDate());
 
             int affectedRows = statement.executeUpdate();
 

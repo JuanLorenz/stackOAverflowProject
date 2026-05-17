@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import utilities.manager.SerializeManager;
 import utilities.service.TransactionService;
 
@@ -46,7 +47,17 @@ public class HistoryRecordsController {
         filteredData.addListener((ListChangeListener<Transaction>) c -> refreshTable());
 
         // show table
+        setupHeader();
         refreshTable();
+    }
+
+    private void setupHeader() {
+        tableHeader.getChildren().clear();
+        String[] columns = {"Date Borrowed", "Equipment", "Condition", "Date Returned"};
+
+        for (String col : columns) {
+            tableHeader.getChildren().add(createColumnLabel(col, true));
+        }
     }
 
     /**
@@ -81,46 +92,44 @@ public class HistoryRecordsController {
         }
     }
 
-    /**
-     * Helper to build a single "Pill" row HBox
-     */
     private HBox createRow(Transaction t) {
         HBox row = new HBox();
         row.setAlignment(Pos.CENTER);
-        row.setSpacing(10); // Matches FXML spacing if needed
+        row.setSpacing(tableHeader.getSpacing());
         row.getStyleClass().add("history-row");
 
-        Label[] labels = getLabels(t);
-        for (Label l : labels) {
-            l.setMaxWidth(Double.MAX_VALUE);
-            l.setAlignment(Pos.CENTER);
-            l.setStyle("-fx-text-fill: #333333; -fx-font-weight: bold;");
-            HBox.setHgrow(l, Priority.ALWAYS);
-            row.getChildren().add(l);
-        }
+        String returnStr = (t.getDateReturned() == null) ? "Not Returned" : t.getDateReturned().toString();
 
-        // You can add a CSS class here later for the "Pill" look
-        row.getStyleClass().add("history-row");
+        row.getChildren().addAll(
+                createColumnLabel(t.getDateBorrowed().toString(), false),
+                createColumnLabel(t.getEquipment().getEquipmentName(), false),
+                createColumnLabel(t.getEquipment().getCondition(), false),
+                createColumnLabel(returnStr, false)
+        );
 
         return row;
     }
 
-    private Label[] getLabels(Transaction t) {
-        // Column 1: Borrow Date
-        Label dateBorrowed = new Label(t.getDateBorrowed().toString());
+    /**
+     * Helper to create a Label with standardized alignment constraints.
+     */
+    private Label createColumnLabel(String text, boolean isHeader) {
+        Label label = new Label(text);
 
-        // Column 2: Equipment Name
-        Label name = new Label(t.getEquipment().getEquipmentName());
+        // 1. Fill the horizontal space
+        label.setMaxWidth(Double.MAX_VALUE);
+        label.setPrefWidth(0);
+        HBox.setHgrow(label, Priority.ALWAYS);
 
-        // Column 3: Condition
-        Label condition = new Label(t.getEquipment().getCondition());
+        label.setAlignment(Pos.CENTER);
 
-        // Column 4: Date Returned (Check for null)
-        String returnStr = (t.getDateReturned() == null) ? "Not Returned" : t.getDateReturned().toString();
-        Label dateReturned = new Label(returnStr);
+        if (isHeader) {
+            label.setStyle("-fx-font-weight: bold; -fx-text-fill: #555555;");
+        } else {
+            label.setWrapText(true); // Prevents long names from breaking the table
+            label.setTextAlignment(TextAlignment.CENTER);
+        }
 
-        // Apply Alignment and Growth to each label so they match the FXML Header
-        Label[] labels = {dateBorrowed, name, condition, dateReturned};
-        return labels;
+        return label;
     }
 }

@@ -18,7 +18,6 @@ public class Transaction {
         this.equipment = equipment;
         this.dateBorrowed = dateBorrowed;
         this.dateReturned = dateReturned;
-        //REMOVED INIT FOR dateReturned SINCE IT DOESN'T MAKE SENSE
         dueDate = dateBorrowed.plusDays(30);
     }
 
@@ -68,9 +67,5 @@ public class Transaction {
 
     public LocalDate getDueDate() {
         return dueDate;
-    }
-
-    public void setDueDate(long days) {
-        dueDate = dueDate.plusDays(days);
     }
 }

@@ -6,12 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlockedUserDAO implements ContractDAO<User>{
-
-    // Use JOIN for better performance and clarity
     private final String FIND_ALL = "SELECT u.*, b.blockedUntil FROM users u JOIN blockedusers b ON u.id = b.userID";
     private final String FIND_BY_ID = "SELECT u.*, b.blockedUntil FROM users u JOIN blockedusers b ON u.id = b.userID WHERE u.id = ?";
     private final String INSERT_BLOCKEDUSER = "INSERT INTO blockedusers (userID, blockedUntil) VALUES (?, ?)";
@@ -82,7 +81,7 @@ public class BlockedUserDAO implements ContractDAO<User>{
     }
 
     private User mapBlockedUser(ResultSet rs) throws SQLException {
-        return new User(
+        User u = new User(
                 rs.getInt("id"),
                 rs.getString("name"),
                 rs.getString("email"),
@@ -91,7 +90,7 @@ public class BlockedUserDAO implements ContractDAO<User>{
                 rs.getBoolean("isBlocked"),
                 rs.getString("profilePhotoPath")
         );
+        u.setBlockedUntil(rs.getObject("blockedUntil", LocalDate.class));
+        return u;
     }
-
-
 }

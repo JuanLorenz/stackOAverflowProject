@@ -75,9 +75,9 @@
 
 /* 3. The Main Gradient Container (tableWrapper) */
 .table-container {
-    -fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 40%, #00f2fe 60%, #43e97b 100%);
-    -fx-background-radius: 40;
-    -fx-padding: 30;
+    -fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
+    -fx-background-radius: 30;
+    -fx-padding: 25;
 }
 
 /* 4. Make the ScrollPane invisible so the gradient shows through */
@@ -100,20 +100,19 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
 }
 
-/* Optional: Make it change color slightly when the user hovers over it */
-.history-row:hover {
-    -fx-background-color: #fcfcfc;
+.history-row .label {
+    -fx-text-fill: #444444;
+    -fx-font-weight: 500;
 }
 
 .header-box {
-    -fx-background-color: white;
-    -fx-background-radius: 15; /* Rounded corners like the rows */
-    -fx-padding: 15 10 15 10;  /* Vertical and horizontal padding */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2); /* Subtle shadow */
+    -fx-background-color: rgba(255, 255, 255, 1);
+    -fx-background-radius: 15;
+    -fx-padding: 15;
 }
 
-.header-label {
-    -fx-text-fill: black;
+.header-box .label {
+    -fx-text-fill: #333333;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
 }

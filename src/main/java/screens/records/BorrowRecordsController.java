@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import utilities.service.TransactionService;
 
 public class BorrowRecordsController {
@@ -35,6 +36,9 @@ public class BorrowRecordsController {
         handleShowActive();
     }
 
+    /**
+     * Called when an Admin clicks on "Actively Borrowed" tab.
+     */
     @FXML
     private void handleShowActive() {
         showingActivelyBorrowed = true;
@@ -65,44 +69,62 @@ public class BorrowRecordsController {
     }
 
     private void renderTable() {
-        // clear the table (header & contents)
         rowsContainer.getChildren().clear();
         tableHeader.getChildren().clear();
 
-        // initialize the labels (depending on what screen is active)
         String lastColumn = showingActivelyBorrowed ? "Condition" : "Date Returned";
         String[] columns = {"Date Borrowed", "Borrower", "Equipment", lastColumn};
 
-        // for header
+        // 1. Setup Header
         for (String col : columns) {
-            Label l = new Label(col);
-            l.setMaxWidth(Double.MAX_VALUE);
-            l.setAlignment(Pos.CENTER);
-            l.setStyle("-fx-font-weight: bold;");
-            HBox.setHgrow(l, Priority.ALWAYS);
-            tableHeader.getChildren().add(l);
+            tableHeader.getChildren().add(createColumnLabel(col, true));
         }
 
-        // for each transaction row
+        // 2. Setup Rows
         for (Transaction t : filteredData) {
             HBox row = new HBox();
             row.getStyleClass().add("history-row");
             row.setAlignment(Pos.CENTER);
 
-            Label date = new Label(t.getDateBorrowed().toString());
-            Label user = new Label(t.getUser().getName());
-            Label equip = new Label(t.getEquipment().getEquipmentName());
+            // Match the spacing of your header if it has any (e.g., tableHeader.getSpacing())
+            row.setSpacing(tableHeader.getSpacing());
 
-            String lastVal = showingActivelyBorrowed ? t.getEquipment().getCondition(): t.getDateReturned().toString();
-            Label last = new Label(lastVal);
+            String lastVal = showingActivelyBorrowed ?
+                    t.getEquipment().getCondition() :
+                    t.getDateReturned().toString();
 
-            for (Label l : new Label[]{date, user, equip, last}) {
-                l.setMaxWidth(Double.MAX_VALUE);
-                l.setAlignment(Pos.CENTER);
-                HBox.setHgrow(l, Priority.ALWAYS);
-                row.getChildren().add(l);
-            }
+            row.getChildren().addAll(
+                    createColumnLabel(t.getDateBorrowed().toString(), false),
+                    createColumnLabel(t.getUser().getName(), false),
+                    createColumnLabel(t.getEquipment().getEquipmentName(), false),
+                    createColumnLabel(lastVal, false)
+            );
+
             rowsContainer.getChildren().add(row);
         }
+    }
+
+    /**
+     * HELPER METHOD: Creates a label with fixed growth constraints
+     */
+    private Label createColumnLabel(String text, boolean isHeader) {
+        Label label = new Label(text);
+
+        // Set prefWidth to 0 and HGrow to ALWAYS.
+        // This forces HBox to divide the total width into exactly equal segments.
+        label.setMaxWidth(Double.MAX_VALUE);
+        label.setPrefWidth(0);
+        HBox.setHgrow(label, Priority.ALWAYS);
+
+        label.setAlignment(Pos.CENTER);
+
+        if (isHeader) {
+            label.setStyle("-fx-font-weight: bold; -fx-text-fill: #555555;");
+        } else {
+            label.setWrapText(true); // Ensures long text doesn't break the layout
+            label.setTextAlignment(TextAlignment.CENTER);
+        }
+
+        return label;
     }
 }
