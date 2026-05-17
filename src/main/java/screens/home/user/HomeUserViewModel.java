@@ -66,7 +66,26 @@ public class HomeUserViewModel {
                 System.out.println("Overdue items found! Blocking user.");
                 userDAO.updateUserBlockStatus(currentUser.getId(), true);
                 currentUser.setUserAccessStatus(true);
+                currentUser.setBlockedOn(LocalDate.now());
                 SerializeManager.serializeUser(currentUser);
+            }else if(currentUser.isBlocked()){
+                LocalDate dateUserBlocked = currentUser.getBlockedDate();
+
+                if(dateUserBlocked != null){
+                    long difference = ChronoUnit.DAYS.between(dateUserBlocked, today);
+
+                    if(difference >= 7 && !hasOverdueItems){
+                        System.out.println("User is no longer blocked!");
+                        userDAO.updateUserBlockStatus(currentUser.getId(), false);
+                        currentUser.setUserAccessStatus(false);
+                        currentUser.setBlockedOn(null);
+                        SerializeManager.serializeUser(currentUser);
+                    }else if(difference >= 7 && hasOverdueItems){
+                        System.out.println("Return remaining overdue items");
+                    }
+                }
+
+
             }
 
             borrowedItems.setAll(activeTransactions);
@@ -76,13 +95,6 @@ public class HomeUserViewModel {
     public void returnEquipment(Transaction transaction, User currentUser) {
         Equipment equipment = transaction.getEquipment();
         boolean transactionUpdated = transactionDAO.updateReturn(transaction.getTransactionID(), LocalDate.now());
-
-        //--Logic for blocking user added ; needs checking
-        long difference = ChronoUnit.DAYS.between(transaction.getDateBorrowed(), LocalDate.now());
-        if(difference > 30){
-            // if returned more than 30 days (due date) of its borrowing time, user is blocked;
-            currentUser.setUserAccessStatus(true);
-        }
 
         if (transactionUpdated) {
             int newAvailableQty = equipment.getAvailableQty() + 1;
