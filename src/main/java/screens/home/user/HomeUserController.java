@@ -20,7 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import screens.home.CategoryCardFactory;
-import screens.home.user.HomeUserViewModel;
 import utilities.manager.SerializeManager;
 
 import java.util.Map;
@@ -96,7 +95,7 @@ public class HomeUserController {
                 returnBtn.getStyleClass().add("btn-return");
                 returnBtn.setOnAction(event -> {
                     Transaction transaction = getTableView().getItems().get(getIndex());
-                    viewModel.returnEquipment(transaction, currentUser);
+                    viewModel.returnEquipment(transaction);
                 });
             }
 
@@ -114,7 +113,6 @@ public class HomeUserController {
         };
         actionColumn.setCellFactory(cellFactory);
     }
-
 
     private void setupSearchAndFilter() {
         categoryComboBox.setItems(FXCollections.observableArrayList(

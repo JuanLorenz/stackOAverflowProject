@@ -69,4 +69,8 @@ public class TransactionService {
     public List<Transaction> getUserHistory(int userId) {
         return transactionDAO.findAllByUserId(userId);
     }
+
+    public List<Transaction> getUserActiveTransaction(int userId) {
+        return transactionDAO.findActiveByUserId(userId);
+    }
 }

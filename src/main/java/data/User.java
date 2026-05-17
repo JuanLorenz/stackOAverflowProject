@@ -15,9 +15,10 @@ public class User implements Serializable {
     private String email;
     private transient String password;
     private String userType;
-    private boolean isBlocked;
     private String profilePhotoPath;
+    private boolean isBlocked;
     private LocalDate blockedOn;
+    private LocalDate blockedUntil;
 
     public User(int id, String name, String email, String password, String userType,  boolean isBlocked, String profilePhotoPath) {
         this.id = id;
@@ -37,33 +38,23 @@ public class User implements Serializable {
     public boolean isBlocked() { return isBlocked; }
     public String getProfilePhotoPath() { return profilePhotoPath; }
     public LocalDate getBlockedDate() {return blockedOn; }
-    public LocalDate getUnblockedDate() {
-        if(isBlocked()){
-            return getBlockedDate().plusDays(30);
-        }
-        return null;
-    }
+    public LocalDate getUnblockedDate() { return blockedUntil; }
 
     public void setUserAccessStatus(boolean isBlocked) { this.isBlocked = isBlocked; }
-
     public void setBlockedOn(LocalDate blockedOn){ this.blockedOn = blockedOn; }
-
+    public void setBlockedUntil(LocalDate blockedUntil) { this.blockedUntil = blockedUntil; }
     public void setProfilePhotoPath(String profilePhotoPath) {
         this.profilePhotoPath = profilePhotoPath;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public String toString(){
         return name + " " + email;
     }
