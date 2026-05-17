@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2026 at 11:52 AM
+-- Generation Time: May 17, 2026 at 06:26 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,45 +56,45 @@ CREATE TABLE `equipment` (
 --
 
 INSERT INTO `equipment` (`equipmentID`, `equipmentName`, `category`, `modelNo`, `serialNo`, `condition`, `totalQty`, `availableQty`, `imagePath`) VALUES
-(1, 'Digital Multimeter', 'Engineering', 'Fluke-115', 'EN-FLK-9921', 'Good', 15, 12, 'media/equipments/digital multimeter.jpg'),
+(1, 'Digital Multimeter', 'Engineering', 'Fluke-115', 'EN-FLK-9921', 'Good', 15, 15, 'media/equipments/digital multimeter.jpg'),
 (3, 'Oscilloscope', 'Engineering', 'TDS2024C', 'EN-OSC-4402', 'New', 5, 5, 'media/equipments/oscilloscope.jpg'),
-(4, 'Soldering Station', 'Engineering', 'WE1010NA', 'EN-SLD-1188', 'Used', 20, 18, 'media/equipments/soldering station.jpg'),
+(4, 'Soldering Station', 'Engineering', 'WE1010NA', 'EN-SLD-1188', 'Used', 20, 20, 'media/equipments/soldering station.jpg'),
 (5, 'Function Generator', 'Engineering', 'AFG1022', 'EN-FGEN-339', 'Good', 8, 8, 'media/equipments/function generator.jpg'),
-(6, 'Laser Level', 'Engineering', 'GLL3-330', 'EN-LLV-7710', 'New', 4, 3, 'media/equipments/laser level.jpg'),
-(7, 'Digital Balances', 'Chemistry', 'ENT-220', 'CH-BAL-8821', 'Good', 10, 9, 'media/equipments/digital balance.jpg'),
+(6, 'Laser Level', 'Engineering', 'GLL3-330', 'EN-LLV-7710', 'New', 4, 4, 'media/equipments/laser level.jpg'),
+(7, 'Digital Balances', 'Chemistry', 'ENT-220', 'CH-BAL-8821', 'Good', 10, 10, 'media/equipments/digital balance.jpg'),
 (8, 'Magnetic Stirrer', 'Chemistry', 'MS-H280', 'CH-STR-1104', 'New', 12, 12, 'media/equipments/magnetic stirrer.jpg'),
-(9, 'Spectrophotometer', 'Chemistry', 'GEN-10S', 'CH-SPEC-553', 'Good', 3, 2, 'media/equipments/spectrophotometer.jpg'),
-(10, 'Centrifuge', 'Chemistry', '5424-R', 'CH-CEN-0091', 'Good', 5, 4, 'media/equipments/centrifuge.jpg'),
-(11, 'pH Meter', 'Chemistry', 'HI-98103', 'CH-PHM-2234', 'New', 15, 14, 'media/equipments/ph meter.jpg'),
-(12, 'Stopwatch', 'Physical Education', 'SL-800', 'PE-STW-1122', 'Good', 30, 25, ''),
+(9, 'Spectrophotometer', 'Chemistry', 'GEN-10S', 'CH-SPEC-553', 'Good', 3, 3, 'media/equipments/spectrophotometer.jpg'),
+(10, 'Centrifuge', 'Chemistry', '5424-R', 'CH-CEN-0091', 'Good', 5, 5, 'media/equipments/centrifuge.jpg'),
+(11, 'pH Meter', 'Chemistry', 'HI-98103', 'CH-PHM-2234', 'New', 15, 15, 'media/equipments/ph meter.jpg'),
+(12, 'Stopwatch', 'Physical Education', 'SL-800', 'PE-STW-1122', 'Good', 30, 30, ''),
 (13, 'Volleyball Net', 'Physical Education', 'VBN-PRO', 'PE-VBN-4400', 'New', 4, 4, ''),
 (14, 'Plyometric Box Set', 'Physical Education', 'PB-3IN1', 'PE-PLY-6601', 'Good', 5, 5, ''),
-(15, 'Agility Ladder', 'Physical Education', 'AG-SPEED', 'PE-AGL-1122', 'Used', 15, 13, ''),
-(16, 'Battle Ropes', 'Physical Education', 'BR-50FT', 'PE-BRP-3311', 'Good', 6, 4, ''),
-(17, 'DSLR Camera', 'Multi Media', 'EOS-90D', 'MM-CAM-7721', 'New', 6, 5, ''),
+(15, 'Agility Ladder', 'Physical Education', 'AG-SPEED', 'PE-AGL-1122', 'Used', 15, 15, ''),
+(16, 'Battle Ropes', 'Physical Education', 'BR-50FT', 'PE-BRP-3311', 'Good', 6, 6, ''),
+(17, 'DSLR Camera', 'Multi Media', 'EOS-90D', 'MM-CAM-7721', 'New', 6, 6, ''),
 (18, 'Tripod', 'Multi Media', '190XPRO', 'MM-TRI-0044', 'Good', 10, 10, ''),
-(19, 'Shotgun Mic', 'Multi Media', 'VideoMic-NTG', 'MM-MIC-8812', 'Good', 8, 4, ''),
-(20, 'LED Video Light', 'Multi Media', 'VL-200', 'MM-LIT-2290', 'New', 12, 10, ''),
-(21, 'Graphic Tablet', 'Multi Media', 'Intuos-Pro', 'MM-TAB-5561', 'Good', 15, 12, ''),
-(22, 'Microscope', 'Medical Sciences', 'CX23', 'MD-MIC-3301', 'Good', 20, 12, ''),
+(19, 'Shotgun Mic', 'Multi Media', 'VideoMic-NTG', 'MM-MIC-8812', 'Good', 8, 8, ''),
+(20, 'LED Video Light', 'Multi Media', 'VL-200', 'MM-LIT-2290', 'New', 12, 12, ''),
+(21, 'Graphic Tablet', 'Multi Media', 'Intuos-Pro', 'MM-TAB-5561', 'Good', 15, 15, ''),
+(22, 'Microscope', 'Medical Sciences', 'CX23', 'MD-MIC-3301', 'Good', 20, 20, ''),
 (23, 'Sphygmomanometer', 'Medical Sciences', 'BP-100', 'MD-SPH-4492', 'New', 15, 15, ''),
-(24, 'Pulse Oximeter', 'Medical Sciences', 'PO-30', 'MD-PLX-1120', 'Good', 25, 18, ''),
+(24, 'Pulse Oximeter', 'Medical Sciences', 'PO-30', 'MD-PLX-1120', 'Good', 25, 25, ''),
 (25, 'Anatomy Manikin', 'Medical Sciences', 'PO-30', 'MD-MAN-5588', 'Good', 3, 3, ''),
-(26, 'Stethoscope', 'Medical Sciences', 'Littmann-C3', 'MD-STT-9904', 'New', 20, 16, ''),
-(27, 'Raspberry Pi 4', 'Information Technology', 'RPI4-8GB', 'IT-RPI-1102', 'New', 30, 28, ''),
-(28, 'VR Headset', 'Information Technology', 'Quest-2', 'IT-VRH-6677', 'Good', 5, 4, ''),
+(26, 'Stethoscope', 'Medical Sciences', 'Littmann-C3', 'MD-STT-9904', 'New', 20, 20, ''),
+(27, 'Raspberry Pi 4', 'Information Technology', 'RPI4-8GB', 'IT-RPI-1102', 'New', 30, 30, ''),
+(28, 'VR Headset', 'Information Technology', 'Quest-2', 'IT-VRH-6677', 'Good', 5, 5, ''),
 (29, 'Network Switch', 'Information Technology', 'Catalyst-2960', 'IT-SWT-4431', 'Used', 6, 6, ''),
 (30, 'Arduino Starter Kit', 'Information Technology', 'Uno-R3', 'IT-ARD-8819', 'New', 25, 25, ''),
-(31, 'External Hard Drive', 'Information Technology', 'HD-1TB', 'IT-EHD-2250', 'Good', 10, 6, ''),
-(32, 'Drafting Table', 'Architecture', 'DT-PRO', 'AR-DFT-3310', 'Good', 20, 6, ''),
-(33, 'Scale Ruler', 'Architecture', 'TRI-SC-12', 'AR-SCL-5502', 'New', 50, 46, ''),
-(34, 'T-Square', 'Architecture', 'TSQ-36', 'AR-TSQ-9912', 'Good', 30, 26, ''),
-(35, '3D Printer', 'Architecture', 'Ender-3', 'AR-3DP-4481', 'Good', 4, 2, ''),
+(31, 'External Hard Drive', 'Information Technology', 'HD-1TB', 'IT-EHD-2250', 'Good', 10, 10, ''),
+(32, 'Drafting Table', 'Architecture', 'DT-PRO', 'AR-DFT-3310', 'Good', 20, 20, ''),
+(33, 'Scale Ruler', 'Architecture', 'TRI-SC-12', 'AR-SCL-5502', 'New', 50, 50, ''),
+(34, 'T-Square', 'Architecture', 'TSQ-36', 'AR-TSQ-9912', 'Good', 30, 30, ''),
+(35, '3D Printer', 'Architecture', 'Ender-3', 'AR-3DP-4481', 'Good', 4, 4, ''),
 (36, 'Plotter Printer', 'Architecture', 'DesignJet-T650', 'AR-PLT-1166', 'New', 2, 2, ''),
 (37, 'Soil Moisture Sensor', 'Agriculture', 'SMS-500', 'AG-SMS-7711', 'New', 20, 20, ''),
-(38, 'Hand Trowel', 'Agriculture', 'HT-ALUM', 'AG-HTR-2299', 'Good', 40, 35, ''),
-(39, 'Digital Grain Scale', 'Agriculture', 'DGS-10', 'AG-DGS-4450', 'Good', 5, 2, ''),
-(40, 'Pruning Shears', 'Agriculture', 'PS-BYPASS', 'AG-PRS-1123', 'Good', 12, 11, ''),
+(38, 'Hand Trowel', 'Agriculture', 'HT-ALUM', 'AG-HTR-2299', 'Good', 40, 40, ''),
+(39, 'Digital Grain Scale', 'Agriculture', 'DGS-10', 'AG-DGS-4450', 'Good', 5, 5, ''),
+(40, 'Pruning Shears', 'Agriculture', 'PS-BYPASS', 'AG-PRS-1123', 'Good', 12, 12, ''),
 (41, 'pH Soil Tester', 'Agriculture', 'ST-LUSTER', 'AG-STT-6644', 'New', 10, 10, '');
 
 -- --------------------------------------------------------
@@ -108,7 +108,8 @@ CREATE TABLE `transaction` (
   `equipmentID` int(11) DEFAULT NULL,
   `userID` int(11) DEFAULT NULL,
   `dateBorrowed` date DEFAULT NULL,
-  `dateReturned` date DEFAULT NULL
+  `dateReturned` date DEFAULT NULL,
+  `dueDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
