@@ -31,13 +31,29 @@
 .custom-table .table-row-cell:filled { -fx-background-color: transparent; }
 .custom-table .table-row-cell:filled:hover { -fx-background-color: transparent; }
 
-/* Apply white background ONLY to item column cells (White pill effect) */
-.custom-table .table-row-cell:filled .item-column {
+/* Base layout cell coloring to build the combined horizontal pill look */
+.custom-table .table-row-cell:filled .item-column,
+.custom-table .table-row-cell:filled .due-date-column {
     -fx-background-color: white;
-    -fx-background-radius: 10px;
+    -fx-background-insets: 6 0 6 0;
+}
+
+/* Left side rounded corners on Item Details */
+.custom-table .table-row-cell:filled .item-column {
+    -fx-background-radius: 10px 0 0 10px;
+    -fx-background-insets: 6 0 6 0;
+}
+
+/* Right side rounded corners and separation padding on Due Date */
+.custom-table .table-row-cell:filled .due-date-column {
+    -fx-background-radius: 0 10px 10px 0;
     -fx-background-insets: 6 15 6 0;
 }
-.custom-table .table-row-cell:filled:hover .item-column { -fx-background-color: #f0f0f0; }
+
+.custom-table .table-row-cell:filled:hover .item-column,
+.custom-table .table-row-cell:filled:hover .due-date-column {
+    -fx-background-color: #f0f0f0;
+}
 
 .custom-table .table-cell {
     -fx-text-fill: #333333;

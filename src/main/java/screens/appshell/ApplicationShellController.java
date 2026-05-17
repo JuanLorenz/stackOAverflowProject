@@ -23,6 +23,8 @@ import java.util.Objects;
 
 public class ApplicationShellController {
 
+    public static ApplicationShellController instance;
+
     @FXML public ImageView ivProfilePic;
     @FXML public Label labelUserName;
     @FXML public Pane globalShadow;
@@ -44,6 +46,8 @@ public class ApplicationShellController {
     private String userType;
 
     public void initialize() {
+
+        instance = this;
         try {
             ivProfilePic.setSmooth(true);
             ivProfilePic.setPreserveRatio(true);
@@ -135,7 +139,8 @@ public class ApplicationShellController {
         if(clickedButton != null) clickedButton.getStyleClass().add("menu-button-active");
     }
 
-    private void loadView(String fxmlPath) {
+
+    private Object loadView(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(fxmlPath)));
             Parent view = loader.load();
@@ -146,9 +151,24 @@ public class ApplicationShellController {
             }
 
             contentArea.getChildren().setAll(view);
+            return controller;
+
         } catch (IOException e) {
             System.out.println("Failed to load " + fxmlPath);
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    // ---> NEW FIX: The special method to navigate AND filter
+    public void goToHistoryWithFilter(String category) {
+        Object controller = loadView("/screens/records/HistoryRecords.fxml");
+        labelShellHeader.setText("History Records");
+        setActiveButton(btnRecords);
+
+        // If the view loaded successfully, tell it to set the filter!
+        if (controller instanceof screens.records.HistoryRecordsController) {
+            ((screens.records.HistoryRecordsController) controller).setCategoryFilter(category);
         }
     }
 

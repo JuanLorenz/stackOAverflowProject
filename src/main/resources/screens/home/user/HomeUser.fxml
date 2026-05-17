@@ -60,7 +60,12 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                     <columns>
-                        <TableColumn fx:id="itemColumn" prefWidth="550.0" styleClass="item-column" text="Item Details" />
+                        <!-- Adjusted width to make room for Due Date -->
+                        <TableColumn fx:id="itemColumn" prefWidth="400.0" styleClass="item-column" text="Item Details" />
+
+                        <!-- NEW COLUMN -->
+                        <TableColumn fx:id="dueDateColumn" prefWidth="150.0" styleClass="due-date-column" text="Due Date" />
+
                         <TableColumn fx:id="actionColumn" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" styleClass="action-column" text="Action" />
                     </columns>
                 </TableView>
