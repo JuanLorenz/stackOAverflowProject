@@ -3,6 +3,8 @@ package data;
 import data.equipment.Equipment;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class User implements Serializable {
@@ -15,6 +17,7 @@ public class User implements Serializable {
     private String userType;
     private boolean isBlocked;
     private String profilePhotoPath;
+    private LocalDate blockedOn;
 
     public User(int id, String name, String email, String password, String userType,  boolean isBlocked, String profilePhotoPath) {
         this.id = id;
@@ -33,8 +36,17 @@ public class User implements Serializable {
     public String getUserType() { return userType; }
     public boolean isBlocked() { return isBlocked; }
     public String getProfilePhotoPath() { return profilePhotoPath; }
+    public LocalDate getBlockedDate() {return blockedOn; }
+    public LocalDate getUnblockedDate() {
+        if(isBlocked()){
+            return getBlockedDate().plusDays(30);
+        }
+        return null;
+    }
 
     public void setUserAccessStatus(boolean isBlocked) { this.isBlocked = isBlocked; }
+
+    public void setBlockedOn(LocalDate blockedOn){ this.blockedOn = blockedOn; }
 
     public void setProfilePhotoPath(String profilePhotoPath) {
         this.profilePhotoPath = profilePhotoPath;
