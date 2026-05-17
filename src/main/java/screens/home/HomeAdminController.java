@@ -47,7 +47,7 @@ public class HomeAdminController {
                 outer.setAlignment(Pos.CENTER_LEFT);
 
                 card.setAlignment(Pos.CENTER_LEFT);
-                card.setPadding(new Insets(12, 20, 12, 20));
+                //card.setPadding(new Insets(12, 20, 12, 20));
                 card.getStyleClass().add("admin-list-card");
 
                 // 2. The 'card' is what actually looks like the row (White background)

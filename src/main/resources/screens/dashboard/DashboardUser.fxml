@@ -7,17 +7,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.StackPane?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@DashboardUserStyle.css" fx:controller="screens.dashboard.DashboardUserController">
+<StackPane stylesheets="@DashboardUserStyle.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="screens.dashboard.DashboardUserController">
     <VBox prefHeight="600.0" prefWidth="900.0" spacing="25.0" styleClass="main-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
         <padding>
             <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
         </padding>
         <children>
-            <Label styleClass="dashboard-title" text="Dashboard" />
+            <Label styleClass="dashboard-title" />
 
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                 <children>
@@ -48,7 +48,7 @@
         </children>
     </VBox>
 
-    <StackPane fx:id="overlayPane" visible="false" style="-fx-background-color: rgba(0,0,0,0.5);">
+    <StackPane fx:id="overlayPane" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
         <!-- The popup FXML will be injected here -->
     </StackPane>
 </StackPane>

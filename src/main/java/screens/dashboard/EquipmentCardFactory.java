@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import utilities.manager.ImageManager;
 
 import java.util.function.Consumer;
@@ -14,12 +15,14 @@ import java.util.function.Consumer;
 public class EquipmentCardFactory {
 
     public static Button createCard(Equipment item, Consumer<Equipment> onClickAction) {
+        int CARD_WIDTH = 180;
+        int CARD_HEIGHT = 220;
         int WIDTH = 150;
         int HEIGHT = 150;
 
         Button btn = new Button();
         btn.getStyleClass().add("equipment-card");
-        btn.setPrefSize(180, 220);
+        btn.setPrefSize(CARD_WIDTH, CARD_HEIGHT);
         String categoryClass = "border-" + item.getCategory().toLowerCase().replace(" ", "");
         btn.getStyleClass().add(categoryClass);
 
@@ -32,7 +35,7 @@ public class EquipmentCardFactory {
 
         // Text Handling
         Label name = new Label(item.getEquipmentName());
-        name.setStyle("-fx-font-size: 14px; -fx-font-family: 'Segoe UI Semibold';");
+        name.setStyle("-fx-font-size: 14px; -fx-font-family: 'Segoe UI Semibold'; -fx-text-fill: #333333;");
         name.setWrapText(true);
         name.setAlignment(Pos.CENTER);
 

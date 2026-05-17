@@ -122,20 +122,25 @@
                 <children>
                     <!-- DYNAMIC CONTENT AREA -->
                     <StackPane fx:id="contentArea" />
-
-                    <!-- HAMBURGER BUTTON -->
-                    <Button fx:id="btnHamburger" onAction="#toggleSidebar" styleClass="hamburger-button">
-                        <graphic>
-                            <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@../../media/icons/icon-burger-green.png" />
-                                </image>
-                            </ImageView>
-                        </graphic>
-                        <StackPane.margin>
-                            <Insets left="5.0" top="25.0" />
-                        </StackPane.margin>
-                    </Button>
+               <HBox alignment="CENTER_LEFT" maxHeight="50.0" maxWidth="300.0" prefHeight="50.0" prefWidth="300.0">
+                  <children>
+      
+                          <!-- HAMBURGER BUTTON -->
+                          <Button fx:id="btnHamburger" onAction="#toggleSidebar" styleClass="hamburger-button">
+                              <graphic>
+                                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                      <image>
+                                          <Image url="@../../media/icons/icon-burger-green.png" />
+                                      </image>
+                                  </ImageView>
+                              </graphic>
+                          </Button>
+                     <Label fx:id="labelShellHeader" styleClass="header-title" text="Header" />
+                  </children>
+                  <StackPane.margin>
+                     <Insets top="15.0" />
+                  </StackPane.margin>
+               </HBox>
                 </children>
             </StackPane>
         </center>

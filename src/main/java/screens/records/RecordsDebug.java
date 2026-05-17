@@ -1,4 +1,4 @@
-package screens.history;
+package screens.records;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
