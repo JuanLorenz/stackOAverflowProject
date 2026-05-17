@@ -63,3 +63,10 @@
     -fx-background-color: transparent;
     -fx-cursor: hand;
 }
+
+/* Header Title (after hamburger) */
+.header-title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}

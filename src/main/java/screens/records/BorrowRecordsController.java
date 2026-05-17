@@ -1,4 +1,4 @@
-package screens.history;
+package screens.records;
 
 import data.Transaction;
 import javafx.collections.FXCollections;

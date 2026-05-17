@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox minWidth="1024.0" style="-fx-padding: 50;" styleClass="root" stylesheets="@HistoryUserStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.history.HistoryRecordsController">
+<VBox minWidth="1024.0" style="-fx-padding: 50;" styleClass="root" stylesheets="@HistoryRecordsStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.records.HistoryRecordsController">
    <children>
-      <Label style="-fx-font-weight: bold; -fx-font-size: 30;" styleClass="labelHistory" text="History">
+      <Label style="-fx-font-weight: bold; -fx-font-size: 30;" styleClass="labelHistory">
          <VBox.margin>
             <Insets bottom="30.0" />
          </VBox.margin></Label>

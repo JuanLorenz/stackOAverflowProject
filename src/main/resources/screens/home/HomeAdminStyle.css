@@ -81,8 +81,14 @@
 .admin-list-card {
     -fx-background-color: white;
     -fx-background-radius: 50px;
-    -fx-padding: 10 20 10 20;
+    -fx-padding: 10 22 10 22;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);
+}
+
+.admin-list-card .label {
+    -fx-font-size: 16px; /* Increased from default ~13px */
+    -fx-font-weight: 500;
+    -fx-text-fill: #333333;
 }
 
 /* ── Hover Effect (Only for filled cells) ── */
@@ -103,10 +109,10 @@
 .delete-admin-button {
     -fx-background-color: #ff4d4d;
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-background-radius: 50px;
-    -fx-padding: 6 16 6 16;
+    -fx-padding: 10 22 10 22;
     -fx-cursor: hand;
 }
 .delete-admin-button:hover {

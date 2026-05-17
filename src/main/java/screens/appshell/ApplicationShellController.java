@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -28,6 +27,7 @@ public class ApplicationShellController {
     @FXML public Label labelUserName;
     @FXML public Pane globalShadow;
     @FXML public StackPane globalOverlayHolder;
+    @FXML public Label labelShellHeader;
 
     @FXML private StackPane shellRoot;
     @FXML private VBox sidebar;
@@ -153,25 +153,44 @@ public class ApplicationShellController {
     }
 
     @FXML public void showHome() {
-        if(userType.equals("admin")) loadView("/screens/home/HomeAdmin.fxml");
-        else loadView("/screens/home/user/HomeUser.fxml");
+        if(userType.equals("admin")) {
+            loadView("/screens/home/HomeAdmin.fxml");
+            labelShellHeader.setText("Welcome, Admin!");
+        }
+        else {
+            loadView("/screens/home/user/HomeUser.fxml");
+            labelShellHeader.setText("Home");
+        }
         setActiveButton(btnHome);
     }
 
     @FXML public void showDashboard() {
-        if(userType.equals("admin")) loadView("/screens/dashboard/DashboardAdmin.fxml");
-        else loadView("/screens/dashboard/DashboardUser.fxml");
+        if(userType.equals("admin")) {
+            loadView("/screens/dashboard/DashboardAdmin.fxml");
+            labelShellHeader.setText("Equipments");
+        }
+        else {
+            loadView("/screens/dashboard/DashboardUser.fxml");
+            labelShellHeader.setText("Dashboard");
+        }
         setActiveButton(btnDashboard);
     }
 
     @FXML public void showSettings() {
         loadView("/screens/settings/Settings.fxml");
+        labelShellHeader.setText("Account Settings");
         setActiveButton(btnSettings);
     }
 
     @FXML public void showRecords() {
-        if(userType.equals("admin")) loadView("/screens/history/BorrowRecords.fxml");
-        else loadView("/screens/history/HistoryRecords.fxml");
+        if(userType.equals("admin")) {
+            loadView("/screens/records/BorrowRecords.fxml");
+            labelShellHeader.setText("Borrow Records");
+        }
+        else {
+            loadView("/screens/records/HistoryRecords.fxml");
+            labelShellHeader.setText("History Records");
+        }
         setActiveButton(btnRecords);
     }
 
