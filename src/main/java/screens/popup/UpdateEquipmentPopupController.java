@@ -1,6 +1,7 @@
 package screens.popup;
 
 import data.equipment.Equipment;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -38,16 +39,13 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
     @FXML private TextField updateEquipmentCondition;
     @FXML private TextField updateEquipmentTotalQty;
 
-
     @FXML private Button buttonUpdateImage;
     @FXML private Button buttonUpdate;
-
 
     private String imagePath;
     private File newImageFile;
     private Equipment equipment;
     private final EquipmentService equipmentService = new EquipmentService();
-
 
     @Override
     public void setData(Equipment data) {
@@ -63,7 +61,6 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
         EquipmentImage.setImage(ImageManager.getSafeImage(data.getImagePath(), 200, 200));
     }
 
-
     public void onUpdateImgClicked(ActionEvent event) {
         newImageFile = ImageManager.chooseImage((Button)event.getSource());
         if (newImageFile != null) {
@@ -77,18 +74,21 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
             finalPath = ImageManager.updateImage(equipment.getImagePath(), newImageFile, ImageManager.TYPE_EQUIPMENT);
         }
 
-        equipmentService.updateEquipment(
+        boolean result = equipmentService.updateEquipment(
                 equipment.getEquipmentName(),
                 updateEquipmentCondition.getText().isEmpty() ? equipment.getCondition() : updateEquipmentCondition.getText(),
-                updateEquipmentTotalQty.getText().isEmpty() ? equipment.getTotalQty() : Integer.parseInt(updateEquipmentTotalQty.getText())
-                //TODO: THIS NEEDS TO HAVE "finalPath" INCLUDED
+                updateEquipmentTotalQty.getText().isEmpty() ? equipment.getTotalQty() : Integer.parseInt(updateEquipmentTotalQty.getText()),
+                finalPath
         );
+        System.out.println(result);
+        if (result) {
+            System.out.println("Successfully updated equipment");
+        }
         SceneManager.closeOverlay();
-
-        System.out.println("Successfully updated equipment");
     }
 
     public void onXClicked(ActionEvent actionEvent) {
         SceneManager.closeOverlay();
     }
+
 }

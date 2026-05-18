@@ -5,7 +5,6 @@ import utilities.database.EquipmentDAO;
 import data.equipment.EquipmentBuilder;
 
 import java.util.List;
-import java.util.Objects;
 
 public class EquipmentService {
     private final EquipmentDAO equipmentDAO = new EquipmentDAO();
@@ -33,10 +32,15 @@ public class EquipmentService {
         return "Cannot connect to database.";
     }
 
-    public boolean updateEquipment(String name, String condition, int totalQty) {
+    public boolean updateEquipment(String name, String condition, int totalQty, String finalPath) {
         Equipment e = equipmentDAO.findByName(name);
 
-        return equipmentDAO.updateCondition(e.getEquipmentID(), condition)
-                && equipmentDAO.updateQuantity(e.getEquipmentID(), totalQty, e.getAvailableQty());
+        boolean a = equipmentDAO.updateCondition(e.getEquipmentID(), condition);
+        boolean b = equipmentDAO.updateQuantity(e.getEquipmentID(), totalQty, e.getAvailableQty());
+        boolean c = equipmentDAO.updateImagePath(e.getEquipmentID(), finalPath);
+
+        System.out.println(a + " " + b + " " + c);
+
+        return a && b && c;
     }
 }

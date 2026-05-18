@@ -27,6 +27,7 @@ import utilities.service.EquipmentService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class DashboardAdminController {
 
@@ -34,49 +35,27 @@ public class DashboardAdminController {
     @FXML public TilePane equipmentContainer;
     @FXML public TextField textfieldSearchEquipment;
 
-    private ObservableList<Equipment> items = FXCollections.observableArrayList();
-    private FilteredList<Equipment> filteredList;
-    private final EquipmentService equipmentService = new EquipmentService();
+    private final DashboardAdminViewModel viewModel = new DashboardAdminViewModel();
 
     public void initialize(){
-        Task<List<Equipment>> loadTask = new Task<>() {
-            @Override
-            protected List<Equipment> call() {
-                // This runs on a separate thread (The "Chef" cooking in the back)
-                return equipmentService.getAllEquipment();
-            }
-        };
+        textfieldSearchEquipment.textProperty().bindBidirectional(viewModel.searchQueryProperty());
 
-        loadTask.setOnSucceeded(e -> {
-            items.setAll(loadTask.getValue());
-            filteredList = new FilteredList<>(items, p -> true);
-
-            //add listener to the search field
-            textfieldSearchEquipment.textProperty().addListener((observable, oldValue, newValue) -> {
-                //everytime user types a letter, restart the timer
-                filteredList.setPredicate(item -> {
-                    if (newValue == null || newValue.isBlank()) return true;
-
-                    String lowerCaseFilter = newValue.toLowerCase();
-                    return item.getEquipmentName().toLowerCase().contains(lowerCaseFilter) ||
-                            item.getModelNo().toLowerCase().contains(lowerCaseFilter);
-                });
-                renderGrid(items);
-            });
-
-            renderGrid(items);
+        // We show a blank screen/loading state until ensureDataLoaded finishes
+        viewModel.ensureDataLoaded(() -> {
+            // This runs on the UI Thread once the background Task is done
+            renderGrid();
+            viewModel.getFilteredData().addListener((ListChangeListener<Equipment>) c -> renderGrid());
         });
 
-        new Thread(loadTask).start();
+        //update equipment quantity if user has returned the equipment
+        viewModel.refreshDataQuietly();
     }
 
-    private void renderGrid(List<Equipment> equipments) {
-        equipmentContainer.getChildren().clear();
-        List<Button> cards = new ArrayList<>();
-        for (Equipment item : filteredList) {
-            Button card = EquipmentCardFactory.createCard(item, this::handleButtonClick);
-            cards.add(card);
-        }
+    private void renderGrid() {
+        // We use viewModel.getFilteredData() here
+        List<Button> cards = viewModel.getFilteredData().stream()
+                .map(item -> EquipmentCardFactory.createCard(item, this::handleButtonClick))
+                .collect(Collectors.toList());
 
         Platform.runLater(() -> equipmentContainer.getChildren().setAll(cards));
     }
@@ -88,4 +67,5 @@ public class DashboardAdminController {
     public void onAddEquipmentClicked(ActionEvent actionEvent) {
         SceneManager.showOverlay("/screens/popup/AddEquipmentPopup.fxml", null);
     }
+
 }
