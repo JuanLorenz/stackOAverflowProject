@@ -10,6 +10,7 @@ module com.example.stackoaverflowproject {
     requires java.sql;
     requires java.desktop;
     requires javafx.graphics;
+    requires javafx.base;
 
     // OPEN your UI folders so JavaFX can read your @FXML tags
     opens screens.login to javafx.fxml;

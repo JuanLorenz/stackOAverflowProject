@@ -14,9 +14,9 @@ public class EquipmentDAO implements ContractDAO<Equipment> {
     private final String FIND_BY_NAME = "SELECT * FROM equipment WHERE equipmentName = ?";
     private final String INSERT_EQUIPMENT = "INSERT INTO equipment (equipmentName, category, modelNo, serialNo, condition, totalQty, availableQty, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-    private final String UPDATE_CONDITION = "UPDATE equipment SET condition = ? WHERE equipmentID = ?";
+    private final String UPDATE_CONDITION = "UPDATE equipment SET `condition` = ? WHERE equipmentID = ?";
     private final String UPDATE_QUANTITY = "UPDATE equipment SET totalQty = ?, availableQty = ? WHERE equipmentID = ?";
-
+    private final String UPDATE_IMAGEPATH = "UPDATE equipment SET imagePath = ? WHERE equipmentID = ?";
     @Override
     public boolean save(Equipment equipment) {
         try (Connection c = ConnectionSQL.getConnection();
@@ -79,13 +79,26 @@ public class EquipmentDAO implements ContractDAO<Equipment> {
         return null;
     }
 
+    public boolean updateImagePath(int id, String newpath){
+        try (Connection c = ConnectionSQL.getConnection();
+             PreparedStatement statement = c.prepareStatement(UPDATE_IMAGEPATH)) {
+            statement.setString(1, newpath);
+            statement.setInt(2, id);
+            return statement.executeUpdate() > 0;
+        } catch (SQLException e) { return false; }
+    }
+
     public boolean updateCondition(int id, String condition) {
         try (Connection c = ConnectionSQL.getConnection();
              PreparedStatement statement = c.prepareStatement(UPDATE_CONDITION)) {
             statement.setString(1, condition);
             statement.setInt(2, id);
             return statement.executeUpdate() > 0;
-        } catch (SQLException e) { return false; }
+        } catch (SQLException e) {
+            System.out.println("Im sorry to fail you...");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false; }
     }
 
     public boolean updateQuantity(int id, int total, int available) {
@@ -105,4 +118,5 @@ public class EquipmentDAO implements ContractDAO<Equipment> {
                 .setInventory(rs.getInt("totalQty"), rs.getInt("availableQty"))
                 .build();
     }
+
 }

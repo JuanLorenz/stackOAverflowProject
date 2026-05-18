@@ -32,7 +32,6 @@ public class AddEquipmentPopupController {
     @FXML private TextField equipmentCondition;
     @FXML private TextField equipmentTotalQty;
 
-
     @FXML private ImageView equipmentImage;
     @FXML private Button uploadImage;
     @FXML private Button back;
@@ -60,6 +59,7 @@ public class AddEquipmentPopupController {
         );
 
         System.out.println(message);
+
     }
 
     public void onXClicked(ActionEvent actionEvent) {;

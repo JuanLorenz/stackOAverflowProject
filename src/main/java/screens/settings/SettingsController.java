@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import screens.appshell.ApplicationShellController;
+import utilities.database.UserDAO;
 import utilities.manager.ImageManager;
 import utilities.manager.SerializeManager;
 import utilities.service.AuthService;
@@ -81,6 +82,7 @@ public class SettingsController {
     @FXML
     private void onClickSaveChanges(ActionEvent actionEvent) {
         User currUser = SerializeManager.deserializeUser();
+        UserDAO userDAO = new UserDAO();
 
         String name = txtfldName.getText();
         String email = txtfldEmail.getText();
@@ -98,6 +100,8 @@ public class SettingsController {
                 if(!newPassword.isEmpty()) currUser.setPassword(confirmPassword);
                 currUser.setEmail(email);
                 SerializeManager.serializeUser(currUser);
+
+                userDAO.changeAccountDetails(currUser.getId(),email,name,confirmPassword);
 
                 lblError.setTextFill(Color.web("#90EE90"));
                 lblError.setText("Change successful.");
