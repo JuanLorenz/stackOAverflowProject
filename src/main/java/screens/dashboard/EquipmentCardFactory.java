@@ -46,7 +46,7 @@ public class EquipmentCardFactory {
 
         // Pass the equipment object back to the controller's specific logic
         btn.setOnAction(event -> onClickAction.accept(item));
-
+        btn.setUserData(item.getEquipmentName());
         return btn;
     }
 }
