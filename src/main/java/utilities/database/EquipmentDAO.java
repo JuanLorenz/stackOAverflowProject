@@ -12,7 +12,7 @@ public class EquipmentDAO implements ContractDAO<Equipment> {
     private final String FIND_ALL = "SELECT * FROM equipment";
     private final String FIND_BY_ID = "SELECT * FROM equipment WHERE equipmentID = ?";
     private final String FIND_BY_NAME = "SELECT * FROM equipment WHERE equipmentName = ?";
-    private final String INSERT_EQUIPMENT = "INSERT INTO equipment (equipmentName, category, modelNo, serialNo, condition, totalQty, availableQty, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String INSERT_EQUIPMENT = "INSERT INTO equipment (equipmentName, category, modelNo, serialNo, `condition`, totalQty, availableQty, imagePath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final String UPDATE_CONDITION = "UPDATE equipment SET `condition` = ? WHERE equipmentID = ?";
     private final String UPDATE_QUANTITY = "UPDATE equipment SET totalQty = ?, availableQty = ? WHERE equipmentID = ?";

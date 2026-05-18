@@ -13,31 +13,25 @@ public class EquipmentService {
         return equipmentDAO.findAll();
     }
 
-    public String addNewEquipment(String name, String category, String modelNo, String serialNo, String condition, int totalQty, String imgPath) {
-        Equipment e = EquipmentBuilder.start(category)
-                .setInfo(0, name, modelNo)                  // 0 id is placeholder
-                .setDetails(serialNo, condition, imgPath)
-                .setInventory(totalQty, totalQty)
-                .build();
-
-        Equipment check = equipmentDAO.findByName(name);
+    public boolean addNewEquipment(Equipment e) {
+        Equipment check = equipmentDAO.findByName(e.getEquipmentName());
         if (check != null) {
-            return "Equipment already exists!";
+            System.out.println("Equipment already exists!");
+            return false;
         }
 
         if (equipmentDAO.save(e)) {
-            return "Equipment added successfully!";
+            System.out.println("Equipment added successfully!");
+            return true;
         }
-
-        return "Cannot connect to database.";
+        System.out.println("Cannot connect to database.");
+        return false;
     }
 
-    public boolean updateEquipment(String name, String condition, int totalQty, String finalPath) {
-        Equipment e = equipmentDAO.findByName(name);
-
-        boolean a = equipmentDAO.updateCondition(e.getEquipmentID(), condition);
-        boolean b = equipmentDAO.updateQuantity(e.getEquipmentID(), totalQty, e.getAvailableQty());
-        boolean c = equipmentDAO.updateImagePath(e.getEquipmentID(), finalPath);
+    public boolean updateEquipment(Equipment e) {
+        boolean a = equipmentDAO.updateCondition(e.getEquipmentID(), e.getCondition());
+        boolean b = equipmentDAO.updateQuantity(e.getEquipmentID(), e.getTotalQty(), e.getAvailableQty());
+        boolean c = equipmentDAO.updateImagePath(e.getEquipmentID(), e.getImagePath());
 
         System.out.println(a + " " + b + " " + c);
 
