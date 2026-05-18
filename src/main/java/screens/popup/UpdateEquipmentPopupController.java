@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import screens.dashboard.DashboardAdminController;
+import screens.dashboard.DashboardAdminViewModel;
 import utilities.manager.DataReceiver;
 import utilities.manager.ImageManager;
 import utilities.manager.SceneManager;
@@ -89,6 +90,10 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
 
         if (result) {
             showAlert("Success","Successfully updated equipment.");
+            DashboardAdminController dac = DashboardAdminController.getInstance();
+            if(dac != null){
+                dac.renderSpecificCard(equipment);
+            }
             SceneManager.closeOverlay();
         } else {
             showAlert("Error", "Could not update equipment.");

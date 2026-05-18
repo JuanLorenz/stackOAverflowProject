@@ -36,10 +36,12 @@ public class DashboardAdminController {
     @FXML public TextField textfieldSearchEquipment;
 
     private final DashboardAdminViewModel viewModel = new DashboardAdminViewModel();
+    private static DashboardAdminController instance;
+    private List<Button> cards;
 
     public void initialize(){
+        instance = this;
         textfieldSearchEquipment.textProperty().bindBidirectional(viewModel.searchQueryProperty());
-
         // We show a blank screen/loading state until ensureDataLoaded finishes
         // This runs on the UI Thread once the background Task is done
         viewModel.ensureDataLoaded(this::renderGrid);
@@ -49,20 +51,33 @@ public class DashboardAdminController {
     }
 
     private void renderGrid() {
-        List<Button> cards = viewModel.getFilteredData().stream()
+        cards = viewModel.getFilteredData().stream()
                 .map(item -> EquipmentCardFactory.createCard(item, this::handleButtonClick))
                 .collect(Collectors.toList());
 
         Platform.runLater(() -> equipmentContainer.getChildren().setAll(cards));
     }
 
+    public void renderSpecificCard(Equipment Updatedequipment){
+        for(int i = 0; i < cards.size(); i++){
+            Button check = cards.get(i);
+            if(check.getUserData().equals(Updatedequipment.getEquipmentName())){
+                Button newCard = EquipmentCardFactory.createCard(Updatedequipment, this::handleButtonClick);
+                equipmentContainer.getChildren().set(i, newCard);
+                break;
+            }
+        }
+    }
     private void handleButtonClick(Equipment item) {
         SceneManager.showOverlay("/screens/popup/UpdateEquipmentPopup.fxml", item);
-
     }
 
     public void onAddEquipmentClicked(ActionEvent actionEvent) {
         SceneManager.showOverlay("/screens/popup/AddEquipmentPopup.fxml", null);
+    }
+
+    public static DashboardAdminController getInstance(){
+        return instance;
     }
 
 }
