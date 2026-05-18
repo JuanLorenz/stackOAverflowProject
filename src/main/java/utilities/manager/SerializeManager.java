@@ -25,6 +25,7 @@ public class SerializeManager {
         }
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            System.out.println("User returned is NOT NULL");
             return (User) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Failed to deserialize user: " + e.getMessage());
