@@ -4,6 +4,7 @@ import data.equipment.Equipment;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -69,22 +70,37 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
     }
 
     public void onUpdateClicked(ActionEvent actionEvent) {
-        String finalPath = equipment.getImagePath();
         if (newImageFile != null) {
-            finalPath = ImageManager.updateImage(equipment.getImagePath(), newImageFile, ImageManager.TYPE_EQUIPMENT);
+            equipment.setImagePath(ImageManager.updateImage(equipment.getImagePath(), newImageFile, ImageManager.TYPE_EQUIPMENT));
+        }
+        String newCondition = updateEquipmentCondition.getText();
+        String newTotal = updateEquipmentTotalQty.getText();
+
+        if (!newCondition.isEmpty()) {
+            equipment.setCondition(newCondition);
+        }
+        if (!newTotal.isEmpty()) {
+            int val = Integer.parseInt(newTotal);
+            equipment.setAvailableQty(equipment.getAvailableQty() + (val - equipment.getAvailableQty()));
+            equipment.setTotalQty(val);
         }
 
-        boolean result = equipmentService.updateEquipment(
-                equipment.getEquipmentName(),
-                updateEquipmentCondition.getText().isEmpty() ? equipment.getCondition() : updateEquipmentCondition.getText(),
-                updateEquipmentTotalQty.getText().isEmpty() ? equipment.getTotalQty() : Integer.parseInt(updateEquipmentTotalQty.getText()),
-                finalPath
-        );
-        System.out.println(result);
+        boolean result = equipmentService.updateEquipment(equipment);
+
         if (result) {
-            System.out.println("Successfully updated equipment");
+            showAlert("Success","Successfully updated equipment.");
+            SceneManager.closeOverlay();
+        } else {
+            showAlert("Error", "Could not update equipment.");
         }
-        SceneManager.closeOverlay();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     public void onXClicked(ActionEvent actionEvent) {

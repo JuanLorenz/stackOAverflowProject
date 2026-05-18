@@ -83,6 +83,10 @@ public class DashboardAdminViewModel {
         masterData.clear();
     }
 
+    public static void addEquipmentToCache(Equipment item) {
+        masterData.add(item);
+    }
+
     // Getters for Controller
     public StringProperty searchQueryProperty() { return searchQuery; }
     public FilteredList<Equipment> getFilteredData() { return filteredData; }

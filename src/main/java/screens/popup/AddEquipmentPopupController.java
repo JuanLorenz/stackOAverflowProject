@@ -4,6 +4,7 @@ import data.equipment.Equipment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,6 +13,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import data.equipment.EquipmentBuilder;
 import screens.dashboard.DashboardAdminController;
+import screens.dashboard.DashboardAdminViewModel;
 import utilities.database.EquipmentDAO;
 import utilities.manager.ImageManager;
 import utilities.manager.SceneManager;
@@ -51,19 +53,30 @@ public class AddEquipmentPopupController {
     public void onAddClicked(ActionEvent actionEvent) {
         String imagePath = ImageManager.saveImage(selectedImage, ImageManager.TYPE_EQUIPMENT);
 
-        String message = equipmentService.addNewEquipment(
-                equipmentName.getText(), equipmentCategory.getText(),
-                equipmentModelNo.getText(), equipmentSerialNo.getText(),
-                equipmentCondition.getText(), Integer.parseInt(equipmentTotalQty.getText()),
-                imagePath
-        );
+        Equipment newEquipment = EquipmentBuilder.start(equipmentCategory.getText())
+                .setInfo(0, equipmentName.getText(), equipmentModelNo.getText())
+                .setDetails(equipmentSerialNo.getText(), equipmentCondition.getText(), imagePath)
+                .setInventory(Integer.parseInt(equipmentTotalQty.getText()), Integer.parseInt(equipmentTotalQty.getText()))
+                .build();
 
-        System.out.println(message);
-
+        if (equipmentService.addNewEquipment(newEquipment)) {
+            showAlert("Success!", "Equipment added successfully!");
+            DashboardAdminViewModel.addEquipmentToCache(newEquipment);
+            SceneManager.closeOverlay();
+        } else {
+            showAlert("Error", "Equipment not added successfully.");
+        }
     }
 
     public void onXClicked(ActionEvent actionEvent) {;
         SceneManager.closeOverlay();
     }
 
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

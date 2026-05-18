@@ -52,7 +52,6 @@ public class HomeUserViewModel {
             });
         }
 
-
         // 2. Delegate "Status Logic" to UserService
         // If the service changed the user (blocked/unblocked), we re-serialize
         if (userService.syncUserStatus(currentUser, activeTransactions)) {

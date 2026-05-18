@@ -69,15 +69,15 @@ public class BorrowEquipmentPopupController implements DataReceiver<Equipment> {
         }
     }
 
+    public void onXClicked(ActionEvent actionEvent) {
+        SceneManager.closeOverlay();
+    }
+
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
-    }
-
-    public void onXClicked(ActionEvent actionEvent) {
-        SceneManager.closeOverlay();
     }
 }

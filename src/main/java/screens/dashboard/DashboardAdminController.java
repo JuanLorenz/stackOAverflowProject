@@ -41,18 +41,14 @@ public class DashboardAdminController {
         textfieldSearchEquipment.textProperty().bindBidirectional(viewModel.searchQueryProperty());
 
         // We show a blank screen/loading state until ensureDataLoaded finishes
-        viewModel.ensureDataLoaded(() -> {
-            // This runs on the UI Thread once the background Task is done
-            renderGrid();
-            viewModel.getFilteredData().addListener((ListChangeListener<Equipment>) c -> renderGrid());
-        });
-
+        // This runs on the UI Thread once the background Task is done
+        viewModel.ensureDataLoaded(this::renderGrid);
+        viewModel.getFilteredData().addListener((ListChangeListener<Equipment>) c -> renderGrid());
         //update equipment quantity if user has returned the equipment
         viewModel.refreshDataQuietly();
     }
 
     private void renderGrid() {
-        // We use viewModel.getFilteredData() here
         List<Button> cards = viewModel.getFilteredData().stream()
                 .map(item -> EquipmentCardFactory.createCard(item, this::handleButtonClick))
                 .collect(Collectors.toList());
@@ -62,6 +58,7 @@ public class DashboardAdminController {
 
     private void handleButtonClick(Equipment item) {
         SceneManager.showOverlay("/screens/popup/UpdateEquipmentPopup.fxml", item);
+
     }
 
     public void onAddEquipmentClicked(ActionEvent actionEvent) {
