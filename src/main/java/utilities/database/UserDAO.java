@@ -21,6 +21,7 @@ public class UserDAO implements ContractDAO<User> {
     private final String CHANGE_USER_PROFILE = "UPDATE users SET profilePhotoPath = ? WHERE id =?";
     private final String DELETE_USER = "DELETE FROM users WHERE id = ?";
     private final String RETRIEVE_ALL_OF_TYPE = "SELECT * FROM users WHERE userType = ?";
+    private final String VERIFY_PASSWORD = "SELECT * FROM users WHERE id = ?";
 
     /**
      * Finds the user in the database given an ID.
@@ -205,6 +206,29 @@ public class UserDAO implements ContractDAO<User> {
         return admins;
     }
 
+    public boolean passwordVerify(int id, String password){
+        try (
+                Connection c = ConnectionSQL.getConnection();
+                PreparedStatement statement = c.prepareStatement(VERIFY_PASSWORD)
+        ) {
+
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()){
+                System.out.println("Makuha ang password");
+                return BCrypt.checkpw(password,rs.getString("password"));
+            }
+        } catch (SQLException e) {
+
+            System.err.println(
+                    "Database connection or query failed: " + e.getMessage()
+            );
+        }
+        return false;
+    }
+
     public boolean removeUser(int id){
         try (
                 Connection c = ConnectionSQL.getConnection();
@@ -244,7 +268,6 @@ public class UserDAO implements ContractDAO<User> {
     }
 
     public boolean updateUserBlockStatus(int userId, boolean isBlocked) {
-
         // IMPORTANT: Make sure "isBlocked" matches the exact column name in your database!
         // If you used the u_ prefix convention, change it to "u_is_blocked".
         String query = "UPDATE users SET isBlocked = ? WHERE id = ?";

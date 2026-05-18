@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import org.mindrot.jbcrypt.BCrypt;
 import screens.appshell.ApplicationShellController;
 import utilities.database.UserDAO;
 import utilities.manager.ImageManager;
@@ -71,7 +72,7 @@ public class SettingsController {
 
     private void loadPlaceholderImage() {
         try {
-            String placeholderPath = "/" + ImageManager.TYPE_PROFILE + "placeholder-profile.png";
+            String placeholderPath = "/" + ImageManager.TYPE_EQUIPMENT + "placeholder-equipment.png";
             var res = getClass().getResource(placeholderPath);
             if (res != null) imgProfile.setImage(new Image(res.toExternalForm()));
         } catch (Exception e) {
@@ -84,6 +85,8 @@ public class SettingsController {
         User currUser = SerializeManager.deserializeUser();
         UserDAO userDAO = new UserDAO();
 
+        assert currUser != null;
+
         String name = txtfldName.getText();
         String email = txtfldEmail.getText();
         String newPassword = txtfldNewPassword.getText();
@@ -91,23 +94,26 @@ public class SettingsController {
 
         lblError.setTextFill(Color.web("#ff0000"));
 
-        if (!name.isEmpty() && !email.isEmpty()){
-            assert currUser != null;
+        if (!name.isEmpty() && !email.isEmpty() && !newPassword.isEmpty() && !confirmPassword.isEmpty()){
             if (!confirmPassword.equals(newPassword)) {
                 lblError.setText("Passwords don't match");
             } else {
-                currUser.setName(name);
-                if(!newPassword.isEmpty()) currUser.setPassword(confirmPassword);
-                currUser.setEmail(email);
-                SerializeManager.serializeUser(currUser);
+                if (userDAO.passwordVerify(currUser.getId(),confirmPassword)){
+                    lblError.setText("Password did not change");
+                }else {
+                    currUser.setName(name);
+                    currUser.setPassword(confirmPassword);
+                    currUser.setEmail(email);
+                    SerializeManager.serializeUser(currUser);
 
-                userDAO.changeAccountDetails(currUser.getId(),email,name,confirmPassword);
+                    userDAO.changeAccountDetails(currUser.getId(), email, name, confirmPassword);
 
-                lblError.setTextFill(Color.web("#90EE90"));
-                lblError.setText("Change successful.");
+                    lblError.setTextFill(Color.web("#90EE90"));
+                    lblError.setText("Change successful.");
 
-                if (appShellController != null) {
-                    appShellController.updateProfileUI(currUser);
+                    if (appShellController != null) {
+                        appShellController.updateProfileUI(currUser);
+                    }
                 }
             }
         } else {
