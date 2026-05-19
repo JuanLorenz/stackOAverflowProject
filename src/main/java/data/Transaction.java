@@ -12,6 +12,15 @@ public class Transaction {
     private LocalDate dueDate;
     private LocalDate dateReturned;
 
+    public Transaction(int transactionID, User user, Equipment equipment, LocalDate dateBorrowed, LocalDate dateReturned, LocalDate dueDate) {
+        this.transactionID = transactionID;
+        this.user = user;
+        this.equipment = equipment;
+        this.dateBorrowed = dateBorrowed;
+        this.dateReturned = dateReturned;
+        this.dueDate = dueDate;
+    }
+
     public Transaction(int transactionID, User user, Equipment equipment, LocalDate dateBorrowed, LocalDate dateReturned) {
         this.transactionID = transactionID;
         this.user = user;

@@ -1,10 +1,12 @@
 package screens.dashboard;
 
+import data.User;
 import data.equipment.Equipment;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -14,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import utilities.manager.SceneManager;
+import utilities.manager.SerializeManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -95,8 +98,24 @@ public class DashboardUserController {
     }
 
     private void openBorrowPopup(Equipment item) {
-        SceneManager.showOverlay("/screens/popup/BorrowEquipmentPopup.fxml", item);
+        User currentUser = SerializeManager.deserializeUser();
+
+        // 2. Intercept the click if the user is blocked
+        if (currentUser != null && currentUser.isBlocked()) {
+            showBlockedWarning();
+        } else {
+
+            SceneManager.showOverlay("/screens/popup/BorrowEquipmentPopup.fxml", item);
+        }
     }
+
+        private void showBlockedWarning() {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Action Denied");
+            alert.setHeaderText("Account Temporarily Blocked");
+            alert.setContentText("You cannot borrow new items right now because you have overdue equipment. Please return your overdue items to restore your borrowing privileges.");
+            alert.showAndWait();
+        }
 
     private void setupCategoryMapping() {
         // Colors
