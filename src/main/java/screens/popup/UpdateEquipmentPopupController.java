@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import screens.dashboard.DashboardAdminController;
@@ -35,6 +36,7 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
     @FXML public Label labelEquipmentCategory;
     @FXML public Label labelEquipmentCondition;
     @FXML public Label labelEquipmentAvailable;
+    @FXML public Label errorMessage;
 
 
     @FXML public ImageView EquipmentImage;
@@ -97,7 +99,8 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
             }
             SceneManager.closeOverlay();
         } else {
-            showAlert("Error", "Could not update equipment.");
+            errorMessage.setText("Error: Could not update equipment.");
+            errorMessage.setTextFill(Color.RED);
         }
     }
 

@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import data.equipment.EquipmentBuilder;
@@ -39,6 +41,8 @@ public class AddEquipmentPopupController {
     @FXML private Button back;
     @FXML private Button add;
 
+    @FXML private Label errorMessage;
+
 
     private final EquipmentService equipmentService = new EquipmentService();
     private File selectedImage;
@@ -53,19 +57,27 @@ public class AddEquipmentPopupController {
     public void onAddClicked(ActionEvent actionEvent) {
         String imagePath = ImageManager.saveImage(selectedImage, ImageManager.TYPE_EQUIPMENT);
 
-        Equipment newEquipment = EquipmentBuilder.start(equipmentCategory.getText())
-                .setInfo(0, equipmentName.getText(), equipmentModelNo.getText())
-                .setDetails(equipmentSerialNo.getText(), equipmentCondition.getText(), imagePath)
-                .setInventory(Integer.parseInt(equipmentTotalQty.getText()), Integer.parseInt(equipmentTotalQty.getText()))
-                .build();
+        if(equipmentName.getText().isEmpty() || equipmentCategory.getText().isEmpty() || equipmentModelNo.getText().isEmpty() ||
+                equipmentSerialNo.getText().isEmpty() || equipmentCondition.getText().isEmpty() || equipmentTotalQty.getText().isEmpty()){
+            errorMessage.setText("Please fill all fields.");
+            errorMessage.setTextFill(Color.RED);
+        }else{
+            Equipment newEquipment = EquipmentBuilder.start(equipmentCategory.getText())
+                    .setInfo(0, equipmentName.getText(), equipmentModelNo.getText())
+                    .setDetails(equipmentSerialNo.getText(), equipmentCondition.getText(), imagePath)
+                    .setInventory(Integer.parseInt(equipmentTotalQty.getText()), Integer.parseInt(equipmentTotalQty.getText()))
+                    .build();
 
-        if (equipmentService.addNewEquipment(newEquipment)) {
-            showAlert("Success!", "Equipment added successfully!");
-            DashboardAdminViewModel.addEquipmentToCache(newEquipment);
-            SceneManager.closeOverlay();
-        } else {
-            showAlert("Error", "Equipment not added successfully.");
+            if (equipmentService.addNewEquipment(newEquipment)) {
+                showAlert("Success!", "Equipment added successfully!");
+                DashboardAdminViewModel.addEquipmentToCache(newEquipment);
+                SceneManager.closeOverlay();
+            } else {
+                errorMessage.setText("Error:Equipment not added successfully.");
+                errorMessage.setTextFill(Color.RED);
+            }
         }
+
     }
 
     public void onXClicked(ActionEvent actionEvent) {;

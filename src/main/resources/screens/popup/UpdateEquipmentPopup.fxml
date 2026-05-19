@@ -104,6 +104,8 @@
 
                 <HBox alignment="BOTTOM_RIGHT">
                     <children>
+                  <Label fx:id="errorMessage" />
+                  <HBox HBox.hgrow="ALWAYS" />
                         <!-- Added styleClass="popup-confirm-button" -->
                         <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#onUpdateClicked" styleClass="popup-confirm-button" text="Update">
                             <HBox.margin> <Insets right="30.0" /> </HBox.margin>
