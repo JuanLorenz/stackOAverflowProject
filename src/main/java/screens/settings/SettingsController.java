@@ -136,6 +136,10 @@ public class SettingsController {
             currUser.setProfilePhotoPath(profileImagePath);
             SerializeManager.serializeUser(currUser);
 
+            if (appShellController != null && currUser != null) {
+                appShellController.updateProfileUI(currUser);
+            }
+
             System.out.println("Saved image path: " + profileImagePath);
         }
     }

@@ -69,7 +69,10 @@ public class HomeUserController {
         // Check if user got blocked upon loading
         currentUser = SerializeManager.deserializeUser();
         if (currentUser != null && currentUser.isBlocked()) {
-            showBlockedWarning();
+            // 2. Queue the alert to show AFTER the screen is visible
+            Platform.runLater(() -> {
+                showBlockedWarning();
+            });
         }
     }
 
@@ -198,6 +201,7 @@ public class HomeUserController {
         alert.setContentText("Your account has been temporarily blocked. Please return your overdue equipment to restore access.");
         alert.showAndWait();
     }
+
 
     // --- Dynamic Resizing & Scrolling ---
     private void setupDynamicCardResizing() {

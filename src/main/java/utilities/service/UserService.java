@@ -41,8 +41,18 @@ public class UserService {
     }
 
     private boolean isOverdue(Transaction t) {
-        // Use the database-provided due date instead of hardcoded days
-        return LocalDate.now().isAfter(t.getDueDate());
+        LocalDate today = LocalDate.now();
+        LocalDate due = t.getDueDate();
+        boolean isLate = today.isAfter(due);
+
+        // For Debug
+//        System.out.println("Checking Item: " + t.getEquipment().getEquipmentName());
+//        System.out.println("Today's Date: " + today);
+//        System.out.println("Due Date in Java: " + due);
+//        System.out.println("Is it overdue? : " + late);
+//        System.out.println("-------------------------");
+
+        return isLate;
     }
 
     private void blockUser(User user) {
