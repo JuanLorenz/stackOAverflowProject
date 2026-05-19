@@ -79,11 +79,12 @@ public class UpdateEquipmentPopupController implements DataReceiver<Equipment> {
 
         if (!newCondition.isEmpty()) {
             equipment.setCondition(newCondition);
-        }
+        }//18/20
         if (!newTotal.isEmpty()) {
-            int val = Integer.parseInt(newTotal);
-            equipment.setAvailableQty(equipment.getAvailableQty() + (val - equipment.getAvailableQty()));
-            equipment.setTotalQty(val);
+            int val = Integer.parseInt(newTotal); //25
+            int add = val - equipment.getTotalQty(); //25-20 = 5
+            equipment.setAvailableQty(equipment.getAvailableQty() + add); //18 + 5 = 23
+            equipment.setTotalQty(val); //25
         }
 
         boolean result = equipmentService.updateEquipment(equipment);

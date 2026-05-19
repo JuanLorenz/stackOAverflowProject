@@ -108,24 +108,28 @@ public class ApplicationShellController {
     @FXML
     public void toggleSidebar() {
         double targetWidth = isSidebarVisible ? 0 : 240;
+        double targetTranslate = isSidebarVisible ? -240 : 0;
 
+        // 1. Create the Clip for the INNER content only
+        // This hides the buttons as they slide left, but doesn't cut the sidebar's shadow
+        javafx.scene.shape.Rectangle contentClip = new javafx.scene.shape.Rectangle();
+        contentClip.heightProperty().bind(sidebar.heightProperty());
+
+        // We make the clip slightly wider than the sidebar (e.g., +50px)
+        // to ensure the shadow on the right edge is NEVER cut off.
+        contentClip.widthProperty().bind(sidebar.widthProperty().add(50));
+
+        // Apply clip to the INNER VBox
+        sidebarContent.setClip(contentClip);
+
+        // 2. The Animation
         javafx.animation.Timeline timeline = new javafx.animation.Timeline(
                 new javafx.animation.KeyFrame(Duration.millis(250),
                         new javafx.animation.KeyValue(sidebar.prefWidthProperty(), targetWidth),
-                        new javafx.animation.KeyValue(sidebar.minWidthProperty(), targetWidth)
+                        new javafx.animation.KeyValue(sidebar.minWidthProperty(), targetWidth),
+                        new javafx.animation.KeyValue(sidebarContent.translateXProperty(), targetTranslate)
                 )
         );
-
-        javafx.scene.shape.Rectangle clip = new javafx.scene.shape.Rectangle();
-        clip.setHeight(1080);
-        clip.widthProperty().bind(sidebar.widthProperty());
-        sidebar.setClip(clip);
-
-        timeline.setOnFinished(e -> {
-            if (!isSidebarVisible) {
-                sidebar.setClip(null);
-            }
-        });
 
         timeline.play();
         isSidebarVisible = !isSidebarVisible;
