@@ -92,22 +92,18 @@ public class SettingsController {
             if (!confirmPassword.equals(newPassword)) {
                 lblError.setText("Passwords don't match");
             } else {
-                if (userDAO.passwordVerify(currUser.getId(),confirmPassword)){
-                    lblError.setText("Password did not change");
-                }else {
-                    currUser.setName(name);
-                    currUser.setPassword(confirmPassword);
-                    currUser.setEmail(email);
-                    SerializeManager.serializeUser(currUser);
+                currUser.setName(name);
+                currUser.setPassword(confirmPassword);
+                currUser.setEmail(email);
+                SerializeManager.serializeUser(currUser);
 
-                    userDAO.changeAccountDetails(currUser.getId(), email, name, confirmPassword);
+                userDAO.changeAccountDetails(currUser.getId(), email, name, confirmPassword);
 
-                    lblError.setTextFill(Color.web("#90EE90"));
-                    lblError.setText("Change successful.");
+                lblError.setTextFill(Color.web("#90EE90"));
+                lblError.setText("Change successful.");
 
-                    if (appShellController != null) {
-                        appShellController.updateProfileUI(currUser);
-                    }
+                if (appShellController != null) {
+                    appShellController.updateProfileUI(currUser);
                 }
             }
         } else {

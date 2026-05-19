@@ -20,7 +20,7 @@ public class UserDAO implements ContractDAO<User> {
     private final String CHANGE_USER_DETAILS = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?";
     private final String CHANGE_USER_PROFILE = "UPDATE users SET profilePhotoPath = ? WHERE id =?";
     private final String DELETE_USER = "DELETE FROM users WHERE id = ?";
-    private final String RETRIEVE_ALL_OF_TYPE = "SELECT * FROM users WHERE userType = ?";
+    private final String RETRIEVE_ALL_OF_TYPE = "SELECT * FROM users WHERE userType = ? && id != ?";
     private final String VERIFY_PASSWORD = "SELECT * FROM users WHERE id = ?";
 
     /**
@@ -178,6 +178,7 @@ public class UserDAO implements ContractDAO<User> {
         ) {
 
             statement.setString(1, "admin");
+            statement.setInt(2, currUser.getId());
 
             System.out.println("Filtering by userType = admin");
 
