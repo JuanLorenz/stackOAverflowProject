@@ -71,13 +71,7 @@ public class SettingsController {
     }
 
     private void loadPlaceholderImage() {
-        try {
-            String placeholderPath = "/" + ImageManager.TYPE_EQUIPMENT + "placeholder-equipment.png";
-            var res = getClass().getResource(placeholderPath);
-            if (res != null) imgProfile.setImage(new Image(res.toExternalForm()));
-        } catch (Exception e) {
-            System.out.println("Could not find placeholder in Settings.");
-        }
+        imgProfile.setImage(ImageManager.getSafeImage("equipment", 300, 300));
     }
 
     @FXML

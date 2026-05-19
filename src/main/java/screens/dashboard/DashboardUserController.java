@@ -109,13 +109,13 @@ public class DashboardUserController {
         }
     }
 
-        private void showBlockedWarning() {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Action Denied");
-            alert.setHeaderText("Account Temporarily Blocked");
-            alert.setContentText("You cannot borrow new items right now because you have overdue equipment. Please return your overdue items to restore your borrowing privileges.");
-            alert.showAndWait();
-        }
+    private void showBlockedWarning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Action Denied");
+        alert.setHeaderText("Account Temporarily Blocked");
+        alert.setContentText("You cannot borrow new items right now because you have overdue equipment. Please return your overdue items to restore your borrowing privileges.");
+        alert.showAndWait();
+    }
 
     private void setupCategoryMapping() {
         // Colors
