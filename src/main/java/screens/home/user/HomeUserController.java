@@ -196,9 +196,9 @@ public class HomeUserController {
 
     private void showBlockedWarning() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Account Blocked");
-        alert.setHeaderText("You have overdue equipment!");
-        alert.setContentText("Your account has been temporarily blocked. Please return your overdue equipment to restore access.");
+        alert.setTitle("Warning");
+        alert.setHeaderText("Account Temporarily Blocked");
+        alert.setContentText("You were blocked due to an overdue equipment.");
         alert.showAndWait();
     }
 

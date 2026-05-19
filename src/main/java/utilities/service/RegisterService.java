@@ -13,7 +13,7 @@ public class RegisterService {
         }
 
         // register ser
-        if (userDAO.save(new User(0, name, email, BCrypt.hashpw(password, BCrypt.gensalt()),role, false, "profiles/"))) {
+        if (userDAO.save(new User(0, name, email, BCrypt.hashpw(password, BCrypt.gensalt()),role, false, "equipments/"))) {
             return 1;
         }
         return -1;
