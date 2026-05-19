@@ -54,7 +54,7 @@
 
 /* --- ACTION BUTTONS --- */
 .popup-container .popup-confirm-button {
-    -fx-background-color: #26BDFC;
+    -fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9);
     -fx-text-fill: #FFFFFF;
     -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-weight: 700;
