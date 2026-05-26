@@ -109,6 +109,8 @@ public class SettingsController {
         } else {
             lblError.setText("Some fields are empty");
         }
+
+
     }
 
     public void onClickUploadNewProfile(ActionEvent actionEvent) {
@@ -126,9 +128,9 @@ public class SettingsController {
             currUser.setProfilePhotoPath(profileImagePath);
             SerializeManager.serializeUser(currUser);
 
-            if (appShellController != null && currUser != null) {
-                appShellController.updateProfileUI(currUser);
-            }
+//            if (appShellController != null && currUser != null) {
+//                appShellController.updateProfileUI(currUser);
+//            }
 
             System.out.println("Saved image path: " + profileImagePath);
         }

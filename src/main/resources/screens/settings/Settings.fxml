@@ -89,7 +89,7 @@
                     <children>
                         <!-- New Password -->
                         <VBox spacing="6.0" HBox.hgrow="ALWAYS">
-                            <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #222222;" text="New Password" />
+                            <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #222222;" text="Enter Password" />
                             <PasswordField fx:id="txtfldNewPassword" maxWidth="Infinity" prefHeight="48.0" promptText="Enter New Password" style="-fx-background-color: transparent; -fx-border-color: #3ecfb2; -fx-border-radius: 25; -fx-background-radius: 25; -fx-padding: 8 18 8 18; -fx-font-size: 15px; -fx-prompt-text-fill: #aaaaaa; -fx-border-width: 2;" />
                         </VBox>
 
