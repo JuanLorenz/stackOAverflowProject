@@ -52,7 +52,6 @@ public class TransactionService {
         Equipment e = t.getEquipment();
         e.setAvailableQty(e.getAvailableQty() + 1);
 
-        // Let's capture the exact results!
         System.out.println("--- PROCESSING RETURN ---");
         System.out.println("Attempting to update Equipment ID: " + e.getEquipmentID());
 

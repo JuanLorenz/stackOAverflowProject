@@ -44,7 +44,7 @@ public class DashboardUserViewModel {
         Task<List<Equipment>> loadTask = new Task<>() {
             @Override
             protected List<Equipment> call() {
-                return equipmentService.getAllEquipment(); // Your SQL call
+                return equipmentService.getAllEquipment();
             }
         };
 
