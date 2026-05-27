@@ -39,7 +39,6 @@ public class SettingsController {
         this.appShellController = appShellController;
     }
 
-    // --- RECORRECTED: Initialize method to load current user data ---
     @FXML
     public void initialize() {
         User currUser = SerializeManager.deserializeUser();

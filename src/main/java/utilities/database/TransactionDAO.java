@@ -91,7 +91,6 @@ public class TransactionDAO implements ContractDAO<Transaction> {
         return transactions;
     }
 
-    // --- NEW: Active Items Only ---
     public List<Transaction> findActiveByUserId(int userId) {
         List<Transaction> activeTransactions = new ArrayList<>();
         String query = FIND_ALL + " WHERE u.id = ? AND t.dateReturned IS NULL";
@@ -105,7 +104,6 @@ public class TransactionDAO implements ContractDAO<Transaction> {
         return activeTransactions;
     }
 
-    // --- NEW: History Counts ---
     public Map<String, Integer> getHistoryCountByCategory(int userId) {
         Map<String, Integer> categoryCounts = new HashMap<>();
         String query = """

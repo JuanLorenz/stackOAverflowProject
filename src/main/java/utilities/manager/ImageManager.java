@@ -9,7 +9,6 @@ import java.nio.file.*;
 
 public class ImageManager {
 
-    // --- PATH CONFIGURATION ---
     private static final String BASE_RES = "src/main/resources/";
     public static final String TYPE_EQUIPMENT = "media/equipments/";
     public static final String TYPE_PROFILE = "media/profiles/";

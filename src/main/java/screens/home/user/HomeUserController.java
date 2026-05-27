@@ -203,7 +203,6 @@ public class HomeUserController {
     }
 
 
-    // --- Dynamic Resizing & Scrolling ---
     private void setupDynamicCardResizing() {
         categoryScrollPane.viewportBoundsProperty().addListener((obs, oldVal, newVal) -> {
             double targetWidth = (newVal.getWidth() - 55.0) / 4.0;
