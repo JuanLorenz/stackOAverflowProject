@@ -13,19 +13,14 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<!-- The Root is now a StackPane -->
-
 <StackPane fx:id="shellRoot" maxHeight="900.0" maxWidth="1600.0" minHeight="600.0" minWidth="1000.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@ApplicationShellStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.appshell.ApplicationShellController">
 
-
-
-    <!-- LAYER 1: THE ACTUAL APP (Sidebar + Content) -->
     <BorderPane fx:id="shellPane" stylesheets="@ApplicationShellStyle.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
         <left>
             <VBox fx:id="sidebar" prefWidth="240.0" styleClass="sidebar" viewOrder="-1">
                 <VBox fx:id="sidebarContent" minWidth="240.0" prefWidth="240.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <!-- LOGO SECTION -->
+
                         <HBox alignment="CENTER" spacing="10.0">
                             <children>
                                 <ImageView fitHeight="40.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
@@ -42,14 +37,13 @@
                             </padding>
                         </HBox>
 
-                        <!-- PROFILE SECTION -->
                         <VBox alignment="CENTER" spacing="15.0">
                             <children>
                                 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="80.0" prefWidth="80.0">
                                     <children>
                                         <ImageView fx:id="ivProfilePic" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <!-- Default placeholder if no user image -->
+
                                                 <Image url="@../../media/profiles/placeholder-profile.png" />
                                             </image>
                                             <clip>
@@ -75,7 +69,6 @@
                             </padding>
                         </VBox>
 
-                        <!-- NAVIGATION SECTION -->
                         <VBox spacing="5.0" VBox.vgrow="ALWAYS">
                             <children>
                                 <Button fx:id="btnHome" maxWidth="Infinity" onAction="#showHome" styleClass="menu-button" text="Home">
@@ -101,7 +94,6 @@
                             </children>
                         </VBox>
 
-                        <!-- LOGOUT SECTION -->
                         <VBox alignment="BOTTOM_CENTER" prefHeight="100.0">
                             <children>
                                 <Button fx:id="btnLogout" maxWidth="180.0" onAction="#onClickLogout" prefHeight="45.0" styleClass="logout-button" text="Logout">                                <graphic>
@@ -120,12 +112,11 @@
         <center>
             <StackPane alignment="TOP_LEFT" BorderPane.alignment="CENTER">
                 <children>
-                    <!-- DYNAMIC CONTENT AREA -->
+
                     <StackPane fx:id="contentArea" />
                <HBox alignment="CENTER_LEFT" maxHeight="50.0" maxWidth="300.0" prefHeight="50.0" prefWidth="300.0">
                   <children>
-      
-                          <!-- HAMBURGER BUTTON -->
+
                           <Button fx:id="btnHamburger" onAction="#toggleSidebar" styleClass="hamburger-button">
                               <graphic>
                                   <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
@@ -150,15 +141,8 @@
     </BorderPane>
 
 
-    <!-- LAYER 2: THE GLOBAL SHADOW (Covers everything) -->
-    <!-- We set mouseTransparent="false" and pickOnBounds="true" to block clicks to the background -->
     <Pane fx:id="globalShadow" onMouseClicked="#onCloseOverlayRequest" style="-fx-background-color: rgba(0, 0, 0, 0.5);" visible="false" />
 
-
-
-    <!-- LAYER 3: THE POPUP CONTAINER (Where FXMLs are injected) -->
-    <!-- We use mouseTransparent="true" on the container itself but FALSE on its children
-         so the popup is clickable but the empty space around it is not. -->
     <StackPane fx:id="globalOverlayHolder" mouseTransparent="false" pickOnBounds="false" visible="false">
         <padding>
             <Insets bottom="50" left="50" right="50" top="50" />

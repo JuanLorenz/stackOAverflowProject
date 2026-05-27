@@ -23,7 +23,6 @@
                 <children>
                     <TextField fx:id="tfSearch" promptText="Search Equipment" styleClass="search-bar" HBox.hgrow="ALWAYS" />
 
-                    <!-- Custom Pill for Category with Icon -->
                     <HBox fx:id="categoryPill" alignment="CENTER" spacing="10.0" styleClass="category-container">
                         <children>
                             <ImageView fx:id="ivCategoryIcon" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
@@ -49,6 +48,5 @@
     </VBox>
 
     <StackPane fx:id="overlayPane" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
-        <!-- The popup FXML will be injected here -->
     </StackPane>
 </StackPane>

@@ -4,7 +4,6 @@
     -fx-border-radius: 40;
     -fx-border-color: #333333;
     -fx-border-width: 1;
-    /* Keeps the popup from stretching */
     -fx-pref-width: 550px;
 }
 
@@ -14,7 +13,6 @@
     -fx-text-fill: black;
 }
 
-/* Back Button Styling */
 .back-button {
     -fx-background-color: transparent;
     -fx-text-fill: #FF4D4D;
@@ -40,7 +38,6 @@
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-/* Fixed Borrow Button Color */
 .borrow-button {
     -fx-background-color: #FF4946;
     -fx-background-radius: 12;

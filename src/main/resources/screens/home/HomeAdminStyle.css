@@ -1,10 +1,9 @@
-/* ── Root ── */
+
 .root {
     -fx-background-color: #ffffff;
     -fx-font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* ── Welcome title ── */
 .welcome-label {
     -fx-font-family: "Arial Black", "Segoe UI Black", Arial, sans-serif;
     -fx-font-size: 22px;
@@ -12,7 +11,6 @@
     -fx-text-fill: #111111;
 }
 
-/* ── "Manage Admins" section title ── */
 .section-label {
     -fx-font-family: "Segoe UI", Arial, sans-serif;
     -fx-font-size: 15px;
@@ -21,7 +19,6 @@
     -fx-padding: 4 0 0 0;
 }
 
-/* ── Search field ── */
 .search-field {
     -fx-pref-width: 200px;
     -fx-pref-height: 34px;
@@ -40,7 +37,6 @@
     -fx-effect: dropshadow(gaussian, rgba(56,182,255,0.25), 6, 0, 0, 2);
 }
 
-/* ── Add Admin button ── */
 .add-admin-button {
     -fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9);
     -fx-text-fill: white;
@@ -56,28 +52,23 @@
     -fx-scale-y: 1.03;
 }
 
-/* ── Gradient card container (The background behind the list) ── */
 .gradient-card {
     -fx-background-color: linear-gradient(to right, #38b6ff, #38d9a9);
     -fx-background-radius: 20px;
     -fx-padding: 14;
 }
 
-/* ── ListView & Cells ── */
 .admins-list-view {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
-/* This is the key: Make the actual cell invisible */
 .admins-list-view .list-cell {
     -fx-background-color: transparent;
-    -fx-padding: 0 0 12 0; /* Creates the GAP (12px) between rows */
+    -fx-padding: 0 0 12 0;
     -fx-text-fill: transparent;
 }
 
-/* ── The Admin "Card" (The white pill row) ── */
-/* Ensure you add this class to your 'card' HBox in the Java CellFactory */
 .admin-list-card {
     -fx-background-color: white;
     -fx-background-radius: 50px;
@@ -86,18 +77,16 @@
 }
 
 .admin-list-card .label {
-    -fx-font-size: 16px; /* Increased from default ~13px */
+    -fx-font-size: 16px;
     -fx-font-weight: 500;
     -fx-text-fill: #333333;
 }
 
-/* ── Hover Effect (Only for filled cells) ── */
 .list-cell:filled:hover .admin-list-card {
     -fx-background-color: #f8f8f8;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 12, 0, 0, 4);
 }
 
-/* ── Selection Style (Only for filled cells) ── */
 .list-cell:filled:selected .admin-list-card {
     -fx-background-color: #eef9ff;
     -fx-border-color: #38b6ff;
@@ -105,7 +94,6 @@
     -fx-border-radius: 50px;
 }
 
-/* ── Delete Admin button ── */
 .delete-admin-button {
     -fx-background-color: #ff4d4d;
     -fx-text-fill: white;
@@ -119,14 +107,12 @@
     -fx-background-color: #e03333;
 }
 
-/* ── Empty state label ── */
 .empty-label {
     -fx-font-family: "Arial Black";
     -fx-font-size: 14px;
     -fx-text-fill: white;
 }
 
-/* ── Scrollbar ── */
 .admins-list-view .scroll-bar:vertical {
     -fx-background-color: transparent;
     -fx-pref-width: 6px;
@@ -136,27 +122,23 @@
     -fx-background-radius: 3px;
 }
 
-/* 1. COMPLETELY DISABLE selection/press visuals for the cell */
 .admins-list-view .list-cell:selected,
 .admins-list-view .list-cell:pressed {
     -fx-background-color: transparent !important;
     -fx-text-fill: inherit;
 }
 
-/* 2. Ensure the inner card doesn't react to the parent being pressed */
 .list-cell:pressed .admin-list-card {
-    -fx-background-color: white; /* Stays white */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2); /* Stays normal */
-    -fx-translate-y: 0; /* Prevents a 'sink' effect */
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-translate-y: 0;
 }
 
-/* 3. Keep the hover glow ONLY for hovering, not for pressing */
 .admin-list-card:hover {
     -fx-background-color: #fcfcfc;
     -fx-effect: dropshadow(three-pass-box, rgba(56,182,255,0.25), 12, 0, 0, 4);
 }
 
-/* 4. Remove the default 'Blue Border' focus ring from the ListView */
 .admins-list-view, .admins-list-view:focused {
     -fx-background-color: transparent;
     -fx-border-color: transparent;

@@ -8,7 +8,7 @@
 
 <Pane fx:id="updateEquipmentPopUp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@UpdateEquipmentPopupStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.popup.UpdateEquipmentPopupController">
     <children>
-        <!-- Added styleClass="popup-container" and removed inline background-color -->
+
         <VBox alignment="CENTER" layoutX="25.0" layoutY="10.0" prefWidth="600.0" styleClass="popup-container">
             <children>
                 <HBox alignment="CENTER">
@@ -17,14 +17,14 @@
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin></HBox>
-                        <!-- Added styleClass="popup-header" -->
+
                         <Label fx:id="labelEquipmentName" styleClass="popup-header">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
                         <HBox HBox.hgrow="ALWAYS" />
-                        <!-- Added styleClass="popup-close-button" -->
+
                         <Button fx:id="buttonX" mnemonicParsing="false" onAction="#onXClicked" styleClass="popup-close-button" text="X">
                             <HBox.margin>
                                 <Insets right="15.0" />
@@ -51,7 +51,7 @@
                         <VBox VBox.vgrow="ALWAYS" />
                                 <HBox alignment="CENTER">
                                     <children>
-                                        <!-- Added styleClass="popup-img-button" -->
+
                                         <Button fx:id="buttonUpdateImage" mnemonicParsing="false" onAction="#onUpdateImgClicked" styleClass="popup-img-button" text="Update Image" />
                                     </children>
                                 </HBox>
@@ -65,7 +65,7 @@
 
                         <VBox alignment="CENTER_LEFT" maxHeight="500.0" maxWidth="300.0" prefHeight="218.0" prefWidth="434.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <!-- Added styleClass="info-value-label" for DB data -->
+
                                 <Label fx:id="labelEquipmentModelNo" styleClass="info-value-label">
                                     <VBox.margin> <Insets bottom="10.0" left="15.0" /> </VBox.margin>
                                 </Label>
@@ -82,12 +82,10 @@
                                     <VBox.margin> <Insets bottom="20.0" left="15.0" /> </VBox.margin>
                                 </Label>
 
-                                <!-- Added styleClass="info-header-label" -->
                                 <Label styleClass="info-header-label" text="Updateable: ">
                                     <VBox.margin> <Insets bottom="10.0" left="15.0" /> </VBox.margin>
                                 </Label>
 
-                                <!-- Added styleClass="popup-text-field" -->
                                 <TextField fx:id="updateEquipmentCondition" promptText="Condition" styleClass="popup-text-field">
                                     <VBox.margin> <Insets bottom="15.0" left="15.0" /> </VBox.margin>
                                 </TextField>
@@ -106,7 +104,7 @@
                     <children>
                   <Label fx:id="errorMessage" />
                   <HBox HBox.hgrow="ALWAYS" />
-                        <!-- Added styleClass="popup-confirm-button" -->
+
                         <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#onUpdateClicked" styleClass="popup-confirm-button" text="Update">
                             <HBox.margin> <Insets right="30.0" /> </HBox.margin>
                         </Button>
