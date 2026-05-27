@@ -18,22 +18,18 @@
                 <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
             </padding>
             <children>
-                <!-- Header -->
                 <Label styleClass="dashboard-title" />
 
                 <HBox alignment="CENTER_LEFT" spacing="20.0">
                     <children>
-                        <!-- Search Bar (Pill Style) -->
                         <TextField fx:id="textfieldSearchEquipment" promptText="Search Equipment" styleClass="search-bar" HBox.hgrow="ALWAYS" />
 
                         <Region HBox.hgrow="ALWAYS" />
 
-                        <!-- Add Button (Pill Style) -->
                         <Button fx:id="buttonAddEquipment" onAction="#onAddEquipmentClicked" styleClass="add-button" text="+ Add Equipment" />
                     </children>
                 </HBox>
 
-                <!-- EQUIPMENT GRID SECTION -->
                 <ScrollPane fitToWidth="true" styleClass="transparent-scroll" VBox.vgrow="ALWAYS">
                     <content>
                         <TilePane fx:id="equipmentContainer" hgap="25.0" vgap="25.0" prefColumns="0">

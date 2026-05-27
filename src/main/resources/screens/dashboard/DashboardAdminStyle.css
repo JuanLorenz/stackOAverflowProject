@@ -1,4 +1,3 @@
-/* Clean Root */
 .main-container {
     -fx-background-color: white;
 }
@@ -10,7 +9,6 @@
     -fx-font-family: "Segoe UI Semibold", sans-serif;
 }
 
-/* Search Bar (Matching User Style) */
 .search-bar {
     -fx-background-radius: 25;
     -fx-border-radius: 25;
@@ -23,7 +21,6 @@
     -fx-border-color: #26BDFC;
 }
 
-/* Add Equipment Button */
 .add-button {
     -fx-background-color: #26BDFC;
     -fx-text-fill: white;
@@ -36,7 +33,6 @@
     -fx-background-color: #1A9ECF;
 }
 
-/* ScrollPane Styling (Performance Optimized) */
 .transparent-scroll {
     -fx-background-color: transparent;
     -fx-background: transparent;
@@ -45,7 +41,6 @@
     -fx-background-color: transparent;
 }
 
-/* Equipment Card (Matches User Performance) */
 .equipment-card {
     -fx-background-color: white;
     -fx-background-radius: 30;
@@ -54,17 +49,14 @@
     -fx-cursor: hand;
     -fx-alignment: center;
     -fx-spacing: 15;
-    /* This shadow is much "lighter" for the CPU than the old one */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 15, 0, 0, 5);
 }
 
 .equipment-card:hover {
-    /* Only change color/shadow slightly on hover to keep it smooth */
     -fx-background-color: #fcfcfc;
     -fx-effect: dropshadow(three-pass-box, rgba(38, 189, 252, 0.2), 15, 0, 0, 5);
 }
 
-/* Category Border Colors */
 .border-engineering             { -fx-border-color: #c169d0; -fx-border-width: 3; -fx-border-radius: 30; }
 .border-chemistry               { -fx-border-color: #ffb24d; -fx-border-width: 3; -fx-border-radius: 30; }
 .border-physicaleducation       { -fx-border-color: #ff6d6a; -fx-border-width: 3; -fx-border-radius: 30; }

@@ -9,10 +9,8 @@
 <HBox prefHeight="600.0" prefWidth="900.0" stylesheets="@RegisterStyle.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="screens.register.RegisterController">
     <children>
 
-        <!-- Left Side: Image with Gradient -->
         <StackPane fx:id="imageContainer" prefWidth="450.0" HBox.hgrow="ALWAYS">
             <children>
-                <!-- managed="false" prevents this large image from squishing the form -->
                 <ImageView fx:id="leftSideImage" managed="false" pickOnBounds="true" preserveRatio="false">
                     <image>
                         <Image url="@../../media/images/engineers.png" />
@@ -22,8 +20,6 @@
             </children>
         </StackPane>
 
-        <!-- Right Side: Register Form -->
-        <!-- minWidth="450.0" ensures the form never gets squished -->
         <BorderPane prefWidth="450.0" minWidth="450.0" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
             <padding>
                 <Insets bottom="40.0" left="80.0" right="80.0" top="40.0" />

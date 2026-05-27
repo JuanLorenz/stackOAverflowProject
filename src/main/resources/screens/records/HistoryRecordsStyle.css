@@ -1,4 +1,3 @@
-/* 1. General Page Styling */
 .root {
     -fx-background-color: #ffffff;
     -fx-font-family: "Segoe UI", sans-serif;
@@ -8,9 +7,8 @@
     -fx-text-fill: #222222;
 }
 
-/* 2. Rounded Search and Category inputs */
 .text-field, .combo-box {
-    -fx-pref-height: 40px; /* Force identical height */
+    -fx-pref-height: 40px;
     -fx-background-color: white;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -20,26 +18,21 @@
     -fx-text-fill: #333;
 }
 
-/* 2. Styling the ComboBox specifically */
 .combo-box .cell {
     -fx-text-fill: #333;
 }
 
-/* Styling the arrow button area */
 .combo-box .arrow-button {
     -fx-background-color: transparent;
     -fx-padding: 0 10 0 0;
 }
 
-/* Styling the actual arrow triangle */
 .combo-box .arrow {
     -fx-background-color: #999;
-    -fx-shape: "M 0 0 L 4 4 L 8 0 Z"; /* Modern downward triangle */
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z";
 }
 
-/* 3. STYLING THE DROPDOWN LIST (The Popup) */
 
-/* The actual list container */
 .combo-box-popup .list-view {
     -fx-background-color: white;
     -fx-background-radius: 15;
@@ -49,23 +42,20 @@
     -fx-padding: 5;
 }
 
-/* Individual items in the list */
 .combo-box-popup .list-cell {
     -fx-padding: 10 15 10 15;
     -fx-background-color: transparent;
     -fx-text-fill: #555;
-    -fx-background-radius: 10; /* Rounded selection highlight */
+    -fx-background-radius: 10;
 }
 
-/* Hover effect for dropdown items */
 .combo-box-popup .list-cell:hover {
     -fx-background-color: #f0f0f0;
     -fx-text-fill: #000;
 }
 
-/* Selected item in the dropdown */
 .combo-box-popup .list-cell:filled:selected {
-    -fx-background-color: #4facfe; /* Matches your blue theme */
+    -fx-background-color: #4facfe;
     -fx-text-fill: white;
 }
 
@@ -73,14 +63,12 @@
     -fx-border-color: #3498db;
 }
 
-/* 3. The Main Gradient Container (tableWrapper) */
 .table-container {
     -fx-background-color: linear-gradient(to bottom right, #4facfe 0%, #00f2fe 50%, #43e97b 100%);
     -fx-background-radius: 30;
     -fx-padding: 25;
 }
 
-/* 4. Make the ScrollPane invisible so the gradient shows through */
 .scroll-pane {
     -fx-background-color: transparent;
     -fx-background: transparent;
@@ -90,13 +78,10 @@
     -fx-background-color: transparent;
 }
 
-/* Styling for each individual transaction row */
 .history-row {
     -fx-background-color: white;
-    -fx-background-radius: 15; /* Rounded corners */
-    -fx-padding: 15;            /* Internal space so text isn't cramped */
-
-    /* Optional: shadow to give it that "floating" look */
+    -fx-background-radius: 15;
+    -fx-padding: 15;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
 }
 

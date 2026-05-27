@@ -19,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import screens.home.CategoryCardFactory;
+import screens.home.user.CategoryCardFactory;
 import utilities.manager.SerializeManager;
 
 import java.time.LocalDate;
