@@ -75,18 +75,17 @@ public class BorrowRecordsController {
         String lastColumn = showingActivelyBorrowed ? "Condition" : "Date Returned";
         String[] columns = {"Date Borrowed", "Borrower", "Equipment", lastColumn};
 
-        // 1. Setup Header
+        // header
         for (String col : columns) {
             tableHeader.getChildren().add(createColumnLabel(col, true));
         }
 
-        // 2. Setup Rows
+        // rows
         for (Transaction t : filteredData) {
             HBox row = new HBox();
             row.getStyleClass().add("history-row");
             row.setAlignment(Pos.CENTER);
 
-            // Match the spacing of your header if it has any (e.g., tableHeader.getSpacing())
             row.setSpacing(tableHeader.getSpacing());
 
             String lastVal = showingActivelyBorrowed ?
@@ -110,8 +109,6 @@ public class BorrowRecordsController {
     private Label createColumnLabel(String text, boolean isHeader) {
         Label label = new Label(text);
 
-        // Set prefWidth to 0 and HGrow to ALWAYS.
-        // This forces HBox to divide the total width into exactly equal segments.
         label.setMaxWidth(Double.MAX_VALUE);
         label.setPrefWidth(0);
         HBox.setHgrow(label, Priority.ALWAYS);
@@ -121,7 +118,7 @@ public class BorrowRecordsController {
         if (isHeader) {
             label.setStyle("-fx-font-weight: bold; -fx-text-fill: #555555;");
         } else {
-            label.setWrapText(true); // Ensures long text doesn't break the layout
+            label.setWrapText(true);
             label.setTextAlignment(TextAlignment.CENTER);
         }
 

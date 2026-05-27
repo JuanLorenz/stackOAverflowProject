@@ -47,11 +47,6 @@ public class BorrowEquipmentPopupController implements DataReceiver<Equipment> {
     }
 
     @FXML
-    private void handleBack() {
-        SceneManager.closeOverlay();
-    }
-
-    @FXML
     private void handleBorrow() {
         if (selectedEquipment.getAvailableQty() <= 0) {
             showAlert("Out of Stock", "This item is currently unavailable.");

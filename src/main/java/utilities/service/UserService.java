@@ -59,27 +59,35 @@ public class UserService {
         LocalDate today = LocalDate.now();
         LocalDate blockedUntil = today.plusDays(PENALTY_DAYS);
 
-        // 1. Update DB flag
+        // Update DB flag
         userDAO.updateUserBlockStatus(user.getId(), true);
 
-        // 2. Set dates in object
+        // Set dates in object
         user.setUserAccessStatus(true);
         user.setBlockedOn(today);
-        user.setBlockedUntil(blockedUntil); // Set it here!
+        user.setBlockedUntil(blockedUntil);
 
-        // 3. Save to blockedusers table (this will now use the date we just set)
+        // Save to blockedusers table
         blockedUserDAO.save(user);
     }
 
     private void unblockUser(User user) {
-        // 1. Update main users table flag
+        // Update main users table flag
         userDAO.updateUserBlockStatus(user.getId(), false);
 
-        // 2. Clear dates in object
+        // Clear dates in object
         user.setUserAccessStatus(false);
         user.setBlockedOn(null);
 
-        // 3. Remove from blockedusers table
+        // Remove from blockedusers table
         blockedUserDAO.delete(user.getId());
+    }
+
+    public boolean removeUser(User user) {
+        return userDAO.delete(user.getId());
+    }
+
+    public List<User> getAllAdmins() {
+        return userDAO.findAllAdmins();
     }
 }

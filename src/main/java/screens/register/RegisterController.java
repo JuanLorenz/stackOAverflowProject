@@ -30,7 +30,7 @@ public class RegisterController {
     }
 
     @FXML
-    void onClickRegister(ActionEvent event) {
+    public void onClickRegister(ActionEvent event) {
         String name = tfName.getText().trim();
         String email = tfEmail.getText().trim();
         String password = tfPassword.getText();

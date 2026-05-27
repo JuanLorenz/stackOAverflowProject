@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import utilities.database.UserDAO;
 import utilities.manager.SceneManager;
+import utilities.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class HomeAdminController {
 
     private List<User> allAdmins = new ArrayList<>();
     private final ObservableList<User> filteredAdmins = FXCollections.observableArrayList();
-    private final UserDAO userDAO = new UserDAO();
+    private final UserService userService = new UserService();
 
     @FXML
     public void initialize() {
@@ -71,7 +72,7 @@ public class HomeAdminController {
                     setGraphic(null);
                 } else {
                     lblInfo.setText(user.getName() + " - " + user.getEmail());
-                    btnDelete.setOnAction(e -> handleDeleteAdmin(user.getId()));
+                    btnDelete.setOnAction(e -> handleDeleteAdmin(user));
                     setGraphic(outer);
                 }
             }
@@ -80,7 +81,7 @@ public class HomeAdminController {
 
     public void loadAdmins() {
         Task<List<User>> fetchTask = new Task<>() {
-            @Override protected List<User> call() { return userDAO.getAllAdmins(); }
+            @Override protected List<User> call() { return userService.getAllAdmins(); }
         };
 
         fetchTask.setOnSucceeded(e -> {
@@ -100,8 +101,8 @@ public class HomeAdminController {
         SceneManager.showOverlay("/screens/popup/AddAdminPopup.fxml", (Runnable) this::loadAdmins);
     }
 
-    private void handleDeleteAdmin(int id) {
-        if (userDAO.removeUser(id)) {
+    private void handleDeleteAdmin(User user) {
+        if (userService.removeUser(user)) {
             loadAdmins();
         }
     }
@@ -118,7 +119,7 @@ public class HomeAdminController {
         lblEmptyAdminList.setVisible(filteredAdmins.isEmpty());
     }
 
-    //this is to make the listview items unclickable
+    // this is to make the listview items unclickable
     public static class NoSelectionModel<T> extends MultipleSelectionModel<T> {
         @Override public ObservableList<Integer> getSelectedIndices() { return FXCollections.emptyObservableList(); }
         @Override public ObservableList<T> getSelectedItems() { return FXCollections.emptyObservableList(); }

@@ -116,7 +116,6 @@ public class HistoryRecordsController {
     private Label createColumnLabel(String text, boolean isHeader) {
         Label label = new Label(text);
 
-        // 1. Fill the horizontal space
         label.setMaxWidth(Double.MAX_VALUE);
         label.setPrefWidth(0);
         HBox.setHgrow(label, Priority.ALWAYS);
@@ -126,7 +125,7 @@ public class HistoryRecordsController {
         if (isHeader) {
             label.setStyle("-fx-font-weight: bold; -fx-text-fill: #555555;");
         } else {
-            label.setWrapText(true); // Prevents long names from breaking the table
+            label.setWrapText(true);
             label.setTextAlignment(TextAlignment.CENTER);
         }
 
@@ -134,8 +133,6 @@ public class HistoryRecordsController {
     }
 
     public void setCategoryFilter(String category) {
-        // Because you already set up a listener on cbCategory in initialize(),
-        // simply changing this value will automatically trigger updateFilter() and refresh the table!
         if (category != null) {
             cbCategory.setValue(category);
         }

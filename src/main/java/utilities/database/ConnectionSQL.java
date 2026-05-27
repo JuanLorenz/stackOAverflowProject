@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public class ConnectionSQL {
 
-    // Make sure your XAMPP/MySQL server has this exact database created: 'oop2-capstone'
     public static final String URL = "jdbc:mysql://localhost:3306/oop2-capstone";
     public static final String USERNAME = "root";
     public static final String PASSWORD = "";

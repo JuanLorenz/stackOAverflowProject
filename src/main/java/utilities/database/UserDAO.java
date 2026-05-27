@@ -21,7 +21,6 @@ public class UserDAO implements ContractDAO<User> {
     private final String CHANGE_USER_PROFILE = "UPDATE users SET profilePhotoPath = ? WHERE id =?";
     private final String DELETE_USER = "DELETE FROM users WHERE id = ?";
     private final String RETRIEVE_ALL_OF_TYPE = "SELECT * FROM users WHERE userType = ? && id != ?";
-    private final String VERIFY_PASSWORD = "SELECT * FROM users WHERE id = ?";
 
     /**
      * Finds the user in the database given an ID.
@@ -86,6 +85,23 @@ public class UserDAO implements ContractDAO<User> {
 
     @Override
     public boolean delete(int id){
+        try (
+                Connection c = ConnectionSQL.getConnection();
+                PreparedStatement statement = c.prepareStatement(DELETE_USER)
+        ) {
+
+            statement.setInt(1, id);
+
+            int rowsUpdated = statement.executeUpdate();
+
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+
+            System.err.println(
+                    "Database connection or query failed: " + e.getMessage()
+            );
+        }
         return false;
     }
 
@@ -166,9 +182,7 @@ public class UserDAO implements ContractDAO<User> {
         return false;
     }
 
-    public List<User> getAllAdmins() {
-        System.out.println("getAllAdmins method called");
-
+    public List<User> findAllAdmins() {
         User currUser = SerializeManager.deserializeUser();
 
         List<User> admins = new ArrayList<>();
@@ -179,8 +193,6 @@ public class UserDAO implements ContractDAO<User> {
 
             statement.setString(1, "admin");
             statement.setInt(2, currUser.getId());
-
-            System.out.println("Filtering by userType = admin");
 
             ResultSet rs = statement.executeQuery();
 
@@ -205,50 +217,6 @@ public class UserDAO implements ContractDAO<User> {
         }
 
         return admins;
-    }
-
-    public boolean passwordVerify(int id, String password){
-        try (
-                Connection c = ConnectionSQL.getConnection();
-                PreparedStatement statement = c.prepareStatement(VERIFY_PASSWORD)
-        ) {
-
-            statement.setInt(1, id);
-
-            ResultSet rs = statement.executeQuery();
-
-            if (rs.next()){
-                System.out.println("Makuha ang password");
-                return BCrypt.checkpw(password,rs.getString("password"));
-            }
-        } catch (SQLException e) {
-
-            System.err.println(
-                    "Database connection or query failed: " + e.getMessage()
-            );
-        }
-        return false;
-    }
-
-    public boolean removeUser(int id){
-        try (
-                Connection c = ConnectionSQL.getConnection();
-                PreparedStatement statement = c.prepareStatement(DELETE_USER)
-        ) {
-
-            statement.setInt(1, id);
-
-            int rowsUpdated = statement.executeUpdate();
-
-            return rowsUpdated > 0;
-
-        } catch (SQLException e) {
-
-            System.err.println(
-                    "Database connection or query failed: " + e.getMessage()
-            );
-        }
-        return false;
     }
 
     /**

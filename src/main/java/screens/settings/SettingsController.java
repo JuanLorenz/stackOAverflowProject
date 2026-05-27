@@ -114,23 +114,17 @@ public class SettingsController {
     }
 
     public void onClickUploadNewProfile(ActionEvent actionEvent) {
-        // USING YOUR NEW CENTRALIZED FILE CHOOSER!
         File selectedFile = ImageManager.chooseImage(btnSaveChanges);
 
         if (selectedFile != null) {
             User currUser = SerializeManager.deserializeUser();
             assert currUser != null;
 
-            // USING YOUR CENTRALIZED UPDATE LOGIC!
             profileImagePath = ImageManager.updateImage(currUser.getProfilePhotoPath(), selectedFile, ImageManager.TYPE_PROFILE);
             imgProfile.setImage(new Image(selectedFile.toURI().toString()));
 
             currUser.setProfilePhotoPath(profileImagePath);
             SerializeManager.serializeUser(currUser);
-
-//            if (appShellController != null && currUser != null) {
-//                appShellController.updateProfileUI(currUser);
-//            }
 
             System.out.println("Saved image path: " + profileImagePath);
         }

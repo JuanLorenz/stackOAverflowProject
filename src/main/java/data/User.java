@@ -1,11 +1,7 @@
 package data;
 
-import data.equipment.Equipment;
-
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;

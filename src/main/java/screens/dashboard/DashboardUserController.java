@@ -84,11 +84,11 @@ public class DashboardUserController {
     }
 
     private void updateCategoryUI(String category) {
-        // Change Pill Color
+        // Change pill color
         String color = categoryColors.getOrDefault(category, "#45D8C9");
         categoryPill.setStyle("-fx-background-color: " + color + ";");
 
-        // Change Pill Icon
+        // Change pill icon
         String iconPath = "/media/icons/" + categoryIcons.getOrDefault(category, "icon-equipment.png");
         try {
             ivCategoryIcon.setImage(new Image(getClass().getResource(iconPath).toExternalForm()));
@@ -100,7 +100,7 @@ public class DashboardUserController {
     private void openBorrowPopup(Equipment item) {
         User currentUser = SerializeManager.deserializeUser();
 
-        // 2. Intercept the click if the user is blocked
+        // Intercept the click if the user is blocked
         if (currentUser != null && currentUser.isBlocked()) {
             showBlockedWarning();
         } else {

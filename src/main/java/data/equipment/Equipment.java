@@ -1,7 +1,6 @@
 package data.equipment;
 
 public abstract class Equipment {
-    //can't decide if these should be final, iirc you can edit equipment as an admin right?
     private int equipmentID;
     private String equipmentName;
     private String modelNo;

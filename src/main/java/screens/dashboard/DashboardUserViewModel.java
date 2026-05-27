@@ -87,11 +87,6 @@ public class DashboardUserViewModel {
         });
     }
 
-    // Clear cache (Call this during Logout)
-    public static void clearCache() {
-        masterData.clear();
-    }
-
     // Getters for Controller
     public StringProperty searchQueryProperty() { return searchQuery; }
     public StringProperty selectedCategoryProperty() { return selectedCategory; }
